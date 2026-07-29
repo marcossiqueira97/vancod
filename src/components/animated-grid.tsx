@@ -1,75 +1,146 @@
+import { useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 
 export function AnimatedGrid() {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize);
+
+    // Create 120 twinkling particles/stars
+    const stars = Array.from({ length: 120 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 2 + 0.5,
+      alpha: Math.random(),
+      speed: Math.random() * 0.02 + 0.005,
+      color: Math.random() > 0.5 ? '#ef4444' : Math.random() > 0.3 ? '#06b6d4' : '#ffffff'
+    }));
+
+    // Create 3 shooting meteors
+    const meteors = Array.from({ length: 3 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height * 0.5,
+      length: Math.random() * 80 + 40,
+      speed: Math.random() * 6 + 4,
+      alpha: 0
+    }));
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Draw Twinkling Stars
+      stars.forEach((star) => {
+        star.alpha += star.speed;
+        if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0.1, Math.abs(star.alpha));
+        ctx.fillStyle = star.color;
+        ctx.shadowBlur = star.size * 3;
+        ctx.shadowColor = star.color;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+
+      // Draw Shooting Meteors
+      meteors.forEach((m) => {
+        m.x -= m.speed;
+        m.y += m.speed * 0.5;
+        m.alpha += 0.02;
+
+        if (m.x < -100 || m.y > height || m.alpha > 1) {
+          m.x = Math.random() * width + 200;
+          m.y = Math.random() * (height * 0.4);
+          m.alpha = 0;
+        }
+
+        ctx.save();
+        ctx.globalAlpha = Math.sin(m.alpha * Math.PI) * 0.7;
+        const grad = ctx.createLinearGradient(m.x, m.y, m.x + m.length, m.y - m.length * 0.5);
+        grad.addColorStop(0, '#ef4444');
+        grad.addColorStop(0.5, '#3b82f6');
+        grad.addColorStop(1, 'transparent');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.8;
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(m.x + m.length, m.y - m.length * 0.5);
+        ctx.stroke();
+        ctx.restore();
+      });
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   return (
-    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none">
-      {/* Animated Glowing Light Orbs for Light Theme */}
+    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden select-none bg-black">
+      {/* Canvas Starfield */}
+      <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-80" />
+
+      {/* Cyberpunk Glowing Neon Orbs */}
       <motion.div 
         animate={{ 
-          scale: [1, 1.25, 1],
-          x: [0, 80, 0],
-          y: [0, -40, 0],
-          opacity: [0.35, 0.65, 0.35]
+          scale: [1, 1.3, 1],
+          x: [0, 90, 0],
+          y: [0, -60, 0],
+          opacity: [0.3, 0.6, 0.3]
         }}
-        transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-40 left-1/4 w-[600px] h-[600px] rounded-full bg-blue-300/30 blur-[120px]"
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-40 left-1/4 w-[650px] h-[650px] rounded-full bg-red-600/25 blur-[140px]"
       />
       <motion.div 
         animate={{ 
           scale: [1.2, 1, 1.2],
-          x: [0, -90, 0],
-          y: [0, 60, 0],
-          opacity: [0.3, 0.55, 0.3]
+          x: [0, -100, 0],
+          y: [0, 80, 0],
+          opacity: [0.25, 0.5, 0.25]
         }}
-        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-20 right-10 w-[500px] h-[500px] rounded-full bg-indigo-300/25 blur-[130px]"
+        transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-20 right-10 w-[550px] h-[550px] rounded-full bg-cyan-600/20 blur-[150px]"
       />
       <motion.div 
         animate={{ 
-          scale: [1, 1.3, 1],
-          x: [0, 50, -50, 0],
+          scale: [1, 1.4, 1],
+          x: [0, 60, -60, 0],
           opacity: [0.2, 0.45, 0.2]
         }}
-        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-96 left-10 w-[450px] h-[450px] rounded-full bg-purple-300/20 blur-[140px]"
+        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-96 left-10 w-[500px] h-[500px] rounded-full bg-purple-600/20 blur-[160px]"
       />
 
-      {/* Grid Pattern Overlay for Light Theme */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.03)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_75%_60%_at_50%_10%,#000_40%,transparent_100%)]" />
+      {/* Cyberpunk Matrix Grid Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_65%_at_50%_20%,#000_50%,transparent_100%)]" />
 
-      {/* Floating Animated Particles */}
-      <div className="absolute inset-0">
-        {[
-          { top: '15%', left: '20%', size: '6px', duration: 4, delay: 0 },
-          { top: '25%', left: '75%', size: '4px', duration: 6, delay: 1 },
-          { top: '45%', left: '15%', size: '5px', duration: 5, delay: 2 },
-          { top: '65%', left: '85%', size: '6px', duration: 7, delay: 0.5 },
-          { top: '35%', left: '50%', size: '4px', duration: 4.5, delay: 1.5 },
-          { top: '80%', left: '35%', size: '5px', duration: 8, delay: 3 }
-        ].map((pt, i) => (
-          <motion.div
-            key={i}
-            animate={{
-              y: [0, -30, 0],
-              opacity: [0.3, 0.9, 0.3],
-              scale: [1, 1.4, 1]
-            }}
-            transition={{
-              duration: pt.duration,
-              delay: pt.delay,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-            style={{
-              top: pt.top,
-              left: pt.left,
-              width: pt.size,
-              height: pt.size,
-            }}
-            className="absolute rounded-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"
-          />
-        ))}
-      </div>
+      {/* Moving Horizontal Scanline Beam */}
+      <motion.div 
+        animate={{ y: ['0%', '1000%'] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        className="absolute inset-x-0 h-1 bg-gradient-to-r from-transparent via-red-500/50 to-transparent shadow-[0_0_15px_#ef4444]"
+      />
     </div>
   );
 }

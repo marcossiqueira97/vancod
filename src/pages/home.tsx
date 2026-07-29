@@ -8,6 +8,7 @@ import { AnimatedGrid } from '../components/animated-grid';
 import { Button } from '../components/button';
 import { VideoDemoPlayer } from '../components/video-demo-player';
 import { ComparisonTable } from '../components/comparison-table';
+import { TerminalLogs } from '../components/terminal-logs';
 
 export default function Home() {
   const containerRef = useRef(null);
@@ -208,24 +209,8 @@ export default function Home() {
               {/* Split Screen: Terminal Pane + Visual Screen */}
               <div className="grid lg:grid-cols-12 min-h-[420px] bg-slate-950">
                 {/* Left Terminal Pane */}
-                <div className="lg:col-span-5 p-6 border-b lg:border-b-0 lg:border-r border-slate-800/80 font-mono text-xs space-y-3 bg-slate-950/90 text-slate-300">
-                  <div className="text-slate-500 flex items-center justify-between pb-2 border-b border-slate-900">
-                    <span>// LOGS DE EXECUÇÃO EM TEMPO REAL</span>
-                    <span className="text-emerald-400 font-bold">STATUS: ATIVO</span>
-                  </div>
-                  
-                  <div className="space-y-2 text-slate-300">
-                    <p className="text-slate-500">❯ vancod-kernel init --engine=rust --db=sqlite</p>
-                    <p className="text-emerald-400">✓ Conexão local estabelecida (0ms latência)</p>
-                    <p className="text-emerald-400">✓ Modo Offline Ativo: Balcão Pro Operacional</p>
-                    <div className="my-3 p-3 bg-slate-900/90 rounded-xl border border-slate-800 text-slate-200">
-                      <span className="text-amber-400 font-bold">● Venda #4092 Confirmada</span>
-                      <p className="text-xs text-slate-400 mt-1">1x Combo Whisky Red Label + 4x Red Bull</p>
-                      <p className="text-emerald-400 font-bold mt-1">Total: R$ 189,90 (Pix Instantâneo)</p>
-                    </div>
-                    <p className="text-cyan-400">⚡ Sync Físico ➔ E-Commerce atualizado automaticamente</p>
-                    <p className="text-slate-400">❯ kds-cozinha dispatch order #104 [Status: Preparando]</p>
-                  </div>
+                <div className="lg:col-span-5 p-4 border-b lg:border-b-0 lg:border-r border-slate-800/80 bg-slate-950 text-slate-300">
+                  <TerminalLogs />
                 </div>
 
                 {/* Right Visual Image Pane */}
