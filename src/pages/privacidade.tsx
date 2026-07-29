@@ -10,7 +10,7 @@ export default function Privacidade() {
   };
 
   return (
-    <div className="bg-slate-950 text-white min-h-screen pt-32 pb-20">
+    <div className="bg-slate-50 text-slate-900 min-h-screen pt-32 pb-20">
       <SEO 
         title="Política de Privacidade" 
         description="Saiba como a Vancod coleta, usa e protege seus dados de acordo com a LGPD."

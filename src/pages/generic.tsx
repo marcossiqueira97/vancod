@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 
 export default function GenericPage({ title }: { title: string }) {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white px-4">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 text-slate-900 px-4">
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

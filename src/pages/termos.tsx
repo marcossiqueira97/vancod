@@ -10,7 +10,7 @@ export default function Termos() {
   };
 
   return (
-    <div className="bg-slate-950 text-white min-h-screen pt-32 pb-20">
+    <div className="bg-slate-50 text-slate-900 min-h-screen pt-32 pb-20">
       <SEO 
         title="Termos de Uso" 
         description="Termos e condições para uso dos softwares SaaS do ecossistema Vancod."

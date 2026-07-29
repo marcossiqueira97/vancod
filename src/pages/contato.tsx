@@ -50,7 +50,7 @@ export default function Contato() {
   };
 
   return (
-    <div className="bg-slate-950 text-white min-h-screen pt-32 pb-20 relative overflow-hidden">
+    <div className="bg-slate-50 text-slate-900 min-h-screen pt-32 pb-20 relative overflow-hidden">
       <SEO 
         title="Fale com Vendas" 
         description="Agende uma demonstração e descubra como a Vancod pode ajudar a escalar sua operação."

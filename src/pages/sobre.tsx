@@ -13,7 +13,7 @@ export default function Sobre() {
   };
 
   return (
-    <div className="bg-slate-950 text-white overflow-hidden min-h-screen">
+    <div className="bg-slate-50 text-slate-900 overflow-hidden min-h-screen">
       <SEO 
         title="Sobre a Empresa" 
         description="A Vancod é um ecossistema de soluções SaaS especializadas. Softwares modernos e intuitivos para gestão de PMEs."
@@ -29,7 +29,7 @@ export default function Sobre() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium text-slate-300 mb-8 backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-300 text-xs font-bold text-blue-800 mb-8 backdrop-blur-md shadow-sm"
           >
             Nossa Missão
           </motion.div>
@@ -37,7 +37,7 @@ export default function Sobre() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-8 leading-[1.05]"
+            className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-slate-900 mb-8 leading-[1.05]"
           >
             Sistemas que <br className="hidden md:block"/>
             <span className="text-slate-400">dão resultados reais.</span>

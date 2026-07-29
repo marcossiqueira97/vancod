@@ -143,13 +143,13 @@ export function Footer() {
               Ecossistema de engenharia de software de classe mundial para empresas que exigem alto desempenho, design e conversão.
             </p>
             <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
                 <Twitter className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
                 <Linkedin className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
+              <a href="https://github.com/marcossiqueira97/vancod" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
                 <Github className="w-4 h-4" />
               </a>
             </div>
@@ -179,8 +179,8 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-6">Recursos</h4>
             <ul className="space-y-4">
               <li><Link to="/suporte" className="text-sm text-slate-400 hover:text-white transition-colors">Central de Ajuda</Link></li>
-              <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Documentação API</a></li>
-              <li><a href="#" className="text-sm text-slate-400 hover:text-white transition-colors">Status do Sistema</a></li>
+              <li><Link to="/suporte" className="text-sm text-slate-400 hover:text-white transition-colors">Documentação API</Link></li>
+              <li><Link to="/suporte" className="text-sm text-slate-400 hover:text-white transition-colors">Status do Sistema</Link></li>
             </ul>
           </div>
 

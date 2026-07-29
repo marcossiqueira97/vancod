@@ -73,7 +73,7 @@ export default function BlogPost() {
   };
 
   return (
-    <div className="bg-slate-950 text-white min-h-screen">
+    <div className="bg-slate-50 text-slate-900 min-h-screen">
       <SEO 
         title={post.title} 
         description={post.excerpt}

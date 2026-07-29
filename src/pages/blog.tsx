@@ -64,7 +64,7 @@ export default function Blog() {
   const regularPosts = posts.filter(p => !p.featured);
 
   return (
-    <div className="bg-slate-950 text-white min-h-screen pt-32 pb-20">
+    <div className="bg-slate-50 text-slate-900 min-h-screen pt-32 pb-20">
       <SEO 
         title="Blog e Insights" 
         description="Estratégias de vendas, gestão e as últimas novidades em tecnologia para escalar sua operação B2B."
