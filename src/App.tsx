@@ -9,8 +9,6 @@ import Eventos from './pages/eventos';
 import Sobre from './pages/sobre';
 import Termos from './pages/termos';
 import Privacidade from './pages/privacidade';
-import Blog from './pages/blog';
-import BlogPost from './pages/blog-post';
 import Contato from './pages/contato';
 import Suporte from './pages/suporte';
 import GenericPage from './pages/generic';
@@ -34,8 +32,6 @@ export default function App() {
             <Route path="/sobre" element={<Sobre />} />
             <Route path="/termos" element={<Termos />} />
             <Route path="/privacidade" element={<Privacidade />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/suporte" element={<Suporte />} />
             <Route path="*" element={<GenericPage title="Página não encontrada" />} />

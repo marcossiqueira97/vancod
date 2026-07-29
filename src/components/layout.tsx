@@ -1,6 +1,6 @@
 import { ReactNode, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight, ChevronDown, Github, Twitter, Linkedin } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown, Instagram } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { Button as UIButton } from '@vancod/ui';
@@ -70,7 +70,7 @@ export function Navbar() {
                 </div>
               </div>
               <Link to="/sobre" className="text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Empresa</Link>
-              <Link to="/blog" className="text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Blog</Link>
+              <Link to="/suporte" className="text-sm font-semibold text-slate-700 hover:text-blue-600 transition-colors">Suporte</Link>
             </nav>
           </div>
 
@@ -112,7 +112,7 @@ export function Navbar() {
               </div>
               <div className="h-px bg-slate-100 my-4" />
               <Link to="/sobre" className="block px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50">Empresa</Link>
-              <Link to="/blog" className="block px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50">Blog</Link>
+              <Link to="/suporte" className="block px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50">Suporte</Link>
               <Link to="/contato" className="block px-3 py-3 rounded-xl text-base font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50">Contato</Link>
               <div className="pt-6 px-3">
                 <Link to="/contato" className="w-full flex justify-center items-center gap-2 py-3.5 bg-blue-600 text-white hover:bg-blue-700 rounded-xl font-bold">
@@ -143,14 +143,8 @@ export function Footer() {
               Ecossistema de engenharia de software de classe mundial para empresas que exigem alto desempenho, design e conversão.
             </p>
             <div className="flex gap-4">
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
-                <Linkedin className="w-4 h-4" />
-              </a>
-              <a href="https://github.com/marcossiqueira97/vancod" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors text-white">
-                <Github className="w-4 h-4" />
+              <a href="https://instagram.com/vancod" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-pink-600/20 hover:border-pink-500/40 transition-all text-white group" title="Instagram Vancod">
+                <Instagram className="w-5 h-5 group-hover:text-pink-400 transition-colors" />
               </a>
             </div>
           </div>
@@ -170,7 +164,6 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-6">Empresa</h4>
             <ul className="space-y-4">
               <li><Link to="/sobre" className="text-sm text-slate-400 hover:text-white transition-colors">Sobre nós</Link></li>
-              <li><Link to="/blog" className="text-sm text-slate-400 hover:text-white transition-colors">Blog</Link></li>
               <li><Link to="/contato" className="text-sm text-slate-400 hover:text-white transition-colors">Contato</Link></li>
             </ul>
           </div>
@@ -179,8 +172,7 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-6">Recursos</h4>
             <ul className="space-y-4">
               <li><Link to="/suporte" className="text-sm text-slate-400 hover:text-white transition-colors">Central de Ajuda</Link></li>
-              <li><Link to="/suporte" className="text-sm text-slate-400 hover:text-white transition-colors">Documentação API</Link></li>
-              <li><Link to="/suporte" className="text-sm text-slate-400 hover:text-white transition-colors">Status do Sistema</Link></li>
+              <li><Link to="/contato" className="text-sm text-slate-400 hover:text-white transition-colors">Falar com Vendas</Link></li>
             </ul>
           </div>
 
