@@ -1,14 +1,14 @@
 import { motion } from 'motion/react';
 
 export function AnimatedGrid() {
-  // Intersection coordinates for blueprint crosshair markers
+  // Intersection coordinates for blueprint crosshair markers (Focado no Empreendedor Brasileiro)
   const blueprintNodes = [
-    { top: '15%', left: '20%', label: '0ms' },
-    { top: '28%', left: '75%', label: 'RUST' },
-    { top: '45%', left: '12%', label: 'SQLITE' },
-    { top: '65%', left: '88%', label: 'KDS' },
-    { top: '38%', left: '82%', label: 'SYNC' },
-    { top: '80%', left: '25%', label: 'OFFLINE' },
+    { top: '15%', left: '15%', label: '⚡ CAIXA EM 0ms' },
+    { top: '26%', left: '78%', label: '🔒 100% OFFLINE (SEM TRAVAR)' },
+    { top: '48%', left: '8%', label: '📲 FIADO AUTOMÁTICO WHATSAPP' },
+    { top: '65%', left: '85%', label: '🛵 INTEGRADO AO IFOOD' },
+    { top: '38%', left: '82%', label: '🛒 ESTOQUE FÍSICO + VIRTUAL' },
+    { top: '80%', left: '22%', label: '📸 FOTOS NA TV POR QR CODE' },
   ];
 
   return (
