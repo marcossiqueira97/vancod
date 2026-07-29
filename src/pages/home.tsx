@@ -37,14 +37,6 @@ export default function Home() {
       badge: '📸 Transmissão de Fotos na TV da Festa',
       img: '/assets/olhare-br.png',
       path: '/olhare'
-    },
-    {
-      id: 'commerce',
-      name: 'Vancod Commerce',
-      subdomain: 'commerce.vancod.com.br',
-      badge: '🛒 Loja Virtual & Estoque Sincronizado',
-      img: '/assets/commerce-br.png',
-      path: '/commerce'
     }
   ];
 
@@ -103,16 +95,6 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center pt-32 pb-20 overflow-hidden z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="text-center max-w-5xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/30 backdrop-blur-md text-sm font-medium text-blue-400 mb-8 hover:bg-blue-600/20 transition-colors cursor-pointer group shadow-[0_0_20px_rgba(37,99,235,0.2)]"
-            >
-              <span className="flex h-2 w-2 rounded-full bg-blue-400 animate-pulse"></span>
-              Vancod OS 2.0 Lançado
-              <ChevronRight className="w-4 h-4 text-blue-400 group-hover:translate-x-1 transition-all" />
-            </motion.div>
             
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
@@ -219,12 +201,11 @@ export default function Home() {
       <section className="py-12 border-y border-slate-200 bg-white/80 backdrop-blur-xl relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center text-xs font-bold text-slate-500 mb-8 uppercase tracking-[0.25em]">Arquitetura de Engenharia de Alta Performance</p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             {[
-              { icon: '⚡', title: '100% Offline (Rust + SQLite)', desc: 'Balcão Pro Adegas (PDV Desktop)', color: 'text-cyan-700 border-cyan-200 bg-cyan-50' },
+              { icon: '⚡', title: '100% Offline (Caixa Rápido)', desc: 'Balcão Pro Adegas (PDV Desktop)', color: 'text-cyan-700 border-cyan-200 bg-cyan-50' },
               { icon: '💻', title: 'App Desktop & Nuvem', desc: 'Vancod Restaurantes (KDS + iFood)', color: 'text-pink-700 border-pink-200 bg-pink-50' },
-              { icon: '📱', title: 'Web App via QR Code', desc: 'Olhare (Telão TV sem Instalação)', color: 'text-purple-700 border-purple-200 bg-purple-50' },
-              { icon: '🛒', title: 'Headless E-Commerce', desc: 'Commerce (Sync Estoque 24/7)', color: 'text-emerald-700 border-emerald-200 bg-emerald-50' }
+              { icon: '📱', title: 'Web App via QR Code', desc: 'Olhare (Telão TV sem Instalação)', color: 'text-purple-700 border-purple-200 bg-purple-50' }
             ].map((pillar, i) => (
               <div key={i} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 hover:border-slate-300 transition-all flex flex-col items-center gap-2 shadow-sm">
                 <span className={`w-10 h-10 rounded-xl border flex items-center justify-center text-lg ${pillar.color}`}>{pillar.icon}</span>
@@ -243,10 +224,10 @@ export default function Home() {
             <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
               Poder sem <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">complexidade.</span>
             </h2>
-            <p className="text-xl text-slate-600">Quatro pilares fundamentais projetados para escalar sua operação sem atritos.</p>
+            <p className="text-xl text-slate-600">Três pilares fundamentais projetados para escalar sua operação sem atritos.</p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {[
               {
                 title: 'Balcão Pro Adegas',
@@ -278,22 +259,6 @@ export default function Home() {
                   'PDV, cozinha KDS e delivery em 1 lugar',
                   'Gestão com suporte a operação local e cloud',
                   'Integração oficial direta com iFood'
-                ]
-              },
-              {
-                title: 'Commerce',
-                tag: '🛒 High Conversion E-Commerce',
-                badgeColor: 'bg-emerald-100 border-emerald-300 text-emerald-800',
-                cardBg: 'bg-white border-slate-200 shadow-xl shadow-emerald-900/5 hover:border-emerald-400 hover:shadow-2xl',
-                desc: 'Plataforma de e-commerce headless de alta performance integrada ao estoque físico.',
-                icon: <Smartphone className="w-8 h-8 text-emerald-600" />,
-                checkColor: 'text-emerald-600',
-                btnColor: 'text-emerald-700 hover:text-emerald-800',
-                path: '/commerce',
-                bulletList: [
-                  'Plataforma e-commerce headless',
-                  'Desempenho focado em conversão',
-                  'Estoque físico sincronizado em tempo real'
                 ]
               },
               {

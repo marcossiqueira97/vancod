@@ -4,7 +4,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import Home from './pages/home';
 import Adega from './pages/adega';
 import Restaurantes from './pages/restaurantes';
-import Commerce from './pages/commerce';
 import Eventos from './pages/eventos';
 import Sobre from './pages/sobre';
 import Termos from './pages/termos';
@@ -25,7 +24,6 @@ export default function App() {
             <Route path="/adega" element={<Adega />} />
             <Route path="/adegas" element={<Adega />} />
             <Route path="/restaurantes" element={<Restaurantes />} />
-            <Route path="/commerce" element={<Commerce />} />
             <Route path="/eventos" element={<Eventos />} />
             <Route path="/olhare" element={<Eventos />} />
             

@@ -16,7 +16,6 @@ export function ComparisonTable() {
     { id: 'adegas', name: 'Balcão Pro Adegas', icon: <Zap className="w-4 h-4" /> },
     { id: 'restaurantes', name: 'Vancod Restaurantes', icon: <UtensilsCrossed className="w-4 h-4" /> },
     { id: 'olhare', name: 'Olhare Fotos & Eventos', icon: <Camera className="w-4 h-4" /> },
-    { id: 'commerce', name: 'Vancod Commerce', icon: <ShoppingBag className="w-4 h-4" /> },
     { id: 'todos', name: 'Visão Geral', icon: <Layers className="w-4 h-4" /> },
   ];
 
@@ -91,20 +90,6 @@ export function ComparisonTable() {
         feature: 'Guarda das Fotos após o Fim do Evento',
         traditional: 'Links expirados no WeTransfer ou arquivos espalhados em grupos do WhatsApp.',
         vancod: 'Galeria digital permanente com download fácil para todos os convidados e organizadores.',
-      },
-    ],
-    commerce: [
-      {
-        category: 'Sincronização de Estoque',
-        feature: 'Integração do Estoque Físico com a Loja Virtual',
-        traditional: 'Sync demorado que vende produtos na internet que já foram comprados no balcão da loja.',
-        vancod: 'Sincronização bidirecional em tempo real (0ms). Baixa automática no e-commerce ao vender na loja física.',
-      },
-      {
-        category: 'Velocidade da Loja Virtual',
-        feature: 'Tempo de Carregamento & Checkout',
-        traditional: 'Lojas virtuais lentas em WordPress/WooCommerce que travam no celular e perdem vendas.',
-        vancod: 'Arquitetura E-Commerce Headless ultraveloz com checkout de alta conversão.',
       },
     ],
     todos: [

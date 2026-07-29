@@ -39,17 +39,6 @@ export function VideoDemoPlayer() {
       stats: ['Plataforma Web 100% em Nuvem', 'Acesso por QR Code (Zero Instalação)', 'Painel de Moderação ao Vivo'],
       previewImg: '/assets/olhare-br.png',
       badgeColor: 'border-purple-500/40 text-purple-300 bg-purple-500/10'
-    },
-    {
-      id: 'commerce-sync',
-      title: 'Sync de Estoque Físico',
-      product: 'Vancod Commerce',
-      icon: <ShoppingBag className="w-5 h-5 text-emerald-400" />,
-      badge: '🛒 E-Commerce Headless',
-      description: 'Uma venda realizada no balcão da sua loja física atualiza automaticamente a disponibilidade da sua loja virtual.',
-      stats: ['Plataforma E-Commerce Headless', 'Sincronização Física + Virtual 24/7', 'Checkout de Alta Conversão'],
-      previewImg: '/assets/commerce-br.png',
-      badgeColor: 'border-emerald-200 text-emerald-800 bg-emerald-50'
     }
   ];
 
@@ -71,7 +60,7 @@ export function VideoDemoPlayer() {
         </div>
 
         {/* Demo Selector Buttons */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
           {demos.map((demo, idx) => (
             <button
               key={demo.id}

@@ -9,7 +9,6 @@ const products = [
   { name: 'Balcão Pro Adegas', path: '/adegas', desc: 'Gestão inteligente para adegas e distribuidoras' },
   { name: 'Vancod Restaurantes', path: '/restaurantes', desc: 'PDV, comandas, mesas e KDS para food service' },
   { name: 'Olhare', path: '/olhare', desc: 'Plataforma de fotos e gestão para eventos' },
-  { name: 'Vancod Commerce', path: '/commerce', desc: 'Plataforma completa de e-commerce' },
 ];
 
 export function Navbar() {
