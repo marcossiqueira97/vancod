@@ -1,0 +1,8 @@
+{
+  "name": "Vancod",
+  "description": "Site institucional da Vancod, ecossistema de softwares SaaS.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
