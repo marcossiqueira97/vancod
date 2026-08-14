@@ -12,8 +12,27 @@ async function startServer() {
   const PORT = 3000;
 
   // Basic security headers
+  // CSP fica ativo apenas em produção: no dev, o Vite usa scripts/estilos inline e HMR
+  // que quebrariam com a política restrita.
   app.use(helmet({
-    contentSecurityPolicy: false, // Disabling CSP for development ease with Vite inline scripts
+    contentSecurityPolicy:
+      process.env.NODE_ENV === "production"
+        ? {
+            directives: {
+              "default-src": ["'self'"],
+              "script-src": ["'self'"],
+              // Inline styles vêm do motion (framer-motion); fontes do Google Fonts.
+              "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+              "font-src": ["'self'", "https://fonts.gstatic.com"],
+              "img-src": ["'self'", "data:", "https://images.unsplash.com"],
+              "connect-src": ["'self'"],
+              "object-src": ["'none'"],
+              "frame-ancestors": ["'none'"],
+              "base-uri": ["'self'"],
+              "form-action": ["'self'"],
+            },
+          }
+        : false,
   }));
 
   app.use(express.json());
