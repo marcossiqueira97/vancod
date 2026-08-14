@@ -9,6 +9,15 @@ export default defineConfig(() => {
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
+        // Espelha os `paths` do tsconfig: @vancod/ui é consumido como fonte TS crua
+        // (fora da raiz do projeto) e seus imports (react/clsx/tailwind-merge) não
+        // resolvem por node_modules a partir de packages/vancod-ui.
+        '@vancod/ui': path.resolve(__dirname, '../packages/vancod-ui/src/index.ts'),
+        '@vancod/ui/tokens': path.resolve(__dirname, '../packages/vancod-ui/src/tokens/index.css'),
+        'react': path.resolve(__dirname, 'node_modules/react'),
+        'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+        'clsx': path.resolve(__dirname, 'node_modules/clsx'),
+        'tailwind-merge': path.resolve(__dirname, 'node_modules/tailwind-merge'),
       },
     },
     server: {

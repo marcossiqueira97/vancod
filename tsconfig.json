@@ -10,10 +10,13 @@
       "@vancod/ui": ["../packages/vancod-ui/src/index.ts"],
       "@vancod/ui/tokens": ["../packages/vancod-ui/src/tokens/index.css"],
       "@vancod/ui/*": ["../packages/vancod-ui/src/*"],
-      "react": ["./node_modules/react"],
-      "react/*": ["./node_modules/react/*"],
-      "react-dom": ["./node_modules/react-dom"],
-      "react-dom/*": ["./node_modules/react-dom/*"],
+      // Apontam para @types: mapear para o JS puro faz o TS abandonar a busca de
+      // declarações (TS7016) — e os módulos de @vancod/ui (fora da raiz) não resolvem
+      // @types por node_modules sem esses paths.
+      "react": ["./node_modules/@types/react"],
+      "react/*": ["./node_modules/@types/react/*"],
+      "react-dom": ["./node_modules/@types/react-dom"],
+      "react-dom/*": ["./node_modules/@types/react-dom/*"],
       "clsx": ["./node_modules/clsx"],
       "tailwind-merge": ["./node_modules/tailwind-merge"],
       "lucide-react": ["./node_modules/lucide-react"]
