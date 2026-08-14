@@ -4,6 +4,8 @@ import fs from "fs";
 import { createServer as createViteServer } from "vite";
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
+import nodemailer from "nodemailer";
+import "dotenv/config";
 
 async function startServer() {
   const app = express();
@@ -26,18 +28,74 @@ async function startServer() {
   });
 
   // API route for contact form
-  app.post("/api/contact", contactLimiter, (req, res) => {
-    const { name, email, phone, role, solution, message } = req.body;
-    
+  // Envia a mensagem de verdade via SMTP quando SMTP_HOST/PORT/USER/PASS e CONTACT_TO
+  // estão configurados; sem configuração, falha com erro claro em vez de fingir sucesso.
+  app.post("/api/contact", contactLimiter, async (req, res) => {
+    const { name, email, phone, role, solution, message } = req.body as {
+      name?: string;
+      email?: string;
+      phone?: string;
+      role?: string;
+      solution?: string;
+      message?: string;
+    };
+
     // Validating basic input to prevent empty spam
     if (!name || !email) {
       return res.status(400).json({ error: "Nome e e-mail são obrigatórios." });
     }
 
-    // In a real app, you would send an email or save to a database here.
-    console.log("Contact form submission received:", req.body);
-    
-    res.status(200).json({ success: true, message: "Mensagem recebida com sucesso!" });
+    const smtpHost = process.env.SMTP_HOST;
+    const smtpPort = process.env.SMTP_PORT;
+    const smtpUser = process.env.SMTP_USER;
+    const smtpPass = process.env.SMTP_PASS;
+    const contactTo = process.env.CONTACT_TO;
+
+    if (!smtpHost || !smtpPort || !smtpUser || !smtpPass || !contactTo) {
+      console.error(
+        "[contact] Envio não configurado: faltam SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS/CONTACT_TO. Mensagem NÃO enviada.",
+      );
+      return res.status(500).json({
+        error:
+          "O envio de mensagens não está configurado neste servidor (faltam as variáveis SMTP_* e CONTACT_TO). Nenhuma mensagem foi enviada.",
+      });
+    }
+
+    const transport = nodemailer.createTransport({
+      host: smtpHost,
+      port: Number(smtpPort),
+      secure: smtpPort === "465",
+      auth: { user: smtpUser, pass: smtpPass },
+    });
+
+    const text = [
+      `Nome: ${name}`,
+      `E-mail: ${email}`,
+      phone ? `Telefone: ${phone}` : null,
+      role ? `Perfil: ${role}` : null,
+      solution ? `Solução: ${solution}` : null,
+      message ? `Mensagem:\n${message}` : null,
+    ]
+      .filter((line): line is string => Boolean(line))
+      .join("\n");
+
+    try {
+      await transport.sendMail({
+        from: process.env.CONTACT_FROM || `"Site Vancod" <${smtpUser}>`,
+        to: contactTo,
+        replyTo: email,
+        subject: `[vancod.com.br] Contato de ${name}${solution ? ` (${solution})` : ""}`,
+        text,
+      });
+      console.log(`[contact] E-mail enviado para ${contactTo} (de ${email})`);
+      res.status(200).json({ success: true, message: "Mensagem enviada com sucesso!" });
+    } catch (err) {
+      console.error("[contact] Falha ao enviar e-mail:", err);
+      res.status(502).json({
+        error:
+          "Não foi possível enviar a mensagem agora (falha no servidor de e-mail configurado). Tente novamente mais tarde.",
+      });
+    }
   });
 
   // Vite middleware for development
