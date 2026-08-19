@@ -1,10 +1,10 @@
 import { ReactNode, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight, ChevronDown, Instagram, Zap, ChefHat, QrCode } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown, Zap, ChefHat, QrCode, Mail, MapPin } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { FloatingWhatsApp } from './floating-whatsapp';
-import { SITE_CONFIG } from '../lib/config';
+import { SITE_CONFIG, getWhatsAppUrl } from '../lib/config';
 
 const products = [
   { 
@@ -164,12 +164,16 @@ export function Navbar() {
 }
 
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <footer className="bg-slate-900 pt-20 pb-12 border-t border-slate-800 text-slate-300 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 lg:gap-12 mb-16">
-          <div className="col-span-2 lg:col-span-2">
-            <Link to="/" className="flex items-center gap-3 mb-4 group">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12 mb-16">
+          
+          {/* Coluna 1: Empresa & Bio */}
+          <div className="col-span-2 lg:col-span-2 space-y-4">
+            <Link to="/" className="flex items-center gap-3 group">
               <div className="w-9 h-9 bg-blue-600 rounded-xl flex items-center justify-center text-white font-extrabold text-lg">
                 V
               </div>
@@ -178,19 +182,19 @@ export function Footer() {
                 <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Tecnologia</span>
               </div>
             </Link>
-            <p className="text-slate-400 text-sm leading-relaxed max-w-sm mb-6">
+            <p className="text-slate-400 text-xs md:text-sm leading-relaxed max-w-sm">
               Desenvolvimento de softwares especializados para rotinas de adegas, restaurantes e eventos com foco em agilidade e confiabilidade operacional.
             </p>
-            <div className="flex items-center gap-3 text-xs text-slate-400">
-              <span>{SITE_CONFIG.contact.city} — {SITE_CONFIG.contact.state}</span>
-              <span>•</span>
-              <span>{SITE_CONFIG.contact.email}</span>
+            <div className="flex items-center gap-2 text-xs text-slate-400 pt-1">
+              <MapPin className="w-3.5 h-3.5 text-blue-400" />
+              <span>Vancod Tecnologia — {SITE_CONFIG.company.city}, {SITE_CONFIG.company.country}</span>
             </div>
           </div>
           
+          {/* Coluna 2: Soluções */}
           <div className="lg:col-span-1">
-            <h4 className="font-bold text-white mb-4 text-xs uppercase tracking-wider">Produtos</h4>
-            <ul className="space-y-3">
+            <h4 className="font-bold text-white mb-4 text-xs uppercase tracking-wider">Soluções</h4>
+            <ul className="space-y-2.5">
               {products.map(p => (
                 <li key={p.path}>
                   <Link to={p.path} className="text-xs text-slate-400 hover:text-white transition-colors">{p.name}</Link>
@@ -199,33 +203,34 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Coluna 3: Suporte & Atendimento */}
+          <div className="lg:col-span-1">
+            <h4 className="font-bold text-white mb-4 text-xs uppercase tracking-wider">Suporte</h4>
+            <ul className="space-y-2.5">
+              <li><Link to="/suporte" className="text-xs text-slate-400 hover:text-white transition-colors">Central de Suporte</Link></li>
+              <li><Link to="/contato" className="text-xs text-slate-400 hover:text-white transition-colors">Fale Conosco</Link></li>
+              <li>
+                <a href={`mailto:${SITE_CONFIG.contact.email}`} className="text-xs text-slate-400 hover:text-white transition-colors">
+                  {SITE_CONFIG.contact.email}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Coluna 4: Institucional & Legal */}
           <div className="lg:col-span-1">
             <h4 className="font-bold text-white mb-4 text-xs uppercase tracking-wider">Institucional</h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               <li><Link to="/sobre" className="text-xs text-slate-400 hover:text-white transition-colors">Sobre a Vancod</Link></li>
-              <li><Link to="/contato" className="text-xs text-slate-400 hover:text-white transition-colors">Contato & Demonstração</Link></li>
-            </ul>
-          </div>
-
-          <div className="lg:col-span-1">
-            <h4 className="font-bold text-white mb-4 text-xs uppercase tracking-wider">Atendimento</h4>
-            <ul className="space-y-3">
-              <li><Link to="/suporte" className="text-xs text-slate-400 hover:text-white transition-colors">Central de Suporte</Link></li>
-              <li><Link to="/contato" className="text-xs text-slate-400 hover:text-white transition-colors">Agendar Demonstração</Link></li>
-            </ul>
-          </div>
-
-          <div className="lg:col-span-1">
-            <h4 className="font-bold text-white mb-4 text-xs uppercase tracking-wider">Transparência</h4>
-            <ul className="space-y-3">
-              <li><Link to="/privacidade" className="text-xs text-slate-400 hover:text-white transition-colors">Privacidade</Link></li>
               <li><Link to="/termos" className="text-xs text-slate-400 hover:text-white transition-colors">Termos de Uso</Link></li>
+              <li><Link to="/privacidade" className="text-xs text-slate-400 hover:text-white transition-colors">Política de Privacidade</Link></li>
             </ul>
           </div>
+
         </div>
         
         <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} Vancod Tecnologia. Todos os direitos reservados.</p>
+          <p>© {currentYear} Vancod Tecnologia. Todos os direitos reservados.</p>
           <div className="flex items-center gap-2">
             <span>Soluções de software desenvolvidas para operações reais.</span>
           </div>

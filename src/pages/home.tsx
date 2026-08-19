@@ -6,11 +6,7 @@ import {
   QrCode, 
   CheckCircle2, 
   ShieldCheck, 
-  Headphones, 
-  Layers, 
   Sparkles,
-  Server,
-  FileCheck2,
   Users2,
   Settings2,
   Check
@@ -23,6 +19,11 @@ import { AnimatedGrid } from '../components/animated-grid';
 import { ComparisonTable } from '../components/comparison-table';
 import { RoiCalculator } from '../components/roi-calculator';
 import { InteractiveSystemSimulator } from '../components/interactive-system-simulator';
+import { ClientsSection } from '../components/clients-section';
+import { CasesSection } from '../components/cases-section';
+import { TestimonialsSection } from '../components/testimonials-section';
+import { WhyVancod } from '../components/why-vancod';
+import { TransparencySection } from '../components/transparency-section';
 import { SITE_CONFIG } from '../lib/config';
 
 export default function Home() {
@@ -78,17 +79,14 @@ export default function Home() {
     }
   ];
 
+  // Schema.org sem preços fictícios ou claims não comprovadas
   const schema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Vancod Tecnologia",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web, Windows, Android, iOS",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "BRL"
-    }
+    "description": "Soluções de software desenvolvidas para atender as necessidades práticas de adegas, distribuidores, restaurantes e eventos com agilidade e confiabilidade."
   };
 
   return (
@@ -101,8 +99,8 @@ export default function Home() {
       
       <AnimatedGrid />
 
-      {/* HERO SECTION */}
-      <section className="relative min-h-[85vh] flex items-center pt-28 pb-20 overflow-hidden z-10">
+      {/* 1. HERO SECTION */}
+      <section className="relative min-h-[80vh] flex items-center pt-28 pb-16 overflow-hidden z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
           <div className="text-center max-w-4xl mx-auto">
             
@@ -162,42 +160,26 @@ export default function Home() {
               </a>
             </motion.div>
 
-            {/* Core Pillars Strip */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-14 pt-8 border-t border-slate-200">
-              {[
-                { title: 'Operação Offline-First', desc: 'Caixa ativo mesmo sem internet' },
-                { title: 'Sem Comissão por Venda', desc: 'Previsibilidade contratual' },
-                { title: 'Suporte Humanizado', desc: 'Atendimento direto por especialistas' },
-                { title: 'Foco em Segmentos', desc: 'Soluções feitas sob medida' },
-              ].map((p, i) => (
-                <div key={i} className="p-3 bg-white rounded-xl border border-slate-200/80 text-left">
-                  <div className="text-xs font-bold text-slate-900">{p.title}</div>
-                  <div className="text-[11px] text-slate-500 mt-0.5">{p.desc}</div>
-                </div>
-              ))}
-            </div>
-
-          </div>
-
-          {/* Interactive Showcase Tabs */}
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-2">
-            {showcaseTabs.map((tab, idx) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(idx)}
-                className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all ${
-                  activeTab === idx
-                    ? 'bg-blue-600 text-white shadow-sm'
-                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
-                }`}
-              >
-                {tab.name}
-              </button>
-            ))}
           </div>
 
           {/* Interface Mockup Display */}
-          <div className="mt-6 relative mx-auto max-w-5xl">
+          <div className="mt-14 relative mx-auto max-w-5xl">
+            <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
+              {showcaseTabs.map((tab, idx) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(idx)}
+                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
+                    activeTab === idx
+                      ? 'bg-blue-600 text-white shadow-sm'
+                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                  }`}
+                >
+                  {tab.name}
+                </button>
+              ))}
+            </div>
+
             <div className="aspect-[16/9] md:aspect-[21/10] rounded-2xl bg-white border border-slate-200 shadow-xl overflow-hidden">
               <div className="h-10 bg-slate-100 border-b border-slate-200 flex items-center px-4 justify-between">
                  <div className="flex gap-1.5">
@@ -229,64 +211,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PRODUTO EM AÇÃO / SIMULADOR */}
-      <div id="simulador">
-        <InteractiveSystemSimulator />
-      </div>
-
-      {/* SEÇÃO: COMO FUNCIONA NA PRÁTICA */}
-      <section className="py-24 bg-white border-y border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Processo Transparente</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
-              Tecnologia que resolve problemas reais da operação.
-            </h2>
-            <p className="text-base md:text-lg text-slate-600">
-              Sem burocracia excessiva ou sistemas genéricos que não encaixam no seu dia a dia.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                step: '01',
-                title: 'Entendemos sua operação',
-                desc: 'Identificamos os pontos críticos do seu fluxo de caixa, atendimento, cozinha ou evento para indicar a configuração ideal.',
-                icon: <Users2 className="w-5 h-5 text-blue-600" />
-              },
-              {
-                step: '02',
-                title: 'Configuramos a solução',
-                desc: 'Ajudamos você a cadastrar seus produtos, parâmetros de atendimento e equipamentos (impressoras, leitores e telas).',
-                icon: <Settings2 className="w-5 h-5 text-blue-600" />
-              },
-              {
-                step: '03',
-                title: 'Sua equipe começa a operar',
-                desc: 'Com uma interface simples e direta, sua equipe aprende em minutos e conta com nosso suporte sempre que precisar.',
-                icon: <CheckCircle2 className="w-5 h-5 text-blue-600" />
-              },
-            ].map((card, i) => (
-              <div key={i} className="p-8 rounded-2xl bg-slate-50 border border-slate-200 relative">
-                <span className="text-4xl font-extrabold text-slate-200 absolute top-6 right-6 font-mono">
-                  {card.step}
-                </span>
-                <div className="p-3 bg-white rounded-xl border border-slate-200 w-fit mb-6 shadow-2xs">
-                  {card.icon}
-                </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">{card.title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">{card.desc}</p>
-              </div>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* PRODUTOS DO ECOSSISTEMA */}
-      <section className="py-24 bg-slate-50">
+      {/* 2. PRODUTOS DO ECOSSISTEMA */}
+      <section className="py-24 bg-slate-50 border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -379,59 +305,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SEÇÃO: POR QUE CONFIAR NA VANCOD? */}
-      <section className="py-24 bg-white border-t border-slate-200">
+      {/* 3. PRODUTO EM AÇÃO / SIMULADOR */}
+      <div id="simulador">
+        <InteractiveSystemSimulator />
+      </div>
+
+      {/* 4. COMO FUNCIONA NA PRÁTICA */}
+      <section className="py-24 bg-white border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Compromisso e Transparência</span>
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Processo Transparente</span>
             <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
-              Por que confiar na Vancod?
+              Tecnologia que resolve problemas reais da operação.
             </h2>
             <p className="text-base md:text-lg text-slate-600">
-              Argumentos claros e verificáveis que fundamentam o nosso modelo de trabalho.
+              Sem burocracia excessiva ou sistemas genéricos que não encaixam no seu dia a dia.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: 'Softwares Desenvolvidos Internamente',
-                desc: 'Não revendemos ferramentas de terceiros. Mantemos o controle do código-fonte para implementar melhorias e correções rápidas.',
-                icon: <Layers className="w-5 h-5 text-blue-600" />
+                step: '01',
+                title: 'Entendemos sua operação',
+                desc: 'Identificamos os pontos críticos do seu fluxo de caixa, atendimento, cozinha ou evento para indicar a configuração ideal.',
+                icon: <Users2 className="w-5 h-5 text-blue-600" />
               },
               {
-                title: 'Operação Offline-First quando Aplicável',
-                desc: 'Entendemos que sua empresa não pode parar. Asseguramos que o PDV continue operando mesmo com o sinal de internet instável.',
-                icon: <Server className="w-5 h-5 text-blue-600" />
+                step: '02',
+                title: 'Configuramos a solução',
+                desc: 'Ajudamos você a cadastrar seus produtos, parâmetros de atendimento e equipamentos (impressoras, leitores e telas).',
+                icon: <Settings2 className="w-5 h-5 text-blue-600" />
               },
               {
-                title: 'Sem Comissão Sobre Vendas',
-                desc: 'Cobramos um valor de assinatura transparente. O faturamento e o lucro gerados pelas suas vendas pertencem 100% à sua empresa.',
-                icon: <ShieldCheck className="w-5 h-5 text-blue-600" />
-              },
-              {
-                title: 'Suporte Técnico Humanizado',
-                desc: 'Você conversa diretamente com pessoas que conhecem o produto e entendem o contexto da sua operação diária.',
-                icon: <Headphones className="w-5 h-5 text-blue-600" />
-              },
-              {
-                title: 'Foco em Segmentos Definidos',
-                desc: 'Evitamos tentar atender todo o mercado com uma única tela. Cada produto é projetado respeitando as regras do seu segmento.',
-                icon: <FileCheck2 className="w-5 h-5 text-blue-600" />
-              },
-              {
-                title: 'Demonstração Prévia sem Compromisso',
-                desc: 'Você tem a oportunidade de testar e visualizar o fluxo de trabalho antes de qualquer decisão comercial.',
+                step: '03',
+                title: 'Sua equipe começa a operar',
+                desc: 'Com uma interface simples e direta, sua equipe aprende em minutos e conta com nosso suporte sempre que precisar.',
                 icon: <CheckCircle2 className="w-5 h-5 text-blue-600" />
               },
-            ].map((item, i) => (
-              <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
-                <div className="p-2.5 bg-white rounded-xl border border-slate-200 w-fit mb-4">
-                  {item.icon}
+            ].map((card, i) => (
+              <div key={i} className="p-8 rounded-2xl bg-slate-50 border border-slate-200 relative">
+                <span className="text-4xl font-extrabold text-slate-200 absolute top-6 right-6 font-mono">
+                  {card.step}
+                </span>
+                <div className="p-3 bg-white rounded-xl border border-slate-200 w-fit mb-6 shadow-2xs">
+                  {card.icon}
                 </div>
-                <h3 className="text-base font-bold text-slate-900 mb-2">{item.title}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">{card.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
@@ -439,33 +361,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* COMPARATIVO OPERACIONAL */}
+      {/* 5. POR QUE ESCOLHER A VANCOD (4 PILARES) */}
+      <WhyVancod />
+
+      {/* 6. COMPARATIVO OPERACIONAL */}
       <ComparisonTable />
 
-      {/* CALCULADORA ROI */}
+      {/* 7. SIMULADOR DE RETORNO / ROI */}
       <RoiCalculator />
 
-      {/* ESTRUTURA INSTITUCIONAL: CONHEÇA ANTES DE CONTRATAR */}
-      <section className="py-20 bg-slate-100/70 border-t border-slate-200">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">Transparência Comercial</span>
-          <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-4">
-            Conheça a solução antes de contratar.
-          </h2>
-          <p className="text-sm md:text-base text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-            Agende uma apresentação prática com nosso time. Mostramos o funcionamento das telas, o fluxo de pedidos e tiramos todas as dúvidas técnicas da sua equipe.
-          </p>
-          <Link
-            to="/contato"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-xs shadow-sm transition-all"
-          >
-            <span>Falar com nossa equipe</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-        </div>
-      </section>
+      {/* 8. PROVA SOCIAL: CLIENTES & CASES & DEPOIMENTOS (ESTRUTURA HONESTA) */}
+      <ClientsSection />
+      <CasesSection />
+      <TestimonialsSection />
 
-      {/* FAQ */}
+      {/* 9. CONFIANÇA & TRANSPARÊNCIA INSTITUCIONAL */}
+      <TransparencySection />
+
+      {/* 10. FAQ */}
       <section className="py-24 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -480,7 +393,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA FINAL */}
+      {/* 11. CTA FINAL */}
       <section className="py-24 bg-blue-600 text-white text-center relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">

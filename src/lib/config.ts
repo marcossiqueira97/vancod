@@ -1,26 +1,65 @@
 /**
  * Configurações Institucionais e Comerciais da Vancod Tecnologia
- * Centralização de contatos, links e informações da empresa.
+ * Centralização de contatos, dados da empresa e estruturas para expansão futura.
  */
+
+export interface ClientItem {
+  name: string;
+  logo?: string;
+  segment: string;
+  url?: string;
+  isAuthorized?: boolean;
+}
+
+export interface CaseItem {
+  company: string;
+  segment: string;
+  challenge: string;
+  solution: string;
+  result: string;
+  testimonial?: string;
+  image?: string;
+  ctaText?: string;
+  ctaUrl?: string;
+}
+
+export interface TestimonialItem {
+  name: string;
+  role: string;
+  company: string;
+  segment: string;
+  testimonial: string;
+  photo?: string;
+}
 
 export const SITE_CONFIG = {
   name: 'Vancod Tecnologia',
   shortName: 'Vancod',
   tagline: 'Soluções de software especializadas para a operação do seu negócio',
-  description: 'Desenvolvemos sistemas focados em resolver problemas reais de adegas, restaurantes e eventos com agilidade e confiabilidade.',
+  description: 'Desenvolvemos sistemas focados em resolver problemas práticos de adegas, restaurantes e eventos com agilidade e confiabilidade.',
   url: 'https://vancod.com.br',
   
+  // Informações Institucionais da Empresa
+  company: {
+    legalName: '', // Razão Social oficial quando disponível
+    cnpj: '', // CNPJ oficial quando disponível
+    city: 'São Paulo',
+    state: 'SP',
+    country: 'Brasil',
+  },
+
   // Contatos comerciais e institucionais
   contact: {
     email: 'contato@vancod.com.br',
     suporteEmail: 'suporte@vancod.com.br',
-    // IMPORTANTE: Definir o número oficial no formato DDI + DDD + Número (ex: '5511999999999')
-    whatsappNumber: '', // Preencher com o número oficial real
-    city: 'São Paulo',
-    state: 'SP',
-    country: 'Brasil',
-    cnpj: '', // Preencher com o CNPJ oficial quando disponível
+    // Inserir número oficial quando definido (ex: '5511999999999')
+    whatsappNumber: '',
   },
+
+  // Estruturas prontas para receber dados reais quando autorizados
+  clients: [] as ClientItem[],
+  cases: [] as CaseItem[],
+  testimonials: [] as TestimonialItem[],
 
   // Produtos Oficiais do Ecossistema
   products: [
@@ -52,10 +91,10 @@ export const SITE_CONFIG = {
       summary: 'Plataforma web para transmissão ao vivo de fotos dos convidados em telões e TVs de eventos.',
     }
   ]
-} as const;
+};
 
 /**
- * Gera link do WhatsApp com mensagem pré-formatada
+ * Gera link do WhatsApp com mensagem pré-formatada ou redireciona para contato
  */
 export function getWhatsAppUrl(customMessage?: string): string {
   const number = SITE_CONFIG.contact.whatsappNumber;
@@ -64,7 +103,6 @@ export function getWhatsAppUrl(customMessage?: string): string {
   );
 
   if (!number) {
-    // Se o número ainda não estiver configurado, redireciona para a página de contato
     return '/contato';
   }
 
