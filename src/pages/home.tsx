@@ -1,38 +1,31 @@
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion } from 'motion/react';
 import { 
   ArrowRight, 
-  Box, 
-  BarChart3, 
   Zap, 
-  Shield, 
-  Smartphone, 
-  Globe, 
-  Layers, 
+  ChefHat, 
+  QrCode, 
   CheckCircle2, 
-  ChevronRight, 
-  Play,
-  TrendingUp,
-  Award,
-  Users,
-  Clock,
+  ShieldCheck, 
+  Headphones, 
+  Layers, 
   Sparkles,
-  ChefHat,
-  QrCode,
-  ShieldCheck
+  Server,
+  FileCheck2,
+  Users2,
+  Settings2,
+  Check
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { FAQ } from '../components/faq';
 import { SEO } from '../components/seo';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { AnimatedGrid } from '../components/animated-grid';
-import { Button } from '../components/button';
-import { VideoDemoPlayer } from '../components/video-demo-player';
 import { ComparisonTable } from '../components/comparison-table';
 import { RoiCalculator } from '../components/roi-calculator';
 import { InteractiveSystemSimulator } from '../components/interactive-system-simulator';
+import { SITE_CONFIG } from '../lib/config';
 
 export default function Home() {
-  const containerRef = useRef(null);
   const [activeTab, setActiveTab] = useState(0);
 
   const showcaseTabs = [
@@ -40,7 +33,7 @@ export default function Home() {
       id: 'adega',
       name: 'Balcão Pro Adegas',
       subdomain: 'adegas.vancod.com.br',
-      badge: '⚡ Caixa Rápido 100% Ativo sem Internet',
+      badge: 'Operação Offline-First & PDV Rápido',
       img: '/assets/adega-br.png',
       path: '/adegas'
     },
@@ -48,7 +41,7 @@ export default function Home() {
       id: 'restaurantes',
       name: 'Vancod Restaurantes',
       subdomain: 'restaurantes.vancod.com.br',
-      badge: '💻 Cozinha na Tela + iFood Direto',
+      badge: 'KDS Cozinha & Comanda de Mesas',
       img: '/assets/restaurantes-br.png',
       path: '/restaurantes'
     },
@@ -56,7 +49,7 @@ export default function Home() {
       id: 'olhare',
       name: 'Olhare Fotos & Eventos',
       subdomain: 'olhare.vancod.com.br',
-      badge: '📸 Transmissão de Fotos na TV da Festa',
+      badge: 'Transmissão ao Vivo na TV via QR Code',
       img: '/assets/olhare-br.png',
       path: '/olhare'
     }
@@ -65,30 +58,30 @@ export default function Home() {
   const faqs = [
     {
       question: "Como funciona a implantação e o suporte dos sistemas Vancod?",
-      answer: "Nossa equipe de especialistas acompanha todo o processo de instalação e configuração inicial. Você conta com suporte técnico humanizado e ágil direto no WhatsApp todos os dias da semana para tirar dúvidas e otimizar sua rotina."
+      answer: "Nossa equipe acompanha você na instalação e na configuração inicial dos produtos e dados. O suporte técnico é prestado de forma direta e humanizada via e-mail e WhatsApp para tirar dúvidas e manter sua rotina fluida."
     },
     {
-      question: "O sistema de caixa continua funcionando se a internet do meu estabelecimento cair?",
-      answer: "Sim! Tanto o Balcão Pro Adegas quanto o Vancod Restaurantes possuem arquitetura Offline-First (Desktop em Rust + SQLite). Seu caixa passa vendas, emite comprovantes e abre a gaveta de dinheiro normalmente sem depender de conexão com a internet."
+      question: "O sistema de caixa continua funcionando se a internet cair?",
+      answer: "Sim. O Balcão Pro Adegas e o módulo de PDV do Vancod Restaurantes foram projetados com arquitetura offline-first. Isso significa que o caixa continua operando localmente no computador, registrando vendas e imprimindo comprovantes sem interrupção."
     },
     {
-      question: "Existe cobrança de comissão ou porcentagem sobre as minhas vendas?",
-      answer: "Não! A Vancod não cobra nenhuma porcentagem sobre o faturamento do seu negócio. Seu lucro é 100% seu, com planos mensais claros, transparentes e previsíveis."
+      question: "Existe cobrança de comissão percentual sobre as vendas?",
+      answer: "Não. A Vancod trabalha com assinaturas de software com valores transparentes e previsíveis. Não cobramos comissões sobre o faturamento do seu estabelecimento."
     },
     {
-      question: "Preciso comprar servidores caros ou computadores novos?",
-      answer: "Não. Nossos sistemas são extremamente leves e otimizados para rodar em computadores comuns, notebooks, tablets ou smartphones, sem exigir investimentos pesados em infraestrutura."
+      question: "Quais equipamentos são necessários para utilizar os sistemas?",
+      answer: "Nossos sistemas rodam em computadores convencionais com Windows, além de navegadores modernos em tablets e celulares. São compatíveis com impressoras térmicas padrão (USB/Rede) e leitores de código de barras comuns."
     },
     {
-      question: "Como funciona a migração dos dados do meu sistema antigo?",
-      answer: "Nossa equipe técnica ajuda na importação do seu catálogo de produtos, clientes e histórico, garantindo uma transição rápida e sem interrupção nas suas vendas."
+      question: "Posso agendar uma demonstração antes de contratar?",
+      answer: "Sim. Realizamos demonstrações online e práticas para você ver o sistema funcionando no modelo exato do seu negócio e tirar todas as suas dúvidas com nossa equipe."
     }
   ];
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Vancod Systems",
+    "name": "Vancod Tecnologia",
     "applicationCategory": "BusinessApplication",
     "operatingSystem": "Web, Windows, Android, iOS",
     "offers": {
@@ -99,109 +92,103 @@ export default function Home() {
   };
 
   return (
-    <div className="bg-slate-50 text-slate-900 overflow-hidden relative" ref={containerRef}>
+    <div className="bg-slate-50 text-slate-900 overflow-hidden relative">
       <SEO 
-        title="Ecossistema SaaS de Alta Performance" 
-        description="Engenharia de software definitiva para Adegas, Restaurantes e Eventos. PDV offline, KDS para cozinha, integração iFood e transmissão de fotos ao vivo."
+        title="Software Especializado para Adegas, Restaurantes e Eventos" 
+        description="Soluções de software desenvolvidas para atender as necessidades práticas de adegas, distribuidores, restaurantes e eventos com agilidade e confiabilidade."
         schema={schema}
       />
       
-      {/* Background Grid */}
       <AnimatedGrid />
 
       {/* HERO SECTION */}
-      <section className="relative min-h-[90vh] flex items-center pt-28 pb-20 overflow-hidden z-10">
+      <section className="relative min-h-[85vh] flex items-center pt-28 pb-20 overflow-hidden z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="text-center max-w-5xl mx-auto">
+          <div className="text-center max-w-4xl mx-auto">
             
             {/* Top Pill */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-300 text-blue-800 text-xs font-extrabold mb-8 shadow-sm"
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/80 text-slate-800 text-xs font-semibold mb-6 border border-slate-300/60"
             >
               <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-              Engenharia de Software de Classe Mundial para o Seu Negócio
+              Sistemas desenvolvidos para a rotina real da sua empresa
             </motion.div>
 
             {/* Main Title */}
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-5xl md:text-7xl lg:text-[88px] font-black tracking-tight text-slate-900 mb-8 leading-[1.08]"
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 leading-[1.1]"
             >
-              A tecnologia que <br className="hidden md:block"/>
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent">
-                multiplica seus resultados.
+              Softwares que simplificam e <br className="hidden sm:block" />
+              <span className="text-blue-600">
+                organizam a sua operação.
               </span>
             </motion.h1>
             
             {/* Subtitle */}
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="text-lg md:text-2xl text-slate-600 mb-12 max-w-3xl mx-auto leading-relaxed font-normal"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-base sm:text-xl text-slate-600 mb-10 max-w-2xl mx-auto font-normal leading-relaxed"
             >
-              Sistemas inteligentes e ultrarrápidos para <strong>adegas</strong>, <strong>restaurantes</strong> e <strong>eventos</strong>. Elimine filas, acabe com erros de cozinha e feche vendas em 0 milissegundos.
+              Soluções especializadas para <strong>adegas</strong>, <strong>restaurantes</strong> e <strong>eventos</strong>. Menos cliques, menos erros de atendimento e funcionamento garantido mesmo sem internet.
             </motion.p>
             
             {/* CTA Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-3.5"
             >
               <Link
                 to="/contato"
-                className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-extrabold text-base shadow-xl shadow-blue-600/30 hover:scale-105 transition-all flex items-center justify-center gap-3"
+                className="w-full sm:w-auto px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2 hover:shadow-md"
               >
-                <span>Agendar Demonstração Gratuita</span>
-                <ArrowRight className="w-5 h-5" />
+                <span>Agendar demonstração</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="#simulador"
-                className="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 rounded-full font-bold text-base shadow-sm hover:scale-105 transition-all flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 rounded-full font-semibold text-sm shadow-xs transition-all flex items-center justify-center"
               >
-                <span>Testar Simulador Interativo</span>
+                <span>Ver demonstração interativa</span>
               </a>
             </motion.div>
 
-            {/* Trust Proof Metrics Under Hero */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.4 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-10 border-t border-slate-200"
-            >
+            {/* Core Pillars Strip */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-14 pt-8 border-t border-slate-200">
               {[
-                { label: 'Latência de Caixa Local', val: '0 ms', desc: '100% Offline-First' },
-                { label: 'Aumento de Giro no Pico', val: '+40%', desc: 'Sem Filas no Balcão' },
-                { label: 'Comissão por Pedido', val: 'R$ 0,00', desc: 'Lucro 100% Seu' },
-                { label: 'SLA de Disponibilidade', val: '99.99%', desc: 'Estabilidade Total' },
-              ].map((m, i) => (
-                <div key={i} className="p-4 bg-white/80 rounded-2xl border border-slate-200 text-center shadow-xs">
-                  <div className="text-2xl md:text-3xl font-black text-blue-600 font-mono">{m.val}</div>
-                  <div className="text-xs font-extrabold text-slate-900 mt-1">{m.label}</div>
-                  <div className="text-[11px] text-slate-500 font-medium">{m.desc}</div>
+                { title: 'Operação Offline-First', desc: 'Caixa ativo mesmo sem internet' },
+                { title: 'Sem Comissão por Venda', desc: 'Previsibilidade contratual' },
+                { title: 'Suporte Humanizado', desc: 'Atendimento direto por especialistas' },
+                { title: 'Foco em Segmentos', desc: 'Soluções feitas sob medida' },
+              ].map((p, i) => (
+                <div key={i} className="p-3 bg-white rounded-xl border border-slate-200/80 text-left">
+                  <div className="text-xs font-bold text-slate-900">{p.title}</div>
+                  <div className="text-[11px] text-slate-500 mt-0.5">{p.desc}</div>
                 </div>
               ))}
-            </motion.div>
+            </div>
+
           </div>
 
           {/* Interactive Showcase Tabs */}
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-14 flex flex-wrap items-center justify-center gap-2">
             {showcaseTabs.map((tab, idx) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(idx)}
-                className={`px-6 py-3 rounded-full text-sm font-extrabold transition-all duration-300 flex items-center gap-2 ${
+                className={`px-5 py-2.5 rounded-full text-xs font-bold transition-all ${
                   activeTab === idx
-                    ? 'bg-blue-600 text-white shadow-xl shadow-blue-600/30 scale-105 border border-blue-500'
-                    : 'bg-white text-slate-700 hover:text-blue-600 border border-slate-200 shadow-sm hover:bg-slate-50'
+                    ? 'bg-blue-600 text-white shadow-sm'
+                    : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
                 }`}
               >
                 {tab.name}
@@ -209,74 +196,106 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Hero Interface Mockup with Real HD Image */}
-          <motion.div
-            initial={{ opacity: 0, y: 80 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-8 relative mx-auto max-w-6xl"
-          >
-            <div className="absolute -inset-2 bg-gradient-to-r from-blue-400/20 via-indigo-400/15 to-purple-400/20 rounded-3xl blur-2xl opacity-70" />
-            
-            <div className="relative aspect-[16/9] md:aspect-[21/9] rounded-2xl bg-white border border-slate-200/90 shadow-2xl shadow-slate-300/60 overflow-hidden group ring-1 ring-slate-200">
-              <div className="absolute top-0 w-full h-12 bg-slate-100/90 border-b border-slate-200 flex items-center px-6 gap-2 z-30 backdrop-blur-md">
+          {/* Interface Mockup Display */}
+          <div className="mt-6 relative mx-auto max-w-5xl">
+            <div className="aspect-[16/9] md:aspect-[21/10] rounded-2xl bg-white border border-slate-200 shadow-xl overflow-hidden">
+              <div className="h-10 bg-slate-100 border-b border-slate-200 flex items-center px-4 justify-between">
                  <div className="flex gap-1.5">
-                   <div className="w-3 h-3 rounded-full bg-red-400" />
-                   <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                   <div className="w-3 h-3 rounded-full bg-green-400" />
+                   <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+                   <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+                   <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
                  </div>
-                 <div className="mx-auto px-6 py-1 rounded-md bg-white text-xs text-slate-700 font-mono border border-slate-200 flex items-center gap-2 shadow-inner">
-                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                 <span className="text-xs font-mono text-slate-500">
                    https://{showcaseTabs[activeTab].subdomain}
-                 </div>
-                 <Link to={showcaseTabs[activeTab].path} className="text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors flex items-center gap-1">
-                   Acessar Solução <ArrowRight className="w-3.5 h-3.5" />
+                 </span>
+                 <Link 
+                   to={showcaseTabs[activeTab].path} 
+                   className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+                 >
+                   Ver produto <ArrowRight className="w-3 h-3" />
                  </Link>
               </div>
               
-              <div className="absolute inset-0 pt-12 flex items-center justify-center bg-slate-100">
-                <motion.div
-                  key={activeTab}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4 }}
-                  className="relative w-full h-full"
-                >
-                  <img 
-                    src={showcaseTabs[activeTab].img} 
-                    alt={showcaseTabs[activeTab].name}
-                    className="w-full h-full object-cover object-top"
-                  />
-                  <div className="absolute top-4 right-4 px-4 py-2 rounded-full bg-white/95 border border-slate-200 text-xs font-bold text-blue-700 backdrop-blur-md shadow-lg flex items-center gap-2">
-                    {showcaseTabs[activeTab].badge}
-                  </div>
-                </motion.div>
+              <div className="relative w-full h-[calc(100%-2.5rem)] bg-slate-100">
+                <img 
+                  src={showcaseTabs[activeTab].img} 
+                  alt={showcaseTabs[activeTab].name}
+                  className="w-full h-full object-cover object-top"
+                />
               </div>
             </div>
-          </motion.div>
+          </div>
+
         </div>
       </section>
 
-      {/* INTERACTIVE SYSTEM SIMULATOR SECTION */}
+      {/* PRODUTO EM AÇÃO / SIMULADOR */}
       <div id="simulador">
         <InteractiveSystemSimulator />
       </div>
 
-      {/* ROI & PROFIT IMPACT CALCULATOR */}
-      <RoiCalculator />
-
-      {/* THREE PILLARS BENTO GRID */}
-      <section className="py-32 relative z-10">
+      {/* SEÇÃO: COMO FUNCIONA NA PRÁTICA */}
+      <section className="py-24 bg-white border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
-              Sistemas Especialistas, <br />
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Zero Burocracia.
-              </span>
+          
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Processo Transparente</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+              Tecnologia que resolve problemas reais da operação.
             </h2>
-            <p className="text-xl text-slate-600">
-              Cada segmento possui necessidades únicas. Por isso desenvolvemos ferramentas dedicadas e cirurgicamente precisas.
+            <p className="text-base md:text-lg text-slate-600">
+              Sem burocracia excessiva ou sistemas genéricos que não encaixam no seu dia a dia.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                step: '01',
+                title: 'Entendemos sua operação',
+                desc: 'Identificamos os pontos críticos do seu fluxo de caixa, atendimento, cozinha ou evento para indicar a configuração ideal.',
+                icon: <Users2 className="w-5 h-5 text-blue-600" />
+              },
+              {
+                step: '02',
+                title: 'Configuramos a solução',
+                desc: 'Ajudamos você a cadastrar seus produtos, parâmetros de atendimento e equipamentos (impressoras, leitores e telas).',
+                icon: <Settings2 className="w-5 h-5 text-blue-600" />
+              },
+              {
+                step: '03',
+                title: 'Sua equipe começa a operar',
+                desc: 'Com uma interface simples e direta, sua equipe aprende em minutos e conta com nosso suporte sempre que precisar.',
+                icon: <CheckCircle2 className="w-5 h-5 text-blue-600" />
+              },
+            ].map((card, i) => (
+              <div key={i} className="p-8 rounded-2xl bg-slate-50 border border-slate-200 relative">
+                <span className="text-4xl font-extrabold text-slate-200 absolute top-6 right-6 font-mono">
+                  {card.step}
+                </span>
+                <div className="p-3 bg-white rounded-xl border border-slate-200 w-fit mb-6 shadow-2xs">
+                  {card.icon}
+                </div>
+                <h3 className="text-lg font-bold text-slate-900 mb-2">{card.title}</h3>
+                <p className="text-sm text-slate-600 leading-relaxed">{card.desc}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* PRODUTOS DO ECOSSISTEMA */}
+      <section className="py-24 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Soluções Dedicadas</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+              Cada produto desenvolvido para um contexto específico.
+            </h2>
+            <p className="text-base md:text-lg text-slate-600">
+              Conheça as ferramentas desenhadas para atender com precisão o seu modelo de trabalho.
             </p>
           </div>
 
@@ -284,238 +303,207 @@ export default function Home() {
             {[
               {
                 title: 'Balcão Pro Adegas',
-                tag: '⚡ 100% Offline (Sem Fila)',
-                badgeColor: 'bg-cyan-100 border-cyan-300 text-cyan-800',
-                cardBg: 'bg-white border-slate-200 shadow-xl shadow-cyan-900/5 hover:border-cyan-400 hover:shadow-2xl',
-                desc: 'O sistema definitivo para adegas, distribuidoras e conveniências que vendem no balcão e no fiado.',
-                icon: <Zap className="w-8 h-8 text-cyan-600" />,
-                checkColor: 'text-cyan-600',
-                btnColor: 'text-cyan-700 hover:text-cyan-800',
+                tag: 'Adegas & Distribuidoras',
+                desc: 'PDV com operação offline-first, dedução automática de insumos em combos e gestão prática de fiado com extrato no WhatsApp.',
+                icon: <Zap className="w-6 h-6 text-cyan-600" />,
                 path: '/adegas',
-                bulletList: [
-                  'Caixa rápido que nunca trava na sexta à noite',
-                  'Controle de fiado com fatura no WhatsApp',
-                  'Baixa automática de combos (whisky + gelo + energético)',
-                  'Controle de cascos e vasilhames retornáveis'
+                bullets: [
+                  'Caixa com funcionamento local sem depender de internet',
+                  'Desmembramento de combos (bebida + insumos)',
+                  'Controle de clientes no fiado e limites',
+                  'Compatível com impressoras térmicas e leitores'
                 ]
               },
               {
                 title: 'Vancod Restaurantes',
-                tag: '💻 KDS & iFood Integrado',
-                badgeColor: 'bg-pink-100 border-pink-300 text-pink-800',
-                cardBg: 'bg-white border-slate-200 shadow-xl shadow-pink-900/5 hover:border-pink-400 hover:shadow-2xl',
-                desc: 'PDV, comanda eletrônica, telas KDS para cozinha e sincronização automática com iFood.',
-                icon: <ChefHat className="w-8 h-8 text-pink-600" />,
-                checkColor: 'text-pink-600',
-                btnColor: 'text-pink-700 hover:text-pink-800',
+                tag: 'Bares & Restaurantes',
+                desc: 'Comanda de mesas no celular, telas KDS para organização de pedidos na cozinha e sincronização com canais de delivery.',
+                icon: <ChefHat className="w-6 h-6 text-pink-600" />,
                 path: '/restaurantes',
-                bulletList: [
-                  'Pedidos do iFood direto na cozinha sem redigitar',
-                  'Telas KDS digitais por setor (Bar, Chapa, Forno)',
-                  'Módulo especialista em Pizzarias (até 4 sabores)',
-                  'Divisão automática de conta por mesa ou comanda'
+                bullets: [
+                  'Telas digitais KDS por praça de preparo',
+                  'Lançamento ágil de mesas e comandas',
+                  'Divisão automática de contas no salão',
+                  'Módulo para pizzarias com meio-a-meio'
                 ]
               },
               {
                 title: 'Olhare Fotos & Eventos',
-                tag: '📸 Mural TV ao Vivo (Zero App)',
-                badgeColor: 'bg-purple-100 border-purple-300 text-purple-800',
-                cardBg: 'bg-white border-slate-200 shadow-xl shadow-purple-900/5 hover:border-purple-400 hover:shadow-2xl',
-                desc: 'Transforme as fotos dos convidados na atração principal da festa com transmissão ao vivo na TV.',
-                icon: <QrCode className="w-8 h-8 text-purple-600" />,
-                checkColor: 'text-purple-600',
-                btnColor: 'text-purple-700 hover:text-purple-800',
+                tag: 'Festas & Cerimoniais',
+                desc: 'Mural interativo que transmite fotos e recados dos convidados na TV do evento via QR Code sem baixar aplicativos.',
+                icon: <QrCode className="w-6 h-6 text-purple-600" />,
                 path: '/olhare',
-                bulletList: [
-                  'Acesso instantâneo por QR Code sem baixar app',
-                  'Mural ao vivo em alta definição na TV do salão',
-                  'Painel de moderação para aprovar fotos e recados',
-                  'Download de todas as fotos em alta resolução em 1 clique'
+                bullets: [
+                  'Acesso instantâneo pelo navegador do celular',
+                  'Painel de moderação para aprovação de fotos',
+                  'Transmissão contínua em Smart TVs ou telões',
+                  'Download completo da galeria pós-evento'
                 ]
-              }
-            ].map((product, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.7, delay: i * 0.1 }}
-                className={`group relative backdrop-blur-xl p-8 rounded-3xl border transition-all duration-500 flex flex-col justify-between overflow-hidden hover:-translate-y-2 ${product.cardBg}`}
-              >
-                <div className="relative z-10 w-full">
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="p-3.5 rounded-2xl bg-slate-100 border border-slate-200 group-hover:scale-110 transition-transform duration-500">
-                      {product.icon}
+              },
+            ].map((p, i) => (
+              <div key={i} className="bg-white p-8 rounded-2xl border border-slate-200 flex flex-col justify-between shadow-xs hover:shadow-md transition-shadow">
+                <div>
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                      {p.icon}
                     </div>
-                    <span className={`px-3 py-1 rounded-full border text-xs font-extrabold backdrop-blur-md ${product.badgeColor}`}>
-                      {product.tag}
+                    <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">
+                      {p.tag}
                     </span>
                   </div>
-                  <h3 className="text-2xl font-extrabold text-slate-900 mb-3 tracking-tight">{product.title}</h3>
-                  <p className="text-sm text-slate-600 mb-6 leading-relaxed font-normal">{product.desc}</p>
                   
-                  <ul className="space-y-3 mb-8">
-                    {product.bulletList.map((item, idx) => (
-                      <li key={idx} className="flex items-start gap-2.5 text-xs md:text-sm text-slate-700 font-medium">
-                        <span className={`${product.checkColor} font-black`}>✓</span>
-                        <span>{item}</span>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">{p.title}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed mb-6">{p.desc}</p>
+                  
+                  <ul className="space-y-2.5 mb-8">
+                    {p.bullets.map((b, idx) => (
+                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-700">
+                        <Check className="w-3.5 h-3.5 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <span>{b}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <Link 
-                  to={product.path} 
-                  className={`inline-flex items-center justify-between font-extrabold ${product.btnColor} transition-colors pt-4 border-t border-slate-100 text-sm`}
+                <Link
+                  to={p.path}
+                  className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600 hover:text-blue-700"
                 >
-                  <span>Conhecer {product.title}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+                  <span>Ver detalhes da solução</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
+
         </div>
       </section>
 
-      {/* VIDEO / INTERACTIVE OPERATION PLAYER */}
-      <VideoDemoPlayer />
-
-      {/* COMPARISON TABLE: VANCOD VS LEGACY SYSTEMS */}
-      <ComparisonTable />
-
-      {/* SOCIAL PROOF & SUCCESS METRICS */}
-      <section className="py-28 bg-white border-t border-slate-200">
+      {/* SEÇÃO: POR QUE CONFIAR NA VANCOD? */}
+      <section className="py-24 bg-white border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs font-bold mb-4 shadow-sm">
-              <Award className="w-3.5 h-3.5 text-emerald-600" /> Resultados Reais de Clientes
-            </div>
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-6">
-              Quem usa Vancod não troca.
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Compromisso e Transparência</span>
+            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+              Por que confiar na Vancod?
             </h2>
-            <p className="text-lg text-slate-600">
-              Veja os depoimentos de empresários que transformaram sua gestão e aceleraram suas vendas.
+            <p className="text-base md:text-lg text-slate-600">
+              Argumentos claros e verificáveis que fundamentam o nosso modelo de trabalho.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               {
-                quote: "Sexta-feira à noite a internet da minha rua caiu no pico de vendas. Antigamente a gente parava tudo. Com o Balcão Pro, o caixa continuou passando cerveja e combo sem travar nada.",
-                author: "Rodrigo Mendes",
-                business: "Distribuidora & Adega Ponto Certo",
-                city: "Campinas / SP",
-                tag: "Adega / Balcão",
-                badgeColor: "bg-cyan-50 text-cyan-700 border-cyan-200"
+                title: 'Softwares Desenvolvidos Internamente',
+                desc: 'Não revendemos ferramentas de terceiros. Mantemos o controle do código-fonte para implementar melhorias e correções rápidas.',
+                icon: <Layers className="w-5 h-5 text-blue-600" />
               },
               {
-                quote: "O KDS na cozinha e a integração com o iFood salvaram nossa operação. Zeramos os erros de pedidos que os garçons anotavam errado no papel.",
-                author: "Juliana Castro",
-                business: "Pizzaria Don Corleone",
-                city: "Curitiba / PR",
-                tag: "Restaurante & Pizzaria",
-                badgeColor: "bg-pink-50 text-pink-700 border-pink-200"
+                title: 'Operação Offline-First quando Aplicável',
+                desc: 'Entendemos que sua empresa não pode parar. Asseguramos que o PDV continue operando mesmo com o sinal de internet instável.',
+                icon: <Server className="w-5 h-5 text-blue-600" />
               },
               {
-                quote: "Colocamos o Olhare no nosso casamento e foi a maior sensação da festa! Os convidados amaram ver as fotos aparecendo no telão em tempo real.",
-                author: "Camila & Marcelo",
-                business: "Casamento no Espaço Villa Real",
-                city: "São Paulo / SP",
-                tag: "Evento / Casamento",
-                badgeColor: "bg-purple-50 text-purple-700 border-purple-200"
-              }
-            ].map((test, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-                className="bg-slate-50 p-8 rounded-3xl border border-slate-200 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex text-amber-400">
-                      {'★'.repeat(5)}
-                    </div>
-                    <span className={`text-[11px] font-bold px-2.5 py-1 rounded-full border ${test.badgeColor}`}>
-                      {test.tag}
-                    </span>
-                  </div>
-                  <p className="text-slate-700 text-sm leading-relaxed mb-6 italic">
-                    "{test.quote}"
-                  </p>
+                title: 'Sem Comissão Sobre Vendas',
+                desc: 'Cobramos um valor de assinatura transparente. O faturamento e o lucro gerados pelas suas vendas pertencem 100% à sua empresa.',
+                icon: <ShieldCheck className="w-5 h-5 text-blue-600" />
+              },
+              {
+                title: 'Suporte Técnico Humanizado',
+                desc: 'Você conversa diretamente com pessoas que conhecem o produto e entendem o contexto da sua operação diária.',
+                icon: <Headphones className="w-5 h-5 text-blue-600" />
+              },
+              {
+                title: 'Foco em Segmentos Definidos',
+                desc: 'Evitamos tentar atender todo o mercado com uma única tela. Cada produto é projetado respeitando as regras do seu segmento.',
+                icon: <FileCheck2 className="w-5 h-5 text-blue-600" />
+              },
+              {
+                title: 'Demonstração Prévia sem Compromisso',
+                desc: 'Você tem a oportunidade de testar e visualizar o fluxo de trabalho antes de qualquer decisão comercial.',
+                icon: <CheckCircle2 className="w-5 h-5 text-blue-600" />
+              },
+            ].map((item, i) => (
+              <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+                <div className="p-2.5 bg-white rounded-xl border border-slate-200 w-fit mb-4">
+                  {item.icon}
                 </div>
-                <div className="pt-4 border-t border-slate-200 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-600 text-white font-extrabold flex items-center justify-center text-sm shadow-sm">
-                    {test.author[0]}
-                  </div>
-                  <div>
-                    <h5 className="font-extrabold text-slate-900 text-sm">{test.author}</h5>
-                    <p className="text-xs text-slate-500">{test.business} • {test.city}</p>
-                  </div>
-                </div>
-              </motion.div>
+                <h3 className="text-base font-bold text-slate-900 mb-2">{item.title}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">{item.desc}</p>
+              </div>
             ))}
           </div>
+
         </div>
       </section>
 
-      {/* FAQ SECTION */}
-      <section className="py-28 bg-slate-900 text-white border-t border-slate-800">
+      {/* COMPARATIVO OPERACIONAL */}
+      <ComparisonTable />
+
+      {/* CALCULADORA ROI */}
+      <RoiCalculator />
+
+      {/* ESTRUTURA INSTITUCIONAL: CONHEÇA ANTES DE CONTRATAR */}
+      <section className="py-20 bg-slate-100/70 border-t border-slate-200">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">Transparência Comercial</span>
+          <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 mb-4">
+            Conheça a solução antes de contratar.
+          </h2>
+          <p className="text-sm md:text-base text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
+            Agende uma apresentação prática com nosso time. Mostramos o funcionamento das telas, o fluxo de pedidos e tiramos todas as dúvidas técnicas da sua equipe.
+          </p>
+          <Link
+            to="/contato"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-xs shadow-sm transition-all"
+          >
+            <span>Falar com nossa equipe</span>
+            <ArrowRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-24 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-6">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4">
               Perguntas Frequentes
             </h2>
-            <p className="text-lg text-slate-400">
-              Tudo o que você precisa saber para começar a usar a Vancod hoje.
+            <p className="text-sm md:text-base text-slate-400">
+              Esclarecimentos sobre implantação, infraestrutura e funcionamento das ferramentas.
             </p>
           </div>
           <FAQ items={faqs} />
         </div>
       </section>
 
-      {/* FINAL HIGH-CONVERSION CTA */}
-      <section className="py-32 relative overflow-hidden bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white text-center">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
-        
+      {/* CTA FINAL */}
+      <section className="py-24 bg-blue-600 text-white text-center relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white text-xs font-extrabold mb-8 backdrop-blur-md">
-              <ShieldCheck className="w-4 h-4 text-emerald-300" />
-              Implantação Rápida • Treinamento Incluso • Sem Fidelidade
-            </div>
-
-            <h2 className="text-4xl md:text-6xl font-black mb-8 tracking-tight leading-tight">
-              Pronto para transformar sua operação e acelerar seu faturamento?
-            </h2>
-
-            <p className="text-lg md:text-xl text-blue-100 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-              Agende uma demonstração prática sem compromisso e veja o sistema funcionando no seu modelo de negócio.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/contato"
-                className="w-full sm:w-auto px-10 py-4 bg-white hover:bg-blue-50 text-blue-900 rounded-full font-black text-base shadow-2xl hover:scale-105 transition-all flex items-center justify-center gap-2"
-              >
-                <span>Falar com um Especialista</span>
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link
-                to="/suporte"
-                className="w-full sm:w-auto px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-full font-bold text-base backdrop-blur-md transition-all flex items-center justify-center"
-              >
-                <span>Central de Suporte</span>
-              </Link>
-            </div>
-          </motion.div>
+          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">
+            Pronto para organizar a operação do seu negócio?
+          </h2>
+          <p className="text-base md:text-lg text-blue-100 mb-8 max-w-xl mx-auto font-normal">
+            Agende uma demonstração prática e veja como os sistemas Vancod se adaptam à sua rotina.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <Link
+              to="/contato"
+              className="w-full sm:w-auto px-8 py-3.5 bg-white text-blue-900 hover:bg-blue-50 rounded-full font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+            >
+              <span>Agendar demonstração</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/suporte"
+              className="w-full sm:w-auto px-6 py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-full font-semibold text-sm transition-all flex items-center justify-center"
+            >
+              <span>Central de suporte</span>
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -5,58 +5,70 @@ export default function Termos() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Termos de Uso - Vancod",
-    "description": "Termos de Uso dos sistemas do ecossistema Vancod."
+    "name": "Termos de Uso - Vancod Tecnologia",
+    "description": "Termos e condições para uso dos softwares e plataformas da Vancod Tecnologia."
   };
 
   return (
-    <div className="bg-slate-50 text-slate-900 min-h-screen pt-32 pb-20">
+    <div className="bg-slate-50 text-slate-900 min-h-screen pt-32 pb-24">
       <SEO 
         title="Termos de Uso" 
-        description="Termos e condições para uso dos softwares SaaS do ecossistema Vancod."
+        description="Termos e condições para contratação e uso dos softwares da Vancod Tecnologia."
         schema={schema}
         canonicalUrl="https://vancod.com.br/termos"
       />
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5 }}
         >
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-white mb-6">Termos de Uso</h1>
-          <p className="text-slate-400 mb-16 text-lg border-b border-white/10 pb-8">Última atualização: {new Date().toLocaleDateString('pt-BR')}</p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 text-slate-800 text-xs font-semibold mb-4">
+            Documento Legal
+          </div>
+          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">Termos de Uso</h1>
+          <p className="text-slate-500 mb-10 text-sm border-b border-slate-200 pb-6">
+            Última atualização: {new Date().toLocaleDateString('pt-BR')}
+          </p>
           
-          <div className="prose prose-invert prose-lg max-w-none space-y-12 text-slate-300">
+          <div className="space-y-8 text-sm text-slate-700 leading-relaxed">
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">1. Aceitação dos Termos</h2>
-              <p className="leading-relaxed font-light">
-                Ao acessar e usar os sistemas do ecossistema Vancod, você concorda em cumprir e ser regido por estes Termos de Uso. Se você não concordar com qualquer parte destes termos, não deverá utilizar nossos serviços.
+              <h2 className="text-lg font-bold text-slate-900 mb-2">1. Aceitação dos Termos</h2>
+              <p>
+                Ao contratar, acessar ou utilizar as soluções de software da Vancod Tecnologia (incluindo Balcão Pro Adegas, Vancod Restaurantes e Olhare Fotos & Eventos), você concorda com as condições descritas neste documento. Caso não concorde com alguma das cláusulas, o uso dos serviços não deve ser continuado.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">2. Licença de Uso</h2>
-              <p className="leading-relaxed font-light mb-4">
-                Concedemos a você uma licença limitada, não exclusiva, intransferível e revogável para utilizar nossos softwares SaaS estritamente para os fins comerciais da sua empresa, de acordo com o plano contratado.
+              <h2 className="text-lg font-bold text-slate-900 mb-2">2. Licença de Uso do Software</h2>
+              <p className="mb-3">
+                A Vancod concede uma licença limitada, não exclusiva, intransferível e revogável para a utilização das ferramentas contratadas no âmbito da atividade comercial do cliente:
               </p>
-              <ul className="list-disc pl-6 space-y-3 font-light text-slate-400 marker:text-blue-500">
-                <li>Você não pode copiar, modificar ou distribuir o código fonte.</li>
-                <li>O uso deve respeitar os limites de usuários e recursos do plano.</li>
-                <li>É proibido usar o sistema para fins ilícitos.</li>
+              <ul className="list-disc pl-5 space-y-1.5 text-slate-600">
+                <li>O cliente não tem direito de sublicenciar, descompilar, realizar engenharia reversa ou copiar o código-fonte.</li>
+                <li>O uso deve respeitar os limites de terminais ou contas estabelecidos no plano acordado.</li>
+                <li>É vedada a utilização das ferramentas para fins ilícitos ou em desacordo com a legislação brasileira.</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">3. Contas de Usuário</h2>
-              <p className="leading-relaxed font-light">
-                Você é responsável por manter a confidencialidade de suas credenciais de login e por todas as atividades que ocorram sob sua conta. A Vancod não se responsabiliza por perdas ou danos resultantes do uso não autorizado.
+              <h2 className="text-lg font-bold text-slate-900 mb-2">3. Disponibilidade e Operação</h2>
+              <p>
+                A Vancod emprega esforços técnicos para garantir a estabilidade e a continuidade de seus serviços. Nos módulos com tecnologia offline-first, a continuidade das operações no caixa é assegurada localmente, sendo a sincronização com a nuvem retomada assim que restabelecida a conexão do cliente.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mb-4">4. Propriedade Intelectual</h2>
-              <p className="leading-relaxed font-light">
-                Todos os direitos, títulos e interesses relativos aos softwares, marcas, logos e design do ecossistema Vancod são de propriedade exclusiva da Vancod. A contratação dos serviços não confere a você nenhuma propriedade sobre nossas tecnologias.
+              <h2 className="text-lg font-bold text-slate-900 mb-2">4. Propriedade Intelectual</h2>
+              <p>
+                Todos os direitos autorais, marcas, códigos, designs e estruturas dos softwares pertencem exclusivamente à Vancod Tecnologia. A contratação dos serviços confere unicamente o direito de uso nos termos contratados.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-lg font-bold text-slate-900 mb-2">5. Contato e Foro</h2>
+              <p>
+                Para dúvidas referentes aos presentes Termos de Uso, entre em contato através do e-mail <strong>contato@vancod.com.br</strong>. Fica eleito o foro da Comarca de São Paulo/SP para dirimir quaisquer dúvidas decorrentes deste instrumento.
               </p>
             </section>
           </div>

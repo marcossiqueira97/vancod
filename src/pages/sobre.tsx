@@ -1,193 +1,200 @@
 import { motion } from 'motion/react';
-import { ArrowRight, Code2, Rocket, Target, Zap, Layout, Headset, Shield, Sparkles, CheckCircle2, Award, Users, Server } from 'lucide-react';
+import { ArrowRight, Target, Zap, Layout, Headphones, Shield, CheckCircle2, Building, Mail, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/seo';
-import { Button } from '../components/button';
+import { SITE_CONFIG } from '../lib/config';
 
 export default function Sobre() {
   const schema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "name": "Sobre a Vancod Systems",
-    "description": "Somos uma empresa brasileira de alta engenharia de software especializada em soluções SaaS de alto desempenho para o varejo, food service e eventos."
+    "name": "Sobre a Vancod Tecnologia",
+    "description": "Empresa brasileira de tecnologia focada em desenvolver soluções de software especializadas para pequenos e médios negócios."
   };
 
   return (
     <div className="bg-slate-50 text-slate-900 overflow-hidden min-h-screen">
       <SEO 
-        title="Sobre a Vancod • Engenharia de Software de Elite" 
-        description="A Vancod desenvolve softwares com zero latência, alta conversão e foco absoluto em aumentar o lucro de adegas, restaurantes e eventos."
+        title="Sobre a Vancod Tecnologia • Nossa História e Propósito" 
+        description="A Vancod é uma empresa brasileira de tecnologia focada em desenvolver soluções de software especializadas para pequenos e médios negócios."
         schema={schema}
         canonicalUrl="https://vancod.com.br/sobre"
       />
       
       {/* Hero Section */}
-      <section className="pt-36 pb-20 lg:pt-48 lg:pb-28 relative overflow-hidden">
+      <section className="pt-32 pb-16 lg:pt-44 lg:pb-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-300 text-xs font-extrabold text-blue-800 mb-8 shadow-sm"
-          >
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" /> Nossa Missão
-          </motion.div>
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 mb-8 leading-[1.1]"
-          >
-            Software criado para quem <br className="hidden md:block"/>
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-600 bg-clip-text text-transparent">
-              exige resultado e velocidade.
-            </span>
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-lg md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed font-normal mb-12"
-          >
-            Não acreditamos em sistemas lentos, cheios de menus inúteis que travam no horário de pico. Desenvolvemos produtos cirúrgicos para resolver com maestria a operação real da sua empresa.
-          </motion.p>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/80 text-slate-800 text-xs font-semibold mb-6">
+            Institucional
+          </div>
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight max-w-4xl mx-auto">
+            Desenvolvemos softwares que atendem à realidade do seu negócio.
+          </h1>
+          <p className="text-base md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
+            A Vancod é uma empresa brasileira de tecnologia focada em criar soluções de software especializadas, práticas e confiáveis para pequenos e médios negócios.
+          </p>
         </div>
       </section>
 
-      {/* Ecosystem & Vision Section */}
-      <section className="py-24 bg-white border-y border-slate-200 relative">
+      {/* Visão e Abordagem */}
+      <section className="py-20 bg-white border-y border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
-                Um ecossistema especialista que cresce junto com você.
-              </h2>
-              <div className="space-y-6 text-base md:text-lg text-slate-600 font-normal leading-relaxed">
-                <p>
-                  A <strong>Vancod</strong> é uma empresa brasileira de tecnologia com engenharia de classe mundial. Ao invés de um ERP genérico e engessado, construímos softwares dedicados por segmento de mercado.
-                </p>
-                <p>
-                  Utilizamos uma arquitetura híbrida moderna: <strong>Desktop Offline-First em Rust + SQLite</strong> para garantir que seu caixa nunca pare mesmo sem sinal de internet, integrado a uma <strong>Nuvem Serverless de Borda</strong> para sincronização em tempo real de relatórios e faturas.
-                </p>
-                <p>
-                  Nosso compromisso é direto: tecnologia que desaparece na sua rotina para deixar seu negócio vender mais e lucrar com máxima tranquilidade.
-                </p>
-              </div>
-            </motion.div>
+          <div className="grid lg:grid-cols-12 gap-12 items-center">
             
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="relative"
-            >
-              <div className="bg-slate-900 rounded-3xl p-8 md:p-12 shadow-2xl text-white border border-slate-800">
-                 <h3 className="text-2xl font-black text-white mb-8 flex items-center gap-3">
-                   <Award className="w-6 h-6 text-blue-400" />
-                   Nossos Segmentos de Atuação
-                 </h3>
-                 <div className="space-y-6">
-                    {[
-                      { title: "Distribuidoras & Adegas", desc: "Balcão Pro: PDV offline ultra-rápido, combos e fiado WhatsApp.", tag: "Balcão Pro" },
-                      { title: "Restaurantes & Pizzarias", desc: "Vancod Food: KDS digital na cozinha, comandas e iFood direto.", tag: "Food Service" },
-                      { title: "Eventos & Cerimoniais", desc: "Olhare: Transmissão de fotos ao vivo no telão via QR Code.", tag: "Olhare Live" },
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-start gap-4 pb-6 border-b border-slate-800 last:border-0 last:pb-0">
-                         <div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0 mt-1 text-blue-400 font-bold">
-                           {i + 1}
-                         </div>
-                         <div>
-                            <div className="flex items-center gap-2 mb-1">
-                              <h4 className="text-base font-extrabold text-white">{item.title}</h4>
-                              <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                                {item.tag}
-                              </span>
-                            </div>
-                            <p className="text-slate-400 text-xs md:text-sm leading-relaxed">{item.desc}</p>
-                         </div>
-                      </div>
-                    ))}
-                 </div>
+            <div className="lg:col-span-7 space-y-6 text-slate-600 leading-relaxed text-sm md:text-base">
+              <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                Por que criamos produtos especializados?
+              </h2>
+              <p>
+                Durante anos acompanhamos empresários lidando com sistemas genéricos: ferramentas inchadas de funcionalidades que quase ninguém usa, lentas de operar e caras para manter.
+              </p>
+              <p>
+                Na <strong>Vancod</strong>, escolhemos um caminho diferente. Desenvolvemos produtos dedicados por segmento de mercado:
+              </p>
+              <ul className="space-y-2.5 pt-2">
+                <li className="flex items-start gap-2 text-slate-800">
+                  <CheckCircle2 className="w-4 h-4 text-blue-600 mt-1 flex-shrink-0" />
+                  <span><strong>Balcão Pro:</strong> Focado no varejo de bebidas, distribuidoras e adegas que precisam de velocidade de caixa e controle prático de fiado.</span>
+                </li>
+                <li className="flex items-start gap-2 text-slate-800">
+                  <CheckCircle2 className="w-4 h-4 text-blue-600 mt-1 flex-shrink-0" />
+                  <span><strong>Vancod Restaurantes:</strong> Focado em food service, integrando mesas, KDS de cozinha e delivery sem retrabalho.</span>
+                </li>
+                <li className="flex items-start gap-2 text-slate-800">
+                  <CheckCircle2 className="w-4 h-4 text-blue-600 mt-1 flex-shrink-0" />
+                  <span><strong>Olhare:</strong> Focado em eventos, viabilizando transmissão ao vivo de fotos por QR Code direto pelo navegador.</span>
+                </li>
+              </ul>
+              <p className="pt-2">
+                Nosso propósito é oferecer tecnologia acessível, estável e que realmente faça diferença no dia a dia de quem está na linha de frente da operação.
+              </p>
+            </div>
+
+            {/* Institutional Information Card */}
+            <div className="lg:col-span-5 bg-slate-900 text-white rounded-2xl p-8 border border-slate-800 shadow-lg">
+              <h3 className="text-lg font-bold text-white mb-6 pb-3 border-b border-slate-800 flex items-center gap-2">
+                <Building className="w-5 h-5 text-blue-400" />
+                Dados Institucionais
+              </h3>
+              
+              <div className="space-y-4 text-xs">
+                <div>
+                  <span className="text-slate-400 block mb-0.5">Empresa</span>
+                  <span className="font-semibold text-slate-100">{SITE_CONFIG.name}</span>
+                </div>
+                
+                <div>
+                  <span className="text-slate-400 block mb-0.5">Localização</span>
+                  <span className="font-semibold text-slate-100 flex items-center gap-1">
+                    <MapPin className="w-3.5 h-3.5 text-blue-400" />
+                    {SITE_CONFIG.contact.city} — {SITE_CONFIG.contact.state}, {SITE_CONFIG.contact.country}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-slate-400 block mb-0.5">E-mail Comercial</span>
+                  <span className="font-semibold text-slate-100 flex items-center gap-1">
+                    <Mail className="w-3.5 h-3.5 text-blue-400" />
+                    {SITE_CONFIG.contact.email}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-slate-400 block mb-0.5">Registro Fiscal</span>
+                  <span className="font-mono text-slate-300">
+                    {SITE_CONFIG.contact.cnpj ? SITE_CONFIG.contact.cnpj : 'CNPJ: Sob consulta comercial'}
+                  </span>
+                </div>
+
+                <div className="pt-4 border-t border-slate-800">
+                  <span className="text-slate-400 block mb-1">Modelo de Atendimento</span>
+                  <p className="text-slate-300 text-[11px] leading-relaxed">
+                    Atendimento e suporte técnico remoto para todo o território nacional, com implantações guiadas e acompanhamento contínuo.
+                  </p>
+                </div>
               </div>
-            </motion.div>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Valores & Princípios */}
-      <section className="py-28 bg-slate-900 text-white">
+      {/* Princípios de Engenharia e Produto */}
+      <section className="py-20 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20 max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-6 tracking-tight">
-              Nossos Princípios Inegociáveis
+          
+          <div className="text-center mb-14 max-w-3xl mx-auto">
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Como Pensamos</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 tracking-tight">
+              Nossos Princípios de Trabalho
             </h2>
-            <p className="text-lg text-slate-400">
-              As regras de engenharia que guiam cada linha de código e cada interface da Vancod.
+            <p className="text-sm md:text-base text-slate-600">
+              Diretrizes que orientam cada desenvolvimento e decisão de produto.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: <Zap className="w-7 h-7 text-cyan-400" />, title: "Velocidade Extrema (0ms)", desc: "Cada clique importa. Nossos sistemas são desenhados para responder instantaneamente nos horários de maior pico." },
-              { icon: <Server className="w-7 h-7 text-blue-400" />, title: "100% Offline-First", desc: "A internet da rua pode cair que seu caixa continua vendendo, abrindo a gaveta e emitindo notas normalmente." },
-              { icon: <Layout className="w-7 h-7 text-pink-400" />, title: "Design Sem Fricção", desc: "Interfaces claras e ergonômicas. Sua equipe aprende a usar em menos de 10 minutos sem treinamentos cansativos." },
-              { icon: <Target className="w-7 h-7 text-emerald-400" />, title: "Foco no Lucro Real", desc: "Eliminamos desperdícios com cadernos de fiado perdidos, erros manuais de comanda e filas intermináveis." },
-              { icon: <Headset className="w-7 h-7 text-amber-400" />, title: "Suporte Próximo no WhatsApp", desc: "Sem robôs chatos. Atendimento humanizado e rápido com especialistas que entendem a sua rotina." },
-              { icon: <Shield className="w-7 h-7 text-purple-400" />, title: "Zero Comissão sobre Vendas", desc: "Seu faturamento é 100% seu. Cobramos uma assinatura transparente sem surpresas no fim do mês." }
-            ].map((valor, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-                className="bg-slate-950 p-8 rounded-3xl border border-slate-800 hover:border-slate-700 transition-all group"
-              >
-                <div className="w-14 h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                  {valor.icon}
+              { 
+                icon: <Zap className="w-5 h-5 text-blue-600" />, 
+                title: "Simplicidade Operacional", 
+                desc: "O sistema deve ser intuitivo para que qualquer membro da sua equipe aprenda a utilizá-lo sem longos manuais." 
+              },
+              { 
+                icon: <Shield className="w-5 h-5 text-blue-600" />, 
+                title: "Resiliência a Falhas", 
+                desc: "Quando o caixa precisa passar vendas, a perda de internet não pode travar o atendimento do seu cliente." 
+              },
+              { 
+                icon: <Layout className="w-5 h-5 text-blue-600" />, 
+                title: "Interfaces Diretas", 
+                desc: "Telas limpas, sem excesso de botões irrelevantes, focadas em agilizar o fluxo de trabalho." 
+              },
+              { 
+                icon: <Target className="w-5 h-5 text-blue-600" />, 
+                title: "Foco no Resultado Real", 
+                desc: "A tecnologia precisa reduzir retrabalho, evitar calotes e ajudar sua empresa a crescer com organização." 
+              },
+              { 
+                icon: <Headphones className="w-5 h-5 text-blue-600" />, 
+                title: "Suporte Próximo", 
+                desc: "Tratamos clientes como parceiros, ouvindo feedbacks reais para aprimorar os softwares continuamente." 
+              },
+              { 
+                icon: <CheckCircle2 className="w-5 h-5 text-blue-600" />, 
+                title: "Transparência Comercial", 
+                desc: "Sem comissões ocultas sobre suas vendas. Cobranças claras e previsíveis para sua gestão financeira." 
+              }
+            ].map((principio, i) => (
+              <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
+                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 w-fit mb-4">
+                  {principio.icon}
                 </div>
-                <h3 className="text-xl font-extrabold text-white mb-3">{valor.title}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed font-normal">{valor.desc}</p>
-              </motion.div>
+                <h3 className="text-base font-bold text-slate-900 mb-2">{principio.title}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">{principio.desc}</p>
+              </div>
             ))}
           </div>
+
         </div>
       </section>
 
       {/* CTA Final */}
-      <section className="py-28 relative text-center bg-white border-t border-slate-200">
-        <div className="max-w-4xl mx-auto px-4 relative z-10">
-          <motion.h2 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-            className="text-4xl md:text-6xl font-black mb-6 tracking-tight text-slate-900"
-          >
-            Pronto para evoluir a gestão do seu negócio?
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-lg md:text-xl text-slate-600 mb-10 max-w-2xl mx-auto"
-          >
-            Agende uma demonstração prática e descubra como o ecossistema Vancod acelera suas operações.
-          </motion.p>
+      <section className="py-20 text-center bg-white border-t border-slate-200">
+        <div className="max-w-3xl mx-auto px-4">
+          <h2 className="text-2xl md:text-4xl font-extrabold mb-4 tracking-tight text-slate-900">
+            Quer conhecer melhor nossos sistemas?
+          </h2>
+          <p className="text-sm md:text-base text-slate-600 mb-8 max-w-xl mx-auto leading-relaxed">
+            Agende uma demonstração prática sem compromisso com nossa equipe técnica e tire todas as suas dúvidas.
+          </p>
           <div className="flex justify-center">
             <Link
               to="/contato"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-extrabold text-base shadow-xl shadow-blue-600/25 hover:scale-105 transition-all"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-sm shadow-sm transition-all"
             >
-              <span>Solicitar Demonstração</span>
-              <ArrowRight className="w-5 h-5" />
+              <span>Agendar demonstração</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
         </div>

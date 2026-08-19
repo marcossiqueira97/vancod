@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Check, X, Sparkles, Zap, UtensilsCrossed, Camera, ShoppingBag, Layers } from 'lucide-react';
+import { Check, X, Zap, UtensilsCrossed, Camera, Layers } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
 interface ComparisonRow {
@@ -22,118 +22,117 @@ export function ComparisonTable() {
   const comparisonData: Record<string, ComparisonRow[]> = {
     adegas: [
       {
-        category: 'Estabilidade do Caixa',
-        feature: 'Operação de Balcão e Vendas em Quedas de Internet',
-        traditional: 'O sistema trava na hora de fechar a venda no sábado à noite, gerando filas gigantescas no caixa.',
-        vancod: 'Software Desktop 100% Offline em Rust + SQLite. Fecha vendas em 0ms mesmo se o cabo de internet for cortado.',
+        category: 'Estabilidade no Caixa',
+        feature: 'Operação de vendas quando a internet oscila',
+        traditional: 'Sistemas que dependem 100% de conexão em nuvem travam a passagem de compras.',
+        vancod: 'Operação Offline-First: o PDV roda no computador e continua registrando vendas e imprimindo comprovantes.',
       },
       {
         category: 'Controle de Fiado',
-        feature: 'Gestão de Caderneta de Fiado & Cobrança Automática',
-        traditional: 'Cadernos de papel, planilhas perdidas e cobranças constrangedoras que causam calotes.',
-        vancod: 'Controle digital de fiado com emissão de fatura profissional e envio automático pelo WhatsApp.',
+        feature: 'Acompanhamento de compras a prazo',
+        traditional: 'Cadernos de papel e anotações manuais que geram esquecimentos e divergências.',
+        vancod: 'Registro digital com limites de crédito por cliente e emissão de extrato para envio no WhatsApp.',
       },
       {
-        category: 'Controle de Estoque de Bebidas',
-        feature: 'Baixa de Estoque em Combos & Vasilhames Retornáveis',
-        traditional: 'Baixa manual que gera erros de contagem em geladeiras e estoques de fardos de cerveja.',
-        vancod: 'Desmembramento automático de combos (Garrafa + Energéticos) e controle rigoroso de vasilhames.',
+        category: 'Estoque de Bebidas',
+        feature: 'Baixa de combos (garrafa + energéticos + gelo)',
+        traditional: 'Necessidade de deduzir manualmente cada insumo individual do estoque.',
+        vancod: 'Dedução automática de todos os insumos vinculados ao combo no momento da venda.',
       },
       {
-        category: 'Licenciamento & Preço',
-        feature: 'Cobrança por Máquina / Terminal de Caixa',
-        traditional: 'Cobram taxas mensais extras por cada computador ou máquina de caixa adicional.',
-        vancod: 'Preço fixo e transparente. Instale nos terminais da sua distribuidora sem custo por máquina extra.',
+        category: 'Licenciamento',
+        feature: 'Custos por terminal e previsibilidade',
+        traditional: 'Cobranças adicionais por cada máquina ou ponto de venda instalado.',
+        vancod: 'Assinatura com valores claros e suporte técnico incluído.',
       },
     ],
     restaurantes: [
       {
         category: 'Comunicação com a Cozinha',
-        feature: 'Envio de Pedidos de Comanda para a Cozinha',
-        traditional: 'Papéis impressos engordurados, impressoras que travam e garçons correndo de um lado para o outro.',
-        vancod: 'Telas KDS Inteligentes divididas por setor de preparo (Bar, Chapa, Forno) atualizadas instantaneamente.',
+        feature: 'Envio e visualização de pedidos de mesas',
+        traditional: 'Tickets de papel que podem se perder, manchar ou gerar atrasos na entrega.',
+        vancod: 'Telas KDS divididas por praça de preparo (Cozinha, Bar, Forno) com indicação de tempo.',
       },
       {
-        category: 'Integração Delivery',
-        feature: 'Sincronização com o iFood & Pedidos de Delivery',
-        traditional: 'Exige ter um tablet separado para aceitar iFood e reescrever o pedido manualmente no caixa.',
-        vancod: 'Integração Oficial direta no PDV. Aceite e despache pedidos do iFood automaticamente sem digitação manual.',
+        category: 'Centralização de Delivery',
+        feature: 'Recepção de pedidos de canais digitais',
+        traditional: 'Exigência de redigitar pedidos recebidos em tablets manualmente no caixa.',
+        vancod: 'Integração de pedidos diretamente na fila de produção da cozinha sem retrabalho.',
       },
       {
-        category: 'Gestão de Mesas e Comandas',
-        feature: 'Fechamento e Divisão de Conta entre Amigos',
-        traditional: 'Cálculos manuais na calculadora que demoram e causam confusão no atendimento presencial.',
-        vancod: 'Divisão automática de conta por pessoa ou consumo individual na comanda eletrônica.',
+        category: 'Divisão de Contas',
+        feature: 'Fechamento de mesas com múltiplos pagantes',
+        traditional: 'Cálculos manuais na calculadora que geram demora no fechamento da conta.',
+        vancod: 'Divisão automatizada por número de pessoas ou itens consumidos na comanda.',
       },
       {
-        category: 'Comissão por Pedido',
-        feature: 'Taxa Percentual sobre Faturamento das Vendas',
-        traditional: 'Sistemas que cobram 1% a 3% sobre cada pedido faturado no seu restaurante.',
-        vancod: 'Zero comissão por pedido. Seu faturamento é 100% seu.',
+        category: 'Modelo Comercial',
+        feature: 'Taxas sobre o faturamento do restaurante',
+        traditional: 'Cobrança de percentual sobre cada pedido ou venda realizada.',
+        vancod: 'Sem comissão percentual sobre suas vendas. Seu faturamento permanece integralmente com você.',
       },
     ],
     olhare: [
       {
-        category: 'Acesso de Convidados',
-        feature: 'Experiência de Uso em Casamentos e Eventos',
-        traditional: 'O convidado precisa baixar um aplicativo pesado na Play Store ou App Store e se cadastrar.',
-        vancod: 'Zero Instalação: o convidado escaneia o QR Code na mesa e usa direto no navegador do celular.',
+        category: 'Acesso dos Convidados',
+        feature: 'Participação no evento',
+        traditional: 'Exigência de baixar e instalar aplicativos pesados nas lojas de apps.',
+        vancod: 'Acesso instantâneo pelo navegador do celular através de leitura de QR Code na mesa.',
       },
       {
-        category: 'Transmissão ao Vivo na TV',
-        feature: 'Mural de Fotos ao Vivo no Telão da Festa',
-        traditional: 'Processo manual de cópia de pendrive ou fotos desorganizadas sem controle de exibição.',
-        vancod: 'Painel com Moderação ao Vivo em Tempo Real. Transmita fotos selecionadas diretamente na TV em HD.',
+        category: 'Transmissão na TV',
+        feature: 'Mural de fotos durante a festa',
+        traditional: 'Processo manual de cópia de arquivos ou exibição sem moderação prévia.',
+        vancod: 'Painel de moderação para aprovação das fotos antes da exibição ao vivo na Smart TV.',
       },
       {
-        category: 'Livro de Memórias',
-        feature: 'Guarda das Fotos após o Fim do Evento',
-        traditional: 'Links expirados no WeTransfer ou arquivos espalhados em grupos do WhatsApp.',
-        vancod: 'Galeria digital permanente com download fácil para todos os convidados e organizadores.',
+        category: 'Armazenamento',
+        feature: 'Acesso às fotos após o evento',
+        traditional: 'Links temporários de transferência de arquivos que expiram em poucos dias.',
+        vancod: 'Galeria completa com opção de download de todos os arquivos em alta qualidade.',
       },
     ],
     todos: [
       {
-        category: 'Engenharia de Software',
-        feature: 'Arquitetura do Ecossistema',
-        traditional: 'Sistemas legados em nuvem que travam quando a internet oscila.',
-        vancod: 'Arquitetura híbrida (Rust Desktop + Edge Cloud Serverless).',
+        category: 'Arquitetura',
+        feature: 'Modelo de funcionamento dos sistemas',
+        traditional: 'Sistemas genéricos que tentam atender todos os mercados sem foco.',
+        vancod: 'Produtos especializados desenvolvidos para as regras específicas de cada segmento.',
       },
       {
-        category: 'Transparência de Custos',
-        feature: 'Modelo de Cobrança',
-        traditional: 'Mensalidades abusivas, taxas por terminal e comissões por venda.',
-        vancod: 'Planos claros, previsíveis e sem custos escondidos.',
+        category: 'Transparência Comercial',
+        feature: 'Modelo de contratação e suporte',
+        traditional: 'Contratos com multas abusivas e suporte por robôs com filas de espera.',
+        vancod: 'Planos transparentes, suporte humanizado e demonstração prévia sem compromisso.',
       },
     ],
   };
 
   return (
-    <section className="py-28 relative z-10 overflow-hidden bg-slate-50 border-t border-slate-200">
+    <section className="py-24 relative z-10 bg-slate-50 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100 border border-blue-300 text-blue-800 text-xs font-bold mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5" /> Comparativo por Segmento
-          </div>
-          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
-            Por que escolher a <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">Vancod?</span>
+          <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Comparativo Prático</span>
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+            Como a Vancod se compara aos sistemas tradicionais.
           </h2>
-          <p className="text-xl text-slate-600 font-normal">
-            Selecione o seu segmento abaixo para ver como superamos os sistemas tradicionais na sua operação:
+          <p className="text-base md:text-lg text-slate-600">
+            Selecione seu segmento abaixo para conferir as diferenças práticas de operação:
           </p>
         </div>
 
-        {/* Segment Tabs Selector */}
-        <div className="flex flex-wrap justify-center gap-2.5 mb-10">
+        {/* Segment Tabs */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
           {segments.map((s) => (
             <button
               key={s.id}
               onClick={() => setActiveSegment(s.id)}
-              className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs md:text-sm font-bold transition-all duration-300 ${
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all ${
                 activeSegment === s.id
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 scale-105 ring-2 ring-blue-500/20'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-xs'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
               }`}
             >
               {s.icon}
@@ -142,50 +141,43 @@ export function ComparisonTable() {
           ))}
         </div>
 
-        {/* Dynamic Comparison Table */}
+        {/* Comparison Table */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[700px] bg-white rounded-2xl border border-slate-200 shadow-xl overflow-hidden">
+          <table className="w-full text-left border-collapse min-w-[650px] bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
             <thead>
-              <tr className="border-b border-slate-200 text-sm font-bold">
-                <th className="py-5 px-6 text-slate-700 w-1/3 bg-slate-100/90">Diferencial Operacional</th>
-                <th className="py-5 px-6 text-slate-600 w-1/3 bg-slate-100/50">Sistemas Tradicionais do Mercado</th>
-                <th className="py-5 px-6 text-slate-900 w-1/3 bg-blue-50/90 border-x border-blue-200">
-                  <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 rounded-md bg-blue-600 text-white flex items-center justify-center font-extrabold text-xs">V</div>
-                    <span className="font-extrabold text-base text-blue-900">Solução Vancod</span>
-                  </div>
+              <tr className="border-b border-slate-200 text-xs font-bold">
+                <th className="py-4 px-5 text-slate-700 w-1/3 bg-slate-100/80">Recurso Operacional</th>
+                <th className="py-4 px-5 text-slate-600 w-1/3 bg-slate-50">Sistemas Tradicionais</th>
+                <th className="py-4 px-5 text-blue-900 w-1/3 bg-blue-50/80 border-x border-blue-100 font-bold">
+                  Solução Vancod
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 text-sm">
+            <tbody className="divide-y divide-slate-100 text-xs">
               <AnimatePresence mode="wait">
                 {comparisonData[activeSegment]?.map((row, idx) => (
                   <motion.tr
                     key={`${activeSegment}-${idx}`}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.2, delay: idx * 0.05 }}
-                    className="hover:bg-slate-50/80 transition-colors"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.15 }}
+                    className="hover:bg-slate-50/60 transition-colors"
                   >
-                    <td className="py-5 px-6 font-bold text-slate-900">
-                      <span className="block text-[10px] uppercase tracking-wider text-blue-600 font-extrabold mb-1">{row.category}</span>
-                      <span className="text-base text-slate-900 leading-snug">{row.feature}</span>
+                    <td className="py-4 px-5 font-semibold text-slate-900">
+                      <span className="block text-[10px] uppercase text-blue-600 font-bold mb-0.5">{row.category}</span>
+                      <span className="text-slate-800 leading-snug">{row.feature}</span>
                     </td>
-                    <td className="py-5 px-6 bg-slate-50/50 text-slate-600">
-                      <div className="flex items-start gap-2.5">
-                        <div className="w-5 h-5 rounded-full bg-red-100 border border-red-300 text-red-600 flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">
-                          <X className="w-3.5 h-3.5" />
-                        </div>
-                        <span className="leading-relaxed text-slate-600">{row.traditional}</span>
+                    <td className="py-4 px-5 text-slate-600 bg-slate-50/40">
+                      <div className="flex items-start gap-2">
+                        <X className="w-3.5 h-3.5 text-red-500 flex-shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">{row.traditional}</span>
                       </div>
                     </td>
-                    <td className="py-5 px-6 bg-blue-50/40 border-x border-blue-200 text-slate-900 font-semibold">
-                      <div className="flex items-start gap-2.5">
-                        <div className="w-5 h-5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-700 flex items-center justify-center flex-shrink-0 mt-0.5 font-bold">
-                          <Check className="w-3.5 h-3.5" />
-                        </div>
-                        <span className="leading-relaxed text-slate-900">{row.vancod}</span>
+                    <td className="py-4 px-5 bg-blue-50/30 border-x border-blue-100 text-slate-800 font-medium">
+                      <div className="flex items-start gap-2">
+                        <Check className="w-3.5 h-3.5 text-blue-600 flex-shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">{row.vancod}</span>
                       </div>
                     </td>
                   </motion.tr>

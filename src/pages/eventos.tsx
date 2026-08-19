@@ -1,79 +1,79 @@
 import { ProductLayout } from '../components/product-layout';
-import { QrCode, Tv, ShieldCheck, Download, Camera, Heart, BookOpen, Sparkles } from 'lucide-react';
+import { QrCode, Tv, ShieldCheck, Download, Camera, Heart, BookOpen } from 'lucide-react';
 
 export default function Eventos() {
   return (
     <ProductLayout
-      name="Olhare"
+      name="Olhare Fotos & Eventos"
       subdomain="olhare.vancod.com.br"
       primaryColor="text-slate-300"
-      tagline="A plataforma que transforma as fotos dos convidados na maior atração da sua festa."
-      description="Seus convidados tiram fotos pelo celular, escaneiam o QR Code na mesa e veem suas memórias e recados aparecerem ao vivo no telão da festa em segundos."
+      tagline="Mural de fotos e recados ao vivo na TV do evento via QR Code."
+      description="Seus convidados escaneiam o QR Code na mesa pelo celular, enviam fotos e mensagens que passam por moderação prévia e aparecem ao vivo na TV ou telão da festa."
       screenshots={['/assets/olhare-br.png', '/assets/olhare-mural.png']}
-      sectionTitle="Sua festa viva em cada canto do salão."
-      sectionSubtitle="O fotógrafo oficial tira as fotos tradicionais. O Olhare captura os momentos mais espontâneos, divertidos e emocionantes de quem você ama."
-      workflowTitle={<>Sem baixar aplicativo. <br/>Sem complicação.</>}
-      workflowSubtitle="Até a vovó consegue participar em segundos sem precisar cadastrar nada."
+      sectionTitle="Interação espontânea e memórias registradas."
+      sectionSubtitle="Enquanto o fotógrafo oficial cuida dos registros formais, o Olhare reúne os momentos espontâneos e descontraídos capturados pelas pessoas que você convidou."
+      workflowTitle={<>Acesso direto no navegador, <br />sem baixar aplicativo.</>}
+      workflowSubtitle="Experiência simples pensada para que qualquer convidado participe em poucos segundos."
       workflowSteps={[
-        { step: 1, title: 'Aponte o Celular', desc: 'Totens elegantes espalhados pelas mesas da festa chamam a atenção dos convidados.' },
-        { step: 2, title: 'Envie a Foto ou Recado', desc: 'Sem baixar app, o convidado tira a foto ou grava um recado carinhoso direto pelo navegador.' },
-        { step: 3, title: 'Ao Vivo na TV da Festa', desc: 'A foto aprovada entra com animação no telão ou TV, fazendo todo mundo sorrir.' }
+        { step: 1, title: 'QR Code na Mesa', desc: 'O convidado aponta a câmera do celular para o cartão na mesa do evento.' },
+        { step: 2, title: 'Envio de Foto ou Recado', desc: 'Diretamente pelo navegador, ele seleciona uma foto ou escreve uma mensagem de carinho.' },
+        { step: 3, title: 'Moderação & Exibição na TV', desc: 'A foto aprovada no painel de moderação é transmitida na Smart TV ou telão do salão.' }
       ]}
       workflowBullets={[
-        '100% no navegador do celular, zero download de aplicativo',
-        'Moderação total em tempo real para aprovar o que vai pro telão',
-        'Baixe todas as fotos em alta qualidade ao terminar o evento'
+        '100% web: não exige que o convidado baixe apps nas lojas',
+        'Painel de moderação para aprovar ou rejeitar mídias antes da exibição',
+        'Download completo da galeria em alta resolução ao término do evento'
       ]}
-      ctaTitle="Quer tornar o seu evento inesquecível?"
-      ctaSubtitle="Crie a galeria do seu evento agora e surpreenda seus convidados com a transmissão ao vivo."
+      ctaTitle="Deseja conhecer o Olhare para o seu evento?"
+      ctaSubtitle="Agende uma demonstração e veja como funciona o mural de transmissão ao vivo e a moderação de fotos."
       features={[
         {
           icon: <QrCode />,
-          title: "Envio por QR Code (Zero Instalação)",
-          desc: "O convidado só precisa apontar a câmera do celular para o cartão na mesa e já pode enviar fotos e vídeos direto pelo navegador."
+          title: "Envio por QR Code (Sem App)",
+          desc: "Basta escanear o QR Code com a câmera do celular. O convidado acessa a galeria do evento pelo navegador em segundos."
         },
         {
           icon: <Tv />,
-          title: "Transmissão de Fotos ao Vivo na TV / Telão",
-          desc: "As fotos enviadas aparecem no telão ou Smart TV da festa em alta definição, criando um momento de interação constante."
+          title: "Transmissão em Smart TVs e Telões",
+          desc: "O mural de fotos é exibido de forma fluida em telas conectadas por navegador ou cabo de vídeo no salão do evento."
         },
         {
           icon: <ShieldCheck />,
-          title: "Painel de Moderação (Você Escolhe o que Aparece)",
-          desc: "Você ou a equipe do cerimonial aprovam as fotos na tela do celular antes que elas apareçam na TV da festa."
-        },
-        {
-          icon: <Camera />,
-          title: "Desafios Fotográficos Divertidos",
-          desc: "Crie missões animadas para os convidados ('Foto com os noivos', 'Foto fazendo brinde', 'Foto na pista de dança')."
+          title: "Painel de Moderação em Tempo Real",
+          desc: "Controle total sobre o que é exibido: organizadores ou cerimonialistas aprovam as fotos pelo celular antes de irem para a TV."
         },
         {
           icon: <Heart />,
-          title: "Mural de Recados Espontâneos",
-          desc: "Guarde palavras de carinho, votos e felicitações que acompanham as fotos de cada amigo e familiar."
+          title: "Mural de Recados e Votos",
+          desc: "Convidados podem anexar mensagens de carinho, votos aos noivos ou felicitações que acompanham as fotos na tela."
         },
         {
-          icon: <BookOpen />,
-          title: "Livro de Memórias & Download Completo",
-          desc: "Ao final da festa, baixe todas as fotos em alta resolução em 1 clique e gere um lindo álbum diagramado em PDF para imprimir."
+          icon: <Camera />,
+          title: "Missões e Desafios de Fotos",
+          desc: "Crie sugestões divertidas para incentivar os convidados a fotografarem momentos específicos da celebração."
+        },
+        {
+          icon: <Download />,
+          title: "Download Completo da Galeria",
+          desc: "Ao final da festa, os anfitriões podem baixar todos os arquivos originais em alta resolução com um único clique."
         }
       ]}
       faqItems={[
         {
-          question: "Os convidados precisam baixar algum aplicativo no celular?",
-          answer: "Não precisa baixar nada! O Olhare roda direto pelo navegador de qualquer celular (iPhone ou Android). É só escanear o QR Code da mesa e usar."
+          question: "Os convidados precisam instalar algum aplicativo?",
+          answer: "Não. O Olhare funciona 100% no navegador de qualquer smartphone (iOS e Android). O convidado só precisa apontar a câmera para o QR Code."
         },
         {
-          question: "E se alguém mandar uma foto imprópria ou brincadeira sem graça?",
-          answer: "Você tem controle total! Todas as fotos passam primeiro pelo painel de moderação no celular do cerimonial ou anfitrião, que decide o que vai pro telão."
+          question: "Como garantir que fotos inadequadas não apareçam no telão?",
+          answer: "O sistema possui um painel de moderação exclusivo. Todas as fotos enviadas ficam retidas até que um responsável (anfitrião ou cerimonial) clique em aprovar."
         },
         {
-          question: "Como coloco as fotos para passar na TV ou no telão do salão?",
-          answer: "O Olhare gera um link especial de TV que você abre na Smart TV do salão ou no notebook conectado ao telão por cabo HDMI."
+          question: "Como é feita a conexão na TV ou telão?",
+          answer: "Basta abrir o link do mural no navegador da Smart TV ou em um notebook conectado ao telão por cabo HDMI."
         },
         {
-          question: "Como recebo as fotos todas depois que a festa acabar?",
-          answer: "Você pode baixar a pasta compactada com todas as fotos e vídeos em altíssima qualidade com apenas um clique no seu painel."
+          question: "As fotos originais ficam salvas em alta qualidade?",
+          answer: "Sim. Ao término do evento, os organizadores têm acesso a uma pasta com todas as fotos e mensagens enviadas pelos convidados para download."
         }
       ]}
     />

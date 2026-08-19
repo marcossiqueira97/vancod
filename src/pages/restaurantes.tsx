@@ -1,5 +1,5 @@
 import { ProductLayout } from '../components/product-layout';
-import { Utensils, QrCode, MonitorPlay, CreditCard, ChefHat, Laptop, Pizza, ShoppingBag, Truck, Smartphone } from 'lucide-react';
+import { Utensils, MonitorPlay, ChefHat, Laptop, Pizza, ShoppingBag, Truck } from 'lucide-react';
 
 export default function Restaurantes() {
   return (
@@ -7,73 +7,73 @@ export default function Restaurantes() {
       name="Vancod Restaurantes"
       subdomain="restaurantes.vancod.com.br"
       primaryColor="text-slate-300"
-      tagline="O sistema para restaurante que acaba com a confusão da cozinha e acelera o atendimento."
-      description="Da comanda do garçom na mesa ao pedido do iFood, sua cozinha recebe tudo organizado em telas digitais sem papéis sumindo e sem atrasos no prato."
+      tagline="Comanda eletrônica, telas KDS para cozinha e integração de pedidos."
+      description="Do lançamento do garçom no salão ao pedido que entra pelo delivery, sua cozinha recebe tudo de forma organizada em telas digitais, reduzindo atrasos e falhas de comunicação."
       screenshots={['/assets/restaurantes-br.png', '/assets/restaurantes-kds.png']}
-      sectionTitle="Sua cozinha e seu salão rodando em perfeita sintonia."
-      sectionSubtitle="Chega de impressoras travando, comandas de papel rasgadas e erros no iFood. Acelere o giro das mesas e atenda mais clientes por noite."
-      workflowTitle={<>Do pedido à mesa <br/>em tempo recorde.</>}
-      workflowSubtitle="Um fluxo simples que elimina atrasos e gritaria na cozinha durante os horários de pico."
+      sectionTitle="Comunicação integrada entre salão, caixa e cozinha."
+      sectionSubtitle="Elimine comandas de papel ilegíveis e erros na transmissão de pedidos. Acompanhe o tempo de preparo de cada praça e agilize o atendimento aos clientes."
+      workflowTitle={<>Fluxo organizado <br />do pedido à entrega.</>}
+      workflowSubtitle="Processo padronizado que traz clareza para garçons, cozinheiros e caixas durante os períodos de maior movimento."
       workflowSteps={[
-        { step: 1, title: 'Garçom ou iFood', desc: 'O garçom lança o pedido pelo celular ou o iFood entra direto sem precisar digitar nada.' },
-        { step: 2, title: 'Cozinha na Tela', desc: 'Cada setor (Cozinha, Bar, Forno) recebe o pedido na tela com aviso de tempo de preparo.' },
-        { step: 3, title: 'Prato Quente na Mesa', desc: 'Prato pronto avisado na hora, conta dividida sem erro e mesa liberada rápido.' }
+        { step: 1, title: 'Lançamento no Salão ou Delivery', desc: 'O garçom lança o pedido pelo celular/tablet ou o pedido de delivery é recebido no sistema.' },
+        { step: 2, title: 'Exibição nas Telas KDS', desc: 'Cada setor (Cozinha, Bar, Forno) visualiza os itens correspondentes com indicador de tempo de preparo.' },
+        { step: 3, title: 'Finalização e Fechamento', desc: 'Prato marcado como pronto, conta dividida por pessoa ou consumo e mesa liberada com rapidez.' }
       ]}
       workflowBullets={[
-        'Caixa que continua vendendo e imprimindo mesmo se a internet oscilar',
-        'Módulo especialista para pizzarias com meio-a-meio e bordas recheadas',
-        'Integração oficial direta com o iFood para você não ter trabalho manual'
+        'Módulo de PDV com operação offline-first para não travar o caixa',
+        'Módulo para pizzarias com suporte a frações (meio-a-meio) e bordas',
+        'Divisão automática de contas por cliente ou valor igualitário'
       ]}
-      ctaTitle="Pronto para acabar com a confusão no seu restaurante?"
-      ctaSubtitle="Conheça o Vancod Restaurantes e veja como organizar sua cozinha e aumentar seu faturamento."
+      ctaTitle="Deseja ver o Vancod Restaurantes na prática?"
+      ctaSubtitle="Agende uma demonstração com nossa equipe e conheça as ferramentas de gestão de mesas, KDS e delivery."
       features={[
         {
           icon: <Laptop />,
-          title: "Caixa e Cozinha que Não Param (Nuvem + Computador)",
-          desc: "Instale o sistema no computador do restaurante para ter a garantia de que seu caixa e sua cozinha vão continuar funcionando normalmente mesmo em quedas de internet."
+          title: "Caixa com Funcionamento Local",
+          desc: "O módulo de frente de caixa permite registrar fechamentos de contas e emitir comprovantes mesmo em momentos de oscilação de rede."
         },
         {
           icon: <Utensils />,
-          title: "Atendimento Rápido de Mesas & Comandas",
-          desc: "Atenda clientes no celular ou tablet, divida a conta por pessoa sem complicação e veja no mapa quais mesas estão livres ou ocupadas."
+          title: "Gestão de Mesas e Comandas",
+          desc: "Acompanhe mesas livres, ocupadas ou em fechamento com mapa visual, divisão de conta e controle de consumo por garçom."
         },
         {
           icon: <MonitorPlay />,
-          title: "Telas Digitais na Cozinha (Adeus Papelzinho Sumido)",
-          desc: "Substitua papel de comanda por telas modernas no bar e na cozinha. Sua equipe sabe exatamente o que preparar e qual prato tá atrasado."
+          title: "Telas KDS na Cozinha",
+          desc: "Substitua tickets de papel por telas digitais organizadas por ordem de chegada com alertas visuais de tempo de preparo."
         },
         {
           icon: <Pizza />,
-          title: "Especialista em Pizzarias (Meio-a-Meio e Bordas)",
-          desc: "Monte pizzas com até 4 sabores, escolha bordas recheadas e adicionais facilmente, com cálculo automático do preço correto."
+          title: "Módulo Especializado para Pizzarias",
+          desc: "Cadastre pizzas com múltiplos sabores (meio-a-meio), tamanhos, massas, bordas recheadas e adicionais com cálculo automático."
         },
         {
           icon: <ShoppingBag />,
-          title: "iFood Direto no Caixa (Sem Digitar Nada)",
-          desc: "Os pedidos do iFood entram sozinhos no seu sistema e vão direto para a produção na cozinha sem que ninguém precise redigitar."
+          title: "Centralização de Pedidos de Delivery",
+          desc: "Receba pedidos próprios ou de plataformas em um único painel e envie diretamente para a fila de produção da cozinha."
         },
         {
           icon: <Truck />,
-          title: "Controle de Delivery & Motoboys",
-          desc: "Organize as entregas próprias, saiba qual motoboy levou o pedido e acompanhe a taxa de entrega de cada um sem surpresas no fim da noite."
+          title: "Controle de Entregas e Motoboys",
+          desc: "Organize pedidos despachados, vincule entregadores e acompanhe taxas de entrega e fechamento de turnos sem confusão."
         }
       ]}
       faqItems={[
         {
-          question: "O sistema continua funcionando se o Wi-Fi do restaurante cair?",
-          answer: "Sim! Com o aplicativo instalado no seu computador Windows, o caixa e as impressoras da cozinha continuam vendendo e emitindo pedidos normalmente sem depender da internet."
+          question: "O sistema de caixa funciona em caso de queda de internet?",
+          answer: "Sim. O módulo de caixa pode operar de forma local no computador, permitindo continuar registrando recebimentos e imprimindo comprovantes de pagamento."
         },
         {
-          question: "Como funciona para pizzarias com sabores meio-a-meio?",
-          answer: "O sistema tem um módulo feito para pizzarias que aceita até 4 sabores por pizza, adiciona bordas recheadas e calcula o valor automático pelo sabor mais caro ou pela média."
+          question: "Como funciona para pizzarias que vendem pizzas de dois ou mais sabores?",
+          answer: "O sistema possui regras próprias para pizzarias, permitindo dividir a pizza em frações (ex: 2 ou 4 sabores), escolher bordas recheadas e calcular o preço com base no sabor de maior valor ou na média configurada."
         },
         {
-          question: "Preciso digitar os pedidos que chegam do iFood?",
-          answer: "Não! Os pedidos caem direto no caixa e já aparecem na tela da cozinha ou impressora automaticamente, economizando tempo e evitando erros."
+          question: "Posso utilizar telas de TV ou tablets na cozinha?",
+          answer: "Sim. A interface KDS pode ser acessada em Smart TVs, monitores conectados ou tablets posicionados nas bancadas de preparo."
         },
         {
-          question: "Posso usar telas de TV ou tablet na cozinha no lugar de impressoras?",
-          answer: "Pode sim! As telas KDS mostram os pedidos organizados por ordem de chegada com timers de cor que avisam se o prato tá demorando."
+          question: "Como é feita a divisão de contas de mesas?",
+          answer: "O sistema calcula a divisão da conta de forma automática, seja por valor igual entre o número de pessoas ou por itens consumidos individualmente."
         }
       ]}
     />

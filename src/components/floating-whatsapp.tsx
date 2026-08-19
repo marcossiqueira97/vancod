@@ -1,44 +1,42 @@
 import { useState } from 'react';
-import { MessageCircle, X, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { MessageCircle, X, ArrowRight, ShieldCheck, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { Link } from 'react-router-dom';
+import { SITE_CONFIG, getWhatsAppUrl } from '../lib/config';
 
 export function FloatingWhatsApp() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const phone = '5511999999999'; // Can be customized or linked to contact page
-  const defaultMessage = encodeURIComponent('Olá! Gostaria de conhecer as soluções da Vancod e agendar uma demonstração gratuita.');
+  const hasDirectWhatsApp = Boolean(SITE_CONFIG.contact.whatsappNumber);
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            initial={{ opacity: 0, y: 16, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            transition={{ duration: 0.25 }}
-            className="mb-4 w-80 sm:w-96 bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden ring-1 ring-slate-900/5"
+            exit={{ opacity: 0, y: 16, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+            className="mb-4 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden ring-1 ring-slate-900/5"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-5 text-white relative">
+            <div className="bg-slate-900 p-5 text-white relative">
               <button
                 onClick={() => setIsOpen(false)}
-                className="absolute top-4 right-4 p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+                className="absolute top-4 right-4 p-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors"
                 aria-label="Fechar"
               >
                 <X className="w-4 h-4" />
               </button>
               <div className="flex items-center gap-3">
-                <div className="relative">
-                  <div className="w-12 h-12 rounded-2xl bg-white text-blue-600 font-extrabold flex items-center justify-center text-xl shadow-md">
-                    V
-                  </div>
-                  <span className="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-emerald-400 border-2 border-white animate-pulse" />
+                <div className="w-10 h-10 rounded-xl bg-blue-600 text-white font-extrabold flex items-center justify-center text-lg shadow-sm">
+                  V
                 </div>
                 <div>
-                  <h4 className="font-extrabold text-base leading-tight">Time de Especialistas Vancod</h4>
-                  <p className="text-xs text-blue-100 flex items-center gap-1 mt-0.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" /> Online agora • Resposta rápida
+                  <h4 className="font-bold text-base text-white leading-tight">Fale com a Vancod</h4>
+                  <p className="text-xs text-slate-400 mt-0.5">
+                    Demonstrações e esclarecimento de dúvidas
                   </p>
                 </div>
               </div>
@@ -46,64 +44,105 @@ export function FloatingWhatsApp() {
 
             {/* Body */}
             <div className="p-5 bg-slate-50 space-y-4">
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm text-sm text-slate-700 leading-relaxed">
-                <p className="font-semibold text-slate-900 mb-1">👋 Olá! Precisa acelerar sua operação?</p>
-                <p className="text-xs text-slate-600">
-                  Tire dúvidas em tempo real com nossa equipe e agende uma demonstração prática do sistema no seu negócio.
-                </p>
+              <div className="bg-white p-3.5 rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
+                <p className="font-semibold text-slate-900 mb-1">Como podemos ajudar sua operação?</p>
+                <p>Escolha o segmento de interesse para conversar com nossa equipe:</p>
               </div>
 
               <div className="space-y-2">
                 {[
-                  { title: '⚡ Balcão Pro Adegas', text: 'Quero ver o PDV para Adegas e Distribuidoras' },
-                  { title: '💻 Vancod Restaurantes', text: 'Quero conhecer o KDS e Integração iFood' },
-                  { title: '📸 Olhare Fotos', text: 'Quero o mural de fotos ao vivo para Eventos' },
+                  { 
+                    title: 'Balcão Pro Adegas', 
+                    desc: 'PDV offline e fiado no WhatsApp',
+                    msg: 'Olá! Gostaria de agendar uma demonstração do Balcão Pro para Adegas.' 
+                  },
+                  { 
+                    title: 'Vancod Restaurantes', 
+                    desc: 'KDS para cozinha e integração de pedidos',
+                    msg: 'Olá! Gostaria de agendar uma demonstração do Vancod Restaurantes.' 
+                  },
+                  { 
+                    title: 'Olhare Fotos & Eventos', 
+                    desc: 'Transmissão de fotos via QR Code',
+                    msg: 'Olá! Gostaria de conhecer o Olhare para Eventos.' 
+                  },
                 ].map((item, idx) => (
-                  <a
-                    key={idx}
-                    href={`https://wa.me/${phone}?text=${encodeURIComponent(`Olá! ${item.text}`)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 transition-all text-xs font-bold text-slate-800 group shadow-2xs"
-                  >
-                    <span>{item.title}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-1 transition-all" />
-                  </a>
+                  hasDirectWhatsApp ? (
+                    <a
+                      key={idx}
+                      href={getWhatsAppUrl(item.msg)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:bg-blue-50/40 transition-all text-xs text-slate-800 group shadow-2xs"
+                    >
+                      <div>
+                        <span className="font-bold block text-slate-900">{item.title}</span>
+                        <span className="text-[11px] text-slate-500">{item.desc}</span>
+                      </div>
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
+                    </a>
+                  ) : (
+                    <Link
+                      key={idx}
+                      to="/contato"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:bg-blue-50/40 transition-all text-xs text-slate-800 group shadow-2xs"
+                    >
+                      <div>
+                        <span className="font-bold block text-slate-900">{item.title}</span>
+                        <span className="text-[11px] text-slate-500">{item.desc}</span>
+                      </div>
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
+                    </Link>
+                  )
                 ))}
               </div>
 
-              <a
-                href={`https://wa.me/${phone}?text=${defaultMessage}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm shadow-lg shadow-emerald-600/25 transition-all hover:scale-[1.02]"
-              >
-                <MessageCircle className="w-4 h-4 fill-white" />
-                Iniciar Conversa no WhatsApp
-              </a>
+              {hasDirectWhatsApp ? (
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs shadow-md transition-all"
+                >
+                  <MessageCircle className="w-4 h-4 fill-white" />
+                  Abrir Conversa no WhatsApp
+                </a>
+              ) : (
+                <Link
+                  to="/contato"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow-md transition-all"
+                >
+                  <Mail className="w-4 h-4" />
+                  Solicitar Contato Comercial
+                </Link>
+              )}
 
-              <div className="flex items-center justify-center gap-2 text-[11px] text-slate-500 font-medium pt-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                Atendimento 100% seguro e sem compromisso
+              <div className="text-center">
+                <Link 
+                  to="/contato" 
+                  onClick={() => setIsOpen(false)}
+                  className="text-[11px] font-semibold text-blue-600 hover:underline"
+                >
+                  Ou preencha o formulário de demonstração
+                </Link>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Floating Action Button */}
+      {/* Trigger Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="flex items-center gap-3 px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-extrabold shadow-2xl shadow-emerald-600/40 border-2 border-white/20 transition-all group"
-        aria-label="Falar no WhatsApp"
+        whileHover={{ scale: 1.03 }}
+        whileTap={{ scale: 0.97 }}
+        className="flex items-center gap-2.5 px-4 py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-full font-bold shadow-xl border border-slate-700 transition-all text-xs"
+        aria-label="Fale com a Vancod"
       >
-        <div className="relative">
-          <MessageCircle className="w-6 h-6 fill-white" />
-          <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-300 border-2 border-emerald-700 animate-ping" />
-        </div>
-        <span className="text-sm font-bold hidden sm:inline-block">Fale Conosco</span>
+        <MessageCircle className="w-4 h-4 text-emerald-400 fill-emerald-400/20" />
+        <span>Fale Conosco</span>
       </motion.button>
     </div>
   );

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Zap, 
@@ -6,19 +6,15 @@ import {
   WifiOff, 
   CheckCircle2, 
   Clock, 
-  Sparkles, 
   ChefHat, 
   ShoppingBag, 
   QrCode, 
   Tv, 
   Heart, 
-  MessageSquare, 
   ArrowRight,
-  RotateCcw,
   Smartphone,
-  Layers,
-  Send,
-  Plus
+  Plus,
+  Info
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -28,100 +24,97 @@ export function InteractiveSystemSimulator() {
   // Adega Simulation State
   const [isOffline, setIsOffline] = useState(false);
   const [adegaCart, setAdegaCart] = useState([
-    { id: 1, name: 'Combo Whisky Red Label + 4 Red Bull + Gelo', price: 149.90, qty: 1 }
+    { id: 1, name: 'Combo Whisky + 4 Energéticos + Gelo', price: 149.90, desc: 'Dedução automática de 3 itens do estoque' }
   ]);
   const [adegaSuccess, setAdegaSuccess] = useState<string | null>(null);
 
   // Restaurante Simulation State
   const [kdsOrders, setKdsOrders] = useState([
-    { id: '#4820', table: 'Mesa 04', item: 'Pizza Grande Meio Calabresa / Meio 4 Queijos', time: '04 min', status: 'preparando', origin: 'Salão' },
-    { id: '#4821', table: 'iFood #9182', item: '2x Smash Burger Bacon + Batata Rústica', time: '08 min', status: 'pronto', origin: 'iFood' },
+    { id: '#104', table: 'Mesa 04', item: '1x Pizza Meio Calabresa / Meio 4 Queijos', time: '05 min', status: 'preparando' },
+    { id: '#105', table: 'Delivery #89', item: '2x X-Burguer Artesanal + Batata Frita', time: '09 min', status: 'pronto' },
   ]);
   const [kdsMessage, setKdsMessage] = useState<string | null>(null);
 
   // Olhare Simulation State
   const [muralPhotos, setMuralPhotos] = useState([
-    { id: 1, author: 'Lucas & Camila', text: 'Parabéns aos noivos! Festa incrível! 🥂❤️', time: 'Agora', reactions: 14 },
-    { id: 2, author: 'Tia Bete', text: 'Muito amor e bênçãos nessa nova etapa!', time: 'Há 2 min', reactions: 29 },
+    { id: 1, author: 'Mesa da Família', text: 'Parabéns ao casal! Festa maravilhosa!', time: '1 min atrás', reactions: 8 },
+    { id: 2, author: 'Amigos da Faculdade', text: 'Brinde aos noivos! 🥂', time: '3 min atrás', reactions: 15 },
   ]);
   const [moderationQueue, setModerationQueue] = useState<string | null>(null);
 
-  // Actions for Adega
-  const handleAddCombo = () => {
+  // Adega Actions
+  const handleAddProduct = () => {
     setAdegaCart(prev => [
       ...prev,
-      { id: Date.now(), name: 'Pack Cerveja Heineken 350ml (12 un)', price: 64.90, qty: 1 }
+      { id: Date.now(), name: 'Pack Cerveja 350ml (12 un)', price: 64.90, desc: 'Baixa imediata no estoque local' }
     ]);
   };
 
   const handleFinalizeAdegaSale = (type: string) => {
-    setAdegaSuccess(`✅ Venda autorizada via ${type}! Gaveta aberta, estoque atualizado (-1 Whisky, -4 Red Bull, -1 Gelo).`);
-    setTimeout(() => setAdegaSuccess(null), 4500);
+    setAdegaSuccess(`Venda registrada via ${type}. Estoque dos insumos atualizado e recibo pronto.`);
+    setTimeout(() => setAdegaSuccess(null), 4000);
   };
 
-  // Actions for Restaurante
-  const handleSimulateIfood = () => {
-    const newId = `#${Math.floor(1000 + Math.random() * 9000)}`;
+  // Restaurante Actions
+  const handleSimulateNewOrder = () => {
+    const newId = `#${Math.floor(100 + Math.random() * 900)}`;
     setKdsOrders(prev => [
-      { id: newId, table: 'iFood Auto', item: '1x Parmegiana Especial de Alcatra + Arroz', time: '01 min', status: 'preparando', origin: 'iFood' },
+      { id: newId, table: 'Delivery Online', item: '1x Porção de Picanha na Chapa', time: '01 min', status: 'preparando' },
       ...prev
     ]);
-    setKdsMessage(`⚡ Novo pedido iFood ${newId} caiu direto no KDS da cozinha sem digitação!`);
-    setTimeout(() => setKdsMessage(null), 4000);
+    setKdsMessage(`Novo pedido ${newId} enviado diretamente para a tela da cozinha.`);
+    setTimeout(() => setKdsMessage(null), 3500);
   };
 
   const handleAdvanceKds = (id: string) => {
-    setKdsOrders(prev => prev.map(o => o.id === id ? { ...o, status: o.status === 'preparando' ? 'pronto' : 'despachado' } : o).filter(o => o.status !== 'despachado'));
+    setKdsOrders(prev => prev.map(o => o.id === id ? { ...o, status: o.status === 'preparando' ? 'pronto' : 'entregue' } : o).filter(o => o.status !== 'entregue'));
   };
 
-  // Actions for Olhare
+  // Olhare Actions
   const handleSendPhotoGuest = () => {
-    setModerationQueue('📸 Foto recebida do convidado! Aguardando aprovação do cerimonial...');
+    setModerationQueue('Nova foto recebida do convidado. Aguardando aprovação no painel de moderação.');
   };
 
   const handleApprovePhoto = () => {
     if (!moderationQueue) return;
     setMuralPhotos(prev => [
-      { id: Date.now(), author: 'Convidado Mesa 08', text: 'Momento inesquecível! 📸✨', time: 'Agora', reactions: 1 },
+      { id: Date.now(), author: 'Convidado', text: 'Momento especial registrado!', time: 'Agora', reactions: 1 },
       ...prev
     ]);
     setModerationQueue(null);
   };
 
   return (
-    <section className="py-28 bg-slate-50 relative z-10 overflow-hidden border-t border-slate-200">
+    <section className="py-24 bg-slate-50 relative z-10 overflow-hidden border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100 border border-blue-300 text-blue-800 text-xs font-bold mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-blue-600" /> Simulador Interativo Vancod
+        <div className="text-center max-w-3xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-200/80 text-slate-800 text-xs font-semibold mb-4">
+            <Info className="w-3.5 h-3.5 text-blue-600" /> Demonstração Interativa de Fluxos
           </div>
-          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6">
-            Experimente a tecnologia <br />
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-              direto na tela.
-            </span>
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+            Veja como as soluções funcionam na prática.
           </h2>
-          <p className="text-lg md:text-xl text-slate-600">
-            Clique nos botões de simulação abaixo e veja como a engenharia Vancod resolve os maiores gargalos da sua rotina.
+          <p className="text-base md:text-lg text-slate-600">
+            Navegue pelos cenários interativos abaixo para entender como resolvemos os gargalos da operação diária.
           </p>
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        <div className="flex flex-wrap justify-center gap-2.5 mb-8">
           {[
-            { id: 'adega', label: 'Balcão Pro Adegas (PDV + Fiado)', icon: <Zap className="w-4 h-4" /> },
-            { id: 'restaurante', label: 'Vancod Restaurantes (KDS + iFood)', icon: <ChefHat className="w-4 h-4" /> },
-            { id: 'olhare', label: 'Olhare (Mural TV + QR Code)', icon: <QrCode className="w-4 h-4" /> },
+            { id: 'adega', label: 'Balcão Pro (Adegas & Distribuidoras)', icon: <Zap className="w-4 h-4" /> },
+            { id: 'restaurante', label: 'Vancod Restaurantes (Cozinha & Salão)', icon: <ChefHat className="w-4 h-4" /> },
+            { id: 'olhare', label: 'Olhare (Fotos & Mural ao Vivo)', icon: <QrCode className="w-4 h-4" /> },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id as any)}
-              className={`flex items-center gap-2 px-6 py-3.5 rounded-2xl text-sm font-bold transition-all duration-300 ${
+              className={`flex items-center gap-2 px-5 py-3 rounded-xl text-xs md:text-sm font-bold transition-all ${
                 activeTab === tab.id
-                  ? 'bg-blue-600 text-white shadow-xl shadow-blue-600/25 scale-105 ring-2 ring-blue-500/20'
-                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 shadow-sm'
+                  ? 'bg-blue-600 text-white shadow-md'
+                  : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
               }`}
             >
               {tab.icon}
@@ -131,20 +124,20 @@ export function InteractiveSystemSimulator() {
         </div>
 
         {/* Dynamic Simulator Container */}
-        <div className="bg-slate-900 text-white rounded-3xl p-6 md:p-10 shadow-2xl border border-slate-800 relative overflow-hidden">
+        <div className="bg-slate-900 text-white rounded-2xl p-6 md:p-8 shadow-xl border border-slate-800">
           
-          {/* Top Bar of the Simulator */}
-          <div className="flex flex-wrap items-center justify-between pb-6 mb-6 border-b border-slate-800 gap-4">
+          {/* Header Bar */}
+          <div className="flex flex-wrap items-center justify-between pb-5 mb-6 border-b border-slate-800 gap-4">
             <div className="flex items-center gap-3">
               <div className="flex gap-1.5">
-                <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <span className="w-3 h-3 rounded-full bg-green-500/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
+                <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
+                <span className="w-2.5 h-2.5 rounded-full bg-slate-700" />
               </div>
               <span className="text-xs font-mono text-slate-400">
-                {activeTab === 'adega' && 'Balcão Pro POS v3.4 • Terminal 01 (Balcão Principal)'}
-                {activeTab === 'restaurante' && 'Vancod KDS Hub • Cozinha & Expedição'}
-                {activeTab === 'olhare' && 'Olhare Live Hub • Painel de Transmissão TV 4K'}
+                {activeTab === 'adega' && 'Fluxo: Registro de Venda & Operação Offline'}
+                {activeTab === 'restaurante' && 'Fluxo: Recebimento de Pedido & KDS da Cozinha'}
+                {activeTab === 'olhare' && 'Fluxo: Envio por QR Code & Mural na TV'}
               </span>
             </div>
 
@@ -152,262 +145,240 @@ export function InteractiveSystemSimulator() {
             {activeTab === 'adega' && (
               <button
                 onClick={() => setIsOffline(!isOffline)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
                   isOffline
-                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/50'
-                    : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                    ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                    : 'bg-slate-800 text-slate-300 border border-slate-700'
                 }`}
               >
-                {isOffline ? <WifiOff className="w-3.5 h-3.5" /> : <Wifi className="w-3.5 h-3.5" />}
-                <span>{isOffline ? 'MODO OFFLINE (Sem Internet - 100% Funcional)' : 'MODO ONLINE (Sincronizado na Nuvem)'}</span>
+                {isOffline ? <WifiOff className="w-3.5 h-3.5" /> : <Wifi className="w-3.5 h-3.5 text-emerald-400" />}
+                <span>{isOffline ? 'Simulando Queda de Internet (Operação Offline Ativa)' : 'Conectado (Clique para simular offline)'}</span>
               </button>
             )}
           </div>
 
-          {/* TAB 1: ADEGA SIMULATION */}
+          {/* TAB 1: ADEGA */}
           {activeTab === 'adega' && (
             <div className="grid lg:grid-cols-12 gap-8">
-              {/* Left POS Register (7 cols) */}
-              <div className="lg:col-span-7 bg-slate-950/80 rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+              <div className="lg:col-span-7 bg-slate-950 rounded-xl p-5 border border-slate-800 flex flex-col justify-between">
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <h4 className="text-base font-extrabold text-white flex items-center gap-2">
-                      <Zap className="w-4 h-4 text-cyan-400" /> Venda em Andamento
-                    </h4>
-                    <span className="text-xs font-mono text-cyan-400 bg-cyan-950/60 px-2.5 py-1 rounded-md border border-cyan-800">
-                      Operação local: 0ms
-                    </span>
+                    <span className="text-sm font-bold text-slate-200">Itens no Caixa:</span>
+                    <button
+                      onClick={handleAddProduct}
+                      className="flex items-center gap-1 px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 rounded-lg border border-slate-700 transition-colors"
+                    >
+                      <Plus className="w-3 h-3 text-blue-400" /> Inserir Item
+                    </button>
                   </div>
 
-                  <div className="space-y-3 mb-6 max-h-56 overflow-y-auto">
+                  <div className="space-y-2 mb-4">
                     {adegaCart.map((item) => (
-                      <div key={item.id} className="flex justify-between items-center p-3 bg-slate-900/90 rounded-xl border border-slate-800 text-sm">
-                        <div className="flex-1 pr-3">
-                          <span className="font-semibold text-slate-100">{item.name}</span>
-                          <span className="block text-[11px] text-cyan-400 font-mono mt-0.5">
-                            Baixa em 3 insumos de estoque
-                          </span>
+                      <div key={item.id} className="flex justify-between items-center p-3 bg-slate-900 rounded-lg border border-slate-800/80 text-xs">
+                        <div>
+                          <span className="font-semibold text-slate-200 block">{item.name}</span>
+                          <span className="text-slate-500 text-[11px]">{item.desc}</span>
                         </div>
-                        <span className="font-mono font-bold text-emerald-400">
+                        <span className="font-mono font-bold text-slate-200">
                           R$ {item.price.toFixed(2)}
                         </span>
                       </div>
                     ))}
                   </div>
-
-                  <div className="flex gap-2">
-                    <button
-                      onClick={handleAddCombo}
-                      className="flex items-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold border border-slate-700 transition-colors"
-                    >
-                      <Plus className="w-3.5 h-3.5 text-cyan-400" /> Bipar Mais Produtos
-                    </button>
-                  </div>
                 </div>
 
-                <div className="pt-6 border-t border-slate-800 mt-6">
+                <div className="pt-4 border-t border-slate-800">
                   <div className="flex justify-between items-center mb-4">
-                    <span className="text-sm text-slate-400 font-medium">Total da Compra:</span>
-                    <span className="text-2xl font-mono font-extrabold text-emerald-400">
+                    <span className="text-xs text-slate-400">Total do Pedido:</span>
+                    <span className="text-xl font-mono font-bold text-emerald-400">
                       R$ {adegaCart.reduce((acc, i) => acc + i.price, 0).toFixed(2)}
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-3 gap-2 text-xs">
                     <button
-                      onClick={() => handleFinalizeAdegaSale('PIX')}
-                      className="py-3 px-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all flex flex-col items-center gap-1 shadow-lg shadow-emerald-900/30"
+                      onClick={() => handleFinalizeAdegaSale('Pix')}
+                      className="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg font-semibold border border-slate-700 transition-colors"
                     >
-                      <span>Pix QR Dinâmico</span>
+                      Pix
                     </button>
                     <button
-                      onClick={() => handleFinalizeAdegaSale('Cartão de Débito/Crédito')}
-                      className="py-3 px-2 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold transition-all flex flex-col items-center gap-1 shadow-lg shadow-blue-900/30"
+                      onClick={() => handleFinalizeAdegaSale('Cartão')}
+                      className="py-2.5 px-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg font-semibold border border-slate-700 transition-colors"
                     >
-                      <span>Cartão / Tef</span>
+                      Cartão
                     </button>
                     <button
-                      onClick={() => handleFinalizeAdegaSale('Fiado com Fatura WhatsApp')}
-                      className="py-3 px-2 bg-amber-600 hover:bg-amber-500 text-white rounded-xl text-xs font-bold transition-all flex flex-col items-center gap-1 shadow-lg shadow-amber-900/30"
+                      onClick={() => handleFinalizeAdegaSale('Fiado com comprovante WhatsApp')}
+                      className="py-2.5 px-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-semibold transition-colors"
                     >
-                      <span>Fiado no WhatsApp</span>
+                      Fiado no WhatsApp
                     </button>
                   </div>
                 </div>
               </div>
 
-              {/* Right: Simulation Insights (5 cols) */}
+              {/* Explanatory Panel */}
               <div className="lg:col-span-5 space-y-4">
                 <AnimatePresence>
                   {adegaSuccess && (
                     <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
-                      className="p-4 bg-emerald-950/80 border border-emerald-500/60 rounded-2xl text-emerald-200 text-xs font-medium leading-relaxed"
+                      className="p-3.5 bg-emerald-950/80 border border-emerald-500/40 rounded-xl text-emerald-300 text-xs leading-relaxed"
                     >
                       {adegaSuccess}
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                <div className="bg-slate-950/60 p-5 rounded-2xl border border-slate-800 space-y-3">
-                  <h5 className="font-bold text-sm text-cyan-300 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4" /> Por que isso muda sua adega:
-                  </h5>
-                  <ul className="space-y-2.5 text-xs text-slate-300">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                      <span><strong>0 Travamentos na Sexta:</strong> O software roda local em Rust + SQLite. A internet pode cair que seu caixa segue faturando.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                      <span><strong>Fim do Caderninho:</strong> Limite de fiado pré-aprovado e extrato formatado enviado ao WhatsApp do cliente em 1 toque.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 flex-shrink-0 mt-0.5" />
-                      <span><strong>Combos Desmembrados:</strong> Não precisa subtrair garrafas e latas na mão. O sistema deduz cada insumo sozinho.</span>
-                    </li>
-                  </ul>
+                <div className="bg-slate-950/60 p-5 rounded-xl border border-slate-800 space-y-3">
+                  <h4 className="font-bold text-sm text-slate-200">Como o Balcão Pro atende o seu negócio:</h4>
+                  
+                  <div className="space-y-3 text-xs text-slate-400">
+                    <div>
+                      <strong className="text-slate-300 block mb-0.5">• O Problema:</strong>
+                      Sistemas que dependem de internet para passar compras travam nos horários de maior movimento.
+                    </div>
+                    <div>
+                      <strong className="text-slate-300 block mb-0.5">• Como o sistema resolve:</strong>
+                      O PDV roda de forma local. Mesmo sem conexão de rede, o caixa continua registrando vendas e imprimindo comprovantes.
+                    </div>
+                    <div>
+                      <strong className="text-slate-300 block mb-0.5">• Benefício prático:</strong>
+                      Seu atendimento não interrompe vendas nem gera filas no balcão por instabilidade de internet.
+                    </div>
+                  </div>
                 </div>
 
                 <Link
                   to="/adegas"
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 bg-cyan-600 hover:bg-cyan-500 text-slate-950 rounded-xl font-extrabold text-xs transition-all shadow-lg"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-bold text-xs border border-slate-700 transition-colors"
                 >
-                  Conhecer Tudo Sobre o Balcão Pro Adegas <ArrowRight className="w-4 h-4" />
+                  Conhecer detalhes do Balcão Pro <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
           )}
 
-          {/* TAB 2: RESTAURANTE SIMULATION */}
+          {/* TAB 2: RESTAURANTES */}
           {activeTab === 'restaurante' && (
             <div className="grid lg:grid-cols-12 gap-8">
-              {/* Left: KDS Kitchen Display (7 cols) */}
-              <div className="lg:col-span-7 bg-slate-950/80 rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+              <div className="lg:col-span-7 bg-slate-950 rounded-xl p-5 border border-slate-800 flex flex-col justify-between">
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <h4 className="text-base font-extrabold text-white flex items-center gap-2">
-                      <ChefHat className="w-4 h-4 text-pink-400" /> KDS Digital de Cozinha
-                    </h4>
+                    <span className="text-sm font-bold text-slate-200">Telas da Cozinha (KDS):</span>
                     <button
-                      onClick={handleSimulateIfood}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white rounded-lg text-xs font-bold transition-all shadow-md"
+                      onClick={handleSimulateNewOrder}
+                      className="flex items-center gap-1 px-2.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-xs text-white rounded-lg transition-colors font-medium"
                     >
-                      <ShoppingBag className="w-3.5 h-3.5" /> Simular Pedido iFood
+                      <ShoppingBag className="w-3 h-3" /> Simular Pedido Entrando
                     </button>
                   </div>
 
-                  <div className="space-y-3 mb-4">
+                  <div className="space-y-2.5 mb-4">
                     {kdsOrders.map((order) => (
-                      <div key={order.id} className="p-3.5 bg-slate-900 rounded-xl border border-slate-800 flex justify-between items-center">
+                      <div key={order.id} className="p-3 bg-slate-900 rounded-lg border border-slate-800 flex justify-between items-center text-xs">
                         <div>
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-xs font-bold text-pink-400 bg-pink-950 px-2 py-0.5 rounded border border-pink-800">
-                              {order.table}
-                            </span>
-                            <span className="text-xs font-mono text-slate-400">{order.id}</span>
-                            <span className="text-xs text-slate-500 flex items-center gap-1">
+                            <span className="font-bold text-slate-200">{order.table}</span>
+                            <span className="text-slate-500 font-mono">{order.id}</span>
+                            <span className="text-slate-500 flex items-center gap-1">
                               <Clock className="w-3 h-3" /> {order.time}
                             </span>
                           </div>
-                          <p className="text-sm font-semibold text-slate-200">{order.item}</p>
+                          <p className="text-slate-300 font-medium">{order.item}</p>
                         </div>
                         <button
                           onClick={() => handleAdvanceKds(order.id)}
-                          className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                          className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                             order.status === 'preparando'
-                              ? 'bg-amber-600 hover:bg-amber-500 text-white'
+                              ? 'bg-amber-600/80 hover:bg-amber-500 text-white'
                               : 'bg-emerald-600 hover:bg-emerald-500 text-white'
                           }`}
                         >
-                          {order.status === 'preparando' ? 'Marcar Pronto' : 'Despachar'}
+                          {order.status === 'preparando' ? 'Marcar Pronto' : 'Finalizar'}
                         </button>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-                  <span>⏱️ Tempo médio de cozinha: <strong>11 min</strong></span>
-                  <span className="text-emerald-400 font-bold">✓ 0 pedidos atrasados</span>
+                <div className="pt-3 border-t border-slate-800 text-[11px] text-slate-500">
+                  Os pedidos são organizados por ordem de chegada com aviso visual de tempo.
                 </div>
               </div>
 
-              {/* Right: Simulation Insights (5 cols) */}
+              {/* Explanatory Panel */}
               <div className="lg:col-span-5 space-y-4">
                 <AnimatePresence>
                   {kdsMessage && (
                     <motion.div
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
-                      className="p-4 bg-pink-950/80 border border-pink-500/60 rounded-2xl text-pink-200 text-xs font-medium leading-relaxed"
+                      className="p-3.5 bg-blue-950/80 border border-blue-500/40 rounded-xl text-blue-300 text-xs leading-relaxed"
                     >
                       {kdsMessage}
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-                <div className="bg-slate-950/60 p-5 rounded-2xl border border-slate-800 space-y-3">
-                  <h5 className="font-bold text-sm text-pink-300 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4" /> Vantagens Reais no Food Service:
-                  </h5>
-                  <ul className="space-y-2.5 text-xs text-slate-300">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-pink-400 flex-shrink-0 mt-0.5" />
-                      <span><strong>iFood Sem Retrabalho:</strong> Os pedidos entram direto no KDS da cozinha. Não precisa de ninguém para redigitar.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-pink-400 flex-shrink-0 mt-0.5" />
-                      <span><strong>Divisão de Contas Instantânea:</strong> Divida a mesa por 2, 4 ou 10 pessoas em 1 clique sem briga no salão.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-pink-400 flex-shrink-0 mt-0.5" />
-                      <span><strong>Pizzarias Especialistas:</strong> Até 4 sabores por pizza, adicionais e bordas recheadas calculadas sem erro.</span>
-                    </li>
-                  </ul>
+                <div className="bg-slate-950/60 p-5 rounded-xl border border-slate-800 space-y-3">
+                  <h4 className="font-bold text-sm text-slate-200">Como o Vancod Restaurantes atende a operação:</h4>
+                  
+                  <div className="space-y-3 text-xs text-slate-400">
+                    <div>
+                      <strong className="text-slate-300 block mb-0.5">• O Problema:</strong>
+                      Comandas de papel rasgam, perdem-se ou exigem redigitação manual de pedidos que chegam do delivery.
+                    </div>
+                    <div>
+                      <strong className="text-slate-300 block mb-0.5">• Como o sistema resolve:</strong>
+                      Telas digitais na cozinha recebem os pedidos de salão e delivery de forma unificada e organizada.
+                    </div>
+                    <div>
+                      <strong className="text-slate-300 block mb-0.5">• Benefício prático:</strong>
+                      Comunicação direta entre atendimento e cozinha, reduzindo erros de pratos e atrasos no salão.
+                    </div>
+                  </div>
                 </div>
 
                 <Link
                   to="/restaurantes"
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 bg-pink-600 hover:bg-pink-500 text-white rounded-xl font-extrabold text-xs transition-all shadow-lg"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-bold text-xs border border-slate-700 transition-colors"
                 >
-                  Conhecer Vancod Restaurantes <ArrowRight className="w-4 h-4" />
+                  Conhecer detalhes do Vancod Restaurantes <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>
           )}
 
-          {/* TAB 3: OLHARE SIMULATION */}
+          {/* TAB 3: OLHARE */}
           {activeTab === 'olhare' && (
             <div className="grid lg:grid-cols-12 gap-8">
-              {/* Left: Live TV Mural Simulation (7 cols) */}
-              <div className="lg:col-span-7 bg-slate-950/80 rounded-2xl p-6 border border-slate-800 flex flex-col justify-between">
+              <div className="lg:col-span-7 bg-slate-950 rounded-xl p-5 border border-slate-800 flex flex-col justify-between">
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <h4 className="text-base font-extrabold text-white flex items-center gap-2">
-                      <Tv className="w-4 h-4 text-purple-400" /> Telão da Festa em Tempo Real
-                    </h4>
+                    <span className="text-sm font-bold text-slate-200">Mural Exibido na TV do Evento:</span>
                     <button
                       onClick={handleSendPhotoGuest}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-600 hover:bg-purple-500 text-white rounded-lg text-xs font-bold transition-all shadow-md"
+                      className="flex items-center gap-1 px-2.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-xs text-white rounded-lg transition-colors font-medium"
                     >
-                      <Smartphone className="w-3.5 h-3.5" /> Simular Convidado Enviando Foto
+                      <Smartphone className="w-3 h-3" /> Simular Envio via QR Code
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3 mb-4">
+                  <div className="grid grid-cols-2 gap-2.5 mb-4">
                     {muralPhotos.map((photo) => (
-                      <div key={photo.id} className="p-3.5 bg-slate-900 rounded-xl border border-slate-800 text-xs">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="font-bold text-purple-300">{photo.author}</span>
+                      <div key={photo.id} className="p-3 bg-slate-900 rounded-lg border border-slate-800 text-xs">
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-bold text-slate-200">{photo.author}</span>
                           <span className="text-[10px] text-slate-500">{photo.time}</span>
                         </div>
-                        <p className="text-slate-300 italic mb-2">"{photo.text}"</p>
-                        <div className="flex items-center gap-1 text-pink-400 text-[11px] font-bold">
-                          <Heart className="w-3 h-3 fill-pink-400" /> {photo.reactions} curtidas no telão
+                        <p className="text-slate-400 italic text-[11px] mb-2">"{photo.text}"</p>
+                        <div className="flex items-center gap-1 text-pink-400 text-[10px]">
+                          <Heart className="w-3 h-3 fill-pink-400" /> {photo.reactions} curtidas
                         </div>
                       </div>
                     ))}
@@ -415,45 +386,44 @@ export function InteractiveSystemSimulator() {
                 </div>
 
                 {moderationQueue && (
-                  <div className="p-3 bg-purple-950/70 border border-purple-500/50 rounded-xl flex items-center justify-between mt-2">
-                    <span className="text-xs text-purple-200">{moderationQueue}</span>
+                  <div className="p-3 bg-slate-900 border border-purple-500/40 rounded-lg flex items-center justify-between text-xs">
+                    <span className="text-slate-300">{moderationQueue}</span>
                     <button
                       onClick={handleApprovePhoto}
-                      className="px-3 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded-md text-xs font-bold transition-all"
+                      className="px-2.5 py-1 bg-purple-600 hover:bg-purple-500 text-white rounded text-[11px] font-semibold"
                     >
-                      Aprovar para a TV
+                      Aprovar Exibição
                     </button>
                   </div>
                 )}
               </div>
 
-              {/* Right: Simulation Insights (5 cols) */}
+              {/* Explanatory Panel */}
               <div className="lg:col-span-5 space-y-4">
-                <div className="bg-slate-950/60 p-5 rounded-2xl border border-slate-800 space-y-3">
-                  <h5 className="font-bold text-sm text-purple-300 flex items-center gap-2">
-                    <Sparkles className="w-4 h-4" /> A Maior Atração do Evento:
-                  </h5>
-                  <ul className="space-y-2.5 text-xs text-slate-300">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-purple-400 flex-shrink-0 mt-0.5" />
-                      <span><strong>Zero Instalação:</strong> O convidado só aponta a câmera para o QR Code da mesa e já participa. Não precisa baixar app.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-purple-400 flex-shrink-0 mt-0.5" />
-                      <span><strong>Moderação Prévia:</strong> Nenhuma foto imprópria vai para a TV sem a aprovação do cerimonial ou anfitrião.</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-purple-400 flex-shrink-0 mt-0.5" />
-                      <span><strong>Download em HD:</strong> Ao fim do evento, os noivos baixam todas as fotos e vídeos em 1 clique.</span>
-                    </li>
-                  </ul>
+                <div className="bg-slate-950/60 p-5 rounded-xl border border-slate-800 space-y-3">
+                  <h4 className="font-bold text-sm text-slate-200">Como o Olhare funciona no evento:</h4>
+                  
+                  <div className="space-y-3 text-xs text-slate-400">
+                    <div>
+                      <strong className="text-slate-300 block mb-0.5">• O Problema:</strong>
+                      Convidados tiram dezenas de fotos que ficam espalhadas em celulares individuais e nunca chegam aos anfitriões.
+                    </div>
+                    <div>
+                      <strong className="text-slate-300 block mb-0.5">• Como o sistema resolve:</strong>
+                      O convidado aponta a câmera para o QR Code da mesa e envia fotos diretamente pelo navegador, sem instalar aplicativo.
+                    </div>
+                    <div>
+                      <strong className="text-slate-300 block mb-0.5">• Benefício prático:</strong>
+                      Interação ao vivo na TV durante a festa com moderação e galeria completa para download ao final.
+                    </div>
+                  </div>
                 </div>
 
                 <Link
                   to="/olhare"
-                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 bg-purple-600 hover:bg-purple-500 text-white rounded-xl font-extrabold text-xs transition-all shadow-lg"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl font-bold text-xs border border-slate-700 transition-colors"
                 >
-                  Conhecer Tudo Sobre o Olhare <ArrowRight className="w-4 h-4" />
+                  Conhecer detalhes do Olhare <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             </div>

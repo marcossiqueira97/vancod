@@ -1,5 +1,5 @@
 import { ProductLayout } from '../components/product-layout';
-import { Box, BarChart, Truck, Users, Receipt, WifiOff, ShieldCheck, Scale, Layers, MessageSquare } from 'lucide-react';
+import { Box, BarChart, Users, Receipt, WifiOff, Scale, Layers } from 'lucide-react';
 
 export default function Adega() {
   return (
@@ -7,73 +7,73 @@ export default function Adega() {
       name="Balcão Pro Adegas"
       subdomain="adegas.vancod.com.br"
       primaryColor="text-slate-300"
-      tagline="O sistema feito sob medida para quem vende bebida e não quer perder tempo nem dinheiro."
-      description="Atenda filas rapidamente na sexta-feira à noite, lance combos sem erro de estoque, controle o fiado sem caderninho e continue vendendo normalmente mesmo se a internet da sua rua cair."
+      tagline="PDV ágil, controle de fiado e estoque organizado para adegas e distribuidoras."
+      description="Atenda filas com rapidez no balcão, lance combos com dedução automática de insumos, organize o controle de fiado e continue vendendo normalmente mesmo se a internet oscilar."
       screenshots={['/assets/adega-br.png', '/assets/adega-pdv.png']}
-      sectionTitle="Feito para a correria real do seu balcão."
-      sectionSubtitle="Esqueça sistemas lentos que travam no horário de pico. Passe vendas em segundos, receba no fiado pelo WhatsApp e saiba exatamente quanto lucrou no dia."
-      workflowTitle={<>Atenda a fila da sexta <br/>sem enrolação.</>}
-      workflowSubtitle="Passagem de venda ultrarrápida para o seu cliente pegar a bebida gelada e ir embora satisfeito."
+      sectionTitle="Projetado para a rotina prática do seu balcão."
+      sectionSubtitle="Evite filas desnecessárias e desorganização de cadernos. Registre vendas com agilidade, envie faturas no WhatsApp e acompanhe suas entradas diárias."
+      workflowTitle={<>Fluxo de atendimento ágil <br />para horários de pico.</>}
+      workflowSubtitle="Interface limpa com poucos cliques para que sua equipe atenda rápido e sem confusão."
       workflowSteps={[
-        { step: 1, title: 'Bipou o Combo', desc: 'Bipou a garrafa, o sistema já dá baixa no combo, nos energéticos e no gelo sozinho.' },
-        { step: 2, title: 'Pix, Cartão ou Fiado', desc: 'Receba na hora ou registre no fiado com limite de crédito e fatura direto no WhatsApp.' },
-        { step: 3, title: 'Gaveta Aberta & Recibo', desc: 'A gaveta de dinheiro abre automaticamente e a nota sai sem nenhuma travamento.' }
+        { step: 1, title: 'Leitura ou Seleção de Combo', desc: 'Ao bipar ou selecionar uma bebida/combo, o sistema deduz automaticamente os insumos correspondentes no estoque.' },
+        { step: 2, title: 'Forma de Pagamento ou Fiado', desc: 'Receba via Pix, Cartão ou lance no fiado do cliente com limite pré-estabelecido.' },
+        { step: 3, title: 'Emissão e Conclusão', desc: 'Abertura de gaveta e impressão rápida de comprovante com atualização instantânea de caixa.' }
       ]}
       workflowBullets={[
-        'Nunca para de vender: funciona normal no caixa mesmo sem internet',
-        'Fim do caderninho: controle de fiado organizado com cobrança no WhatsApp',
-        'Lucro real na tela: saiba exatamente quanto ganhou em cada bebida e combo'
+        'Operação offline-first: o caixa não para caso a internet caia',
+        'Controle organizado de clientes no fiado com extrato no WhatsApp',
+        'Compatível com impressoras térmicas e leitores de código de barras USB'
       ]}
-      ctaTitle="Pronto para faturar mais e organizar sua adega?"
-      ctaSubtitle="Fale com nosso time e veja como o Balcão Pro deixa a sua operação rápida e lucrativa desde o primeiro dia."
+      ctaTitle="Deseja ver o Balcão Pro funcionando?"
+      ctaSubtitle="Agende uma demonstração prática e veja como o sistema se adapta à rotina da sua adega ou distribuidora."
       features={[
         {
           icon: <WifiOff />,
-          title: "Caixa que Nunca Para (Mesmo sem Internet)",
-          desc: "Se o Wi-Fi cair no meio do movimento da noite, seu caixa continua passando vendas, abrindo a gaveta e imprimindo sem travar."
+          title: "Operação Offline-First",
+          desc: "Se a internet do estabelecimento oscilar ou cair, seu caixa continua registrando compras e imprimindo normalmente sem travar a fila."
         },
         {
           icon: <Layers />,
-          title: "Combos Automáticos (Whisky + Energético + Gelo)",
-          desc: "Venda o combo fechado e o sistema dá baixa automática nas garrafas e latas individuais no estoque sem você ter que calcular nada."
+          title: "Dedução Automática de Combos",
+          desc: "Cadastre combos (ex: Destilado + Energéticos + Gelo) e o sistema deduz cada insumo unitário no estoque sem necessidade de baixa manual."
         },
         {
           icon: <Users />,
-          title: "Fim do Caderninho de Fiado",
-          desc: "Coloque limite de valor para cada cliente, saiba quem tá devendo e envie o extrato com a conta pronta direto para o WhatsApp dele."
+          title: "Gestão Digital de Fiado",
+          desc: "Defina limites de crédito por cliente, consulte históricos de compras e gere extratos organizados para envio direto pelo WhatsApp."
         },
         {
           icon: <Receipt />,
-          title: "Fechamento de Caixa sem Furo",
-          desc: "Saiba exatamente quanto entrou no Pix, Cartão e Dinheiro no final do turno. O sistema te mostra se sobrou ou faltou centavo."
+          title: "Fechamento e Conferência de Caixa",
+          desc: "Acompanhe entradas por modalidade (Pix, Dinheiro, Cartão) e identifique divergências com relatórios claros por turno."
         },
         {
           icon: <Scale />,
-          title: "Controle de Vasilhames & Cascos",
-          desc: "Acompanhe as garrafas retornáveis de cerveja e litrão para não perder dinheiro com embalagem sumindo na distribuidora."
+          title: "Controle de Vasilhames Retornáveis",
+          desc: "Monitore a entrada e saída de cascos e garrafas retornáveis para evitar prejuízos com embalagens perdidas."
         },
         {
           icon: <BarChart />,
-          title: "Relatório de Lucro Real por Bebida",
-          desc: "Descubra quais bebidas colocam mais dinheiro no seu bolso, veja o lucro exato do dia e a hora certa de comprar do fornecedor."
+          title: "Relatórios de Vendas e Giro",
+          desc: "Visualize as bebidas mais vendidas, horários de maior movimento e produtos que precisam de reposição de estoque."
         }
       ]}
       faqItems={[
         {
-          question: "O sistema funciona se a internet da adega cair?",
-          answer: "Funciona 100%! O Balcão Pro fica instalado no seu computador. Mesmo se a rua inteira ficar sem internet, seu caixa continua vendendo, abrindo a gaveta de dinheiro e imprimindo comprovante normalmente."
+          question: "O sistema funciona sem internet?",
+          answer: "Sim. O Balcão Pro possui arquitetura offline-first instalada localmente no computador. Caso a conexão de internet caia, o caixa segue registrando compras e imprimindo comprovantes normalmente."
         },
         {
-          question: "Como funciona a venda de combos (ex: Whisky + Red Bull)?",
-          answer: "Você bipa o combo e o preço sai fechado na hora. O sistema cuida de tirar 1 garrafa de whisky, 4 energéticos e 1 saco de gelo do seu estoque sozinho."
+          question: "Como funciona a venda de combos?",
+          answer: "Você pode criar composições prévias (por exemplo, 1 garrafa de whisky + 4 energéticos + 1 pacote de gelo). Ao vender o combo, o estoque de cada um desses três itens é atualizado automaticamente."
         },
         {
-          question: "Como o sistema me ajuda a cobrar quem compra no fiado?",
-          answer: "Você marca a venda no nome do cliente. O sistema guarda a dívida, não deixa passar do limite que você escolheu e gera um link de cobrança pronto para mandar no WhatsApp dele."
+          question: "Como é feito o controle de fiado?",
+          answer: "O sistema permite cadastrar o cliente, estipular um limite de crédito e registrar as compras na conta dele. É possível gerar um extrato detalhado para acompanhamento e envio no WhatsApp."
         },
         {
-          question: "Funciona com leitor de código de barras e impressora térmica?",
-          answer: "Sim! Funciona com qualquer leitor USB de código de barras, impressora de cupom (Bematech, Elgin, Daruma) e balança de gelo/petisco."
+          question: "Quais impressoras e leitores são compatíveis?",
+          answer: "É compatível com qualquer leitor de código de barras USB comum e impressoras térmicas padrão (Bematech, Elgin, Epson, Daruma, entre outras)."
         }
       ]}
     />
