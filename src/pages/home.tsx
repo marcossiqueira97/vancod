@@ -63,15 +63,15 @@ export default function Home() {
     },
     {
       question: "O sistema de caixa continua funcionando se a internet cair?",
-      answer: "Sim. O Balcão Pro Adegas e o módulo de PDV do Vancod Restaurantes foram projetados com arquitetura offline-first. Isso significa que o caixa continua operando localmente no computador, registrando vendas e imprimindo comprovantes sem interrupção."
+      answer: "Sim. O Balcão Pro Adegas e o módulo de PDV do Vancod Restaurantes contam com processamento local. Isso permite continuar registrando vendas e imprimindo comprovantes mesmo quando a conexão de internet oscilar ou cair. Os dados são sincronizados automaticamente assim que a conexão é restabelecida."
     },
     {
       question: "Existe cobrança de comissão percentual sobre as vendas?",
       answer: "Não. A Vancod trabalha com assinaturas de software com valores transparentes e previsíveis. Não cobramos comissões sobre o faturamento do seu estabelecimento."
     },
     {
-      question: "Quais equipamentos são necessários para utilizar os sistemas?",
-      answer: "Nossos sistemas rodam em computadores convencionais com Windows, além de navegadores modernos em tablets e celulares. São compatíveis com impressoras térmicas padrão (USB/Rede) e leitores de código de barras comuns."
+      question: "Quais equipamentos são compatíveis com os sistemas?",
+      answer: "Nossos sistemas rodam em computadores convencionais com Windows, além de navegadores modernos em tablets e celulares. São compatíveis com impressoras térmicas padrão (USB/Rede) e leitores de código de barras USB comuns."
     },
     {
       question: "Posso agendar uma demonstração antes de contratar?",
@@ -135,7 +135,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-base sm:text-xl text-slate-600 mb-10 max-w-2xl mx-auto font-normal leading-relaxed"
             >
-              Soluções especializadas para <strong>adegas</strong>, <strong>restaurantes</strong> e <strong>eventos</strong>. Menos cliques, menos erros de atendimento e funcionamento garantido mesmo sem internet.
+              Soluções especializadas para <strong>adegas</strong>, <strong>restaurantes</strong> e <strong>eventos</strong>. Menos cliques, menos erros de atendimento e continuidade da operação local mesmo quando a conexão de internet estiver instável.
             </motion.p>
             
             {/* CTA Buttons */}
@@ -370,7 +370,7 @@ export default function Home() {
       {/* 7. SIMULADOR DE RETORNO / ROI */}
       <RoiCalculator />
 
-      {/* 8. PROVA SOCIAL: CLIENTES & CASES & DEPOIMENTOS (ESTRUTURA HONESTA) */}
+      {/* 8. PROVA SOCIAL: CLIENTES & CASES & DEPOIMENTOS (ESTRUTURA MODULAR HONESTA) */}
       <ClientsSection />
       <CasesSection />
       <TestimonialsSection />

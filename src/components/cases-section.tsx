@@ -1,9 +1,11 @@
-import { ArrowRight, FolderKanban, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, FolderKanban } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { SITE_CONFIG } from '../lib/config';
+import { SITE_CONFIG, CaseItem } from '../lib/config';
 
 export function CasesSection() {
-  const cases = SITE_CONFIG.cases || [];
+  const rawCases = SITE_CONFIG.cases || [];
+  // Safeguard: only render cases that have at least company and solution
+  const cases = rawCases.filter((c): c is CaseItem => Boolean(c && c.company && c.company.trim() && c.solution));
 
   return (
     <section className="py-24 bg-white border-t border-slate-200">
@@ -27,17 +29,30 @@ export function CasesSection() {
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-xs font-bold text-slate-900">{item.company}</span>
-                    <span className="text-[11px] text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
-                      {item.segment}
-                    </span>
+                    {item.segment && (
+                      <span className="text-[11px] text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                        {item.segment}
+                      </span>
+                    )}
                   </div>
                   {item.image && (
-                    <img src={item.image} alt={item.company} className="rounded-xl mb-4 w-full h-40 object-cover" />
+                    <img 
+                      src={item.image} 
+                      alt={`Estudo de caso da empresa ${item.company}`} 
+                      className="rounded-xl mb-4 w-full h-40 object-cover border border-slate-200"
+                      loading="lazy" 
+                    />
                   )}
-                  <div className="space-y-2 text-xs text-slate-600 mb-6">
-                    <p><strong className="text-slate-800">Desafio:</strong> {item.challenge}</p>
-                    <p><strong className="text-slate-800">Solução:</strong> {item.solution}</p>
-                    <p><strong className="text-slate-800">Resultado:</strong> {item.result}</p>
+                  <div className="space-y-2 text-xs text-slate-600 mb-6 leading-relaxed">
+                    {item.challenge && (
+                      <p><strong className="text-slate-800">Desafio:</strong> {item.challenge}</p>
+                    )}
+                    {item.solution && (
+                      <p><strong className="text-slate-800">Solução:</strong> {item.solution}</p>
+                    )}
+                    {item.result && (
+                      <p><strong className="text-slate-800">Resultado:</strong> {item.result}</p>
+                    )}
                   </div>
                   {item.testimonial && (
                     <blockquote className="text-xs italic text-slate-700 bg-white p-3 rounded-xl border border-slate-200 mb-4">
@@ -46,7 +61,7 @@ export function CasesSection() {
                   )}
                 </div>
                 {item.ctaUrl && (
-                  <Link to={item.ctaUrl} className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700">
+                  <Link to={item.ctaUrl} className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 pt-2 border-t border-slate-200/60">
                     <span>{item.ctaText || 'Ver detalhes'}</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>

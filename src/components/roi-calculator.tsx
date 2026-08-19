@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Calculator, Clock, ArrowRight, CheckCircle2, Info } from 'lucide-react';
+import { Calculator, Clock, ArrowRight, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export function RoiCalculator() {
@@ -33,7 +33,7 @@ export function RoiCalculator() {
             Simule o impacto na sua rotina.
           </h2>
           <p className="text-base md:text-lg text-slate-300">
-            Estime o tempo de trabalho economizado e a redução de falhas operacionais com a automatização correta.
+            Estime o tempo de trabalho economizado e a redução de falhas manuais com a automação adequada.
           </p>
         </div>
 
@@ -79,64 +79,61 @@ export function RoiCalculator() {
               </div>
             </div>
 
-            {/* Slider 1: Volume */}
-            <div className="space-y-2.5 bg-slate-900 p-4 rounded-xl border border-slate-800/80">
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-slate-300 font-medium">
-                  {segment === 'eventos' ? 'Convidados estimados por evento:' : 'Média de atendimentos/pedidos por dia:'}
-                </span>
-                <span className="font-mono text-sm font-bold text-blue-400">
-                  {dailyOrders} {segment === 'eventos' ? 'convidados' : 'pedidos'}
+            {/* Slider 1: Orders */}
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  {segment === 'eventos' ? 'Convidados por evento (Média):' : 'Atendimentos por dia:'}
+                </label>
+                <span className="text-sm font-bold text-blue-400 font-mono">
+                  {dailyOrders} {segment === 'eventos' ? 'pessoas' : 'pedidos/dia'}
                 </span>
               </div>
               <input
                 type="range"
-                min="20"
-                max={segment === 'eventos' ? 800 : 400}
-                step="5"
+                min={segment === 'eventos' ? 50 : 20}
+                max={segment === 'eventos' ? 1000 : 500}
+                step={segment === 'eventos' ? 25 : 10}
                 value={dailyOrders}
                 onChange={(e) => setDailyOrders(Number(e.target.value))}
-                className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
+                className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
               />
+              <div className="flex justify-between text-[10px] text-slate-500 mt-1">
+                <span>{segment === 'eventos' ? '50' : '20'}</span>
+                <span>{segment === 'eventos' ? '1.000' : '500'}</span>
+              </div>
             </div>
 
             {/* Slider 2: Ticket */}
-            <div className="space-y-2.5 bg-slate-900 p-4 rounded-xl border border-slate-800/80">
-              <div className="flex justify-between items-center text-xs">
-                <span className="text-slate-300 font-medium">
-                  {segment === 'eventos' ? 'Valor médio por convidado (R$):' : 'Ticket médio estimado por venda (R$):'}
-                </span>
-                <span className="font-mono text-sm font-bold text-emerald-400">
-                  R$ {avgTicket.toLocaleString('pt-BR')}
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <label className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  {segment === 'eventos' ? 'Média de fotos por convidado:' : 'Ticket Médio estimado:'}
+                </label>
+                <span className="text-sm font-bold text-blue-400 font-mono">
+                  {segment === 'eventos' ? `${avgTicket} fotos` : `R$ ${avgTicket},00`}
                 </span>
               </div>
               <input
                 type="range"
-                min={segment === 'eventos' ? 5 : 10}
-                max={segment === 'eventos' ? 80 : 200}
-                step="1"
+                min={segment === 'eventos' ? 5 : 15}
+                max={segment === 'eventos' ? 50 : 250}
+                step={segment === 'eventos' ? 5 : 5}
                 value={avgTicket}
                 onChange={(e) => setAvgTicket(Number(e.target.value))}
-                className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
               />
-            </div>
-
-            <div className="space-y-2 pt-1 text-xs text-slate-400">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
-                <span>Planos mensais transparentes sem taxas ocultas</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-3.5 h-3.5 text-blue-400 flex-shrink-0" />
-                <span>Demonstração prática guiada antes de qualquer decisão</span>
+              <div className="flex justify-between text-[10px] text-slate-500 mt-1">
+                <span>{segment === 'eventos' ? '5' : 'R$ 15'}</span>
+                <span>{segment === 'eventos' ? '50' : 'R$ 250'}</span>
               </div>
             </div>
           </div>
 
-          {/* Results Box */}
-          <div className="lg:col-span-6 bg-slate-900 border border-slate-800 rounded-2xl p-6 relative">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-4">
-              Estimativa de Ganho Operacional
+          {/* Results Column */}
+          <div className="lg:col-span-6 bg-slate-900/90 p-6 md:p-8 rounded-2xl border border-slate-800">
+            <span className="text-xs font-bold text-blue-400 uppercase tracking-wider block mb-3">
+              Estimativa de Ganhos Operacionais
             </span>
 
             <div className="grid grid-cols-2 gap-4 mb-6">
@@ -147,7 +144,7 @@ export function RoiCalculator() {
                 <div className="text-2xl font-bold text-white font-mono">
                   ~{hoursSavedPerMonth}h<span className="text-xs font-sans text-slate-500 font-normal">/mês</span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-1">Menos tempo gasto em fechamento e digitação manual</p>
+                <p className="text-[11px] text-slate-500 mt-1">Menos tempo gasto em fechamento e conferências manuais</p>
               </div>
 
               <div className="bg-slate-950 p-4 rounded-xl border border-slate-800/80">
@@ -162,7 +159,7 @@ export function RoiCalculator() {
             </div>
 
             <div className="mb-6 p-3 bg-slate-950/60 rounded-xl border border-slate-800 text-[11px] text-slate-400 leading-relaxed">
-              <strong className="text-slate-300">Nota informativa:</strong> Estimativa simulada baseada nas informações inseridas. Os resultados reais variam conforme o volume, modelo operacional e particularidades de cada empresa.
+              <strong className="text-slate-300">Nota:</strong> Estimativa baseada nos dados informados. Os resultados reais variam conforme a operação.
             </div>
 
             <Link

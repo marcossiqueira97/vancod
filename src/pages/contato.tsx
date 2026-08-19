@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { ArrowRight, Mail, MessageSquare, Phone, Building2, CheckCircle2, ShieldCheck, MapPin, Search, Presentation, Check, Scale } from 'lucide-react';
+import { ArrowRight, Mail, MapPin, CheckCircle2 } from 'lucide-react';
 import { SEO } from '../components/seo';
 import { useState, FormEvent } from 'react';
 import { SITE_CONFIG, getWhatsAppUrl } from '../lib/config';
@@ -168,8 +168,8 @@ export default function Contato() {
 
           {/* Right Column: Complete Form (7 cols) */}
           <div className="lg:col-span-7 bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm">
-            <h3 className="text-xl font-bold text-slate-900 mb-1">Solicitar demonstração</h3>
-            <p className="text-xs text-slate-500 mb-6">Preencha os campos abaixo para nossa equipe retornar o contato.</p>
+            <h3 className="text-xl font-bold text-slate-900 mb-1">Conte como funciona sua operação</h3>
+            <p className="text-xs text-slate-500 mb-6">Nossa equipe usa essas informações para preparar uma demonstração adequada ao seu contexto.</p>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               {status === 'success' && (
@@ -204,7 +204,7 @@ export default function Contato() {
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
                     className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-white text-xs"
-                    placeholder="Ex: Adega São Paulo"
+                    placeholder="Ex: Adega Central"
                   />
                 </div>
               </div>
@@ -266,13 +266,13 @@ export default function Contato() {
               </div>
 
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-700">Mensagem ou dúvida específica (Opcional)</label>
+                <label className="text-xs font-semibold text-slate-700">Mensagem ou contexto específico (Opcional)</label>
                 <textarea
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={3}
                   className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-white text-xs resize-none"
-                  placeholder="Conte brevemente sobre o funcionamento atual da sua empresa..."
+                  placeholder="Conte brevemente sobre os principais desafios da sua rotina..."
                 />
               </div>
 
