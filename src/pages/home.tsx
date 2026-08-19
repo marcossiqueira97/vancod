@@ -5,17 +5,16 @@ import {
   ChefHat, 
   QrCode, 
   CheckCircle2, 
-  ShieldCheck, 
-  Sparkles,
   Users2,
   Settings2,
-  Check
+  Check,
+  ChevronRight
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { FAQ } from '../components/faq';
 import { SEO } from '../components/seo';
 import { useState } from 'react';
-import { AnimatedGrid } from '../components/animated-grid';
+import { AmbientBackground } from '../components/ambient-background';
 import { ComparisonTable } from '../components/comparison-table';
 import { RoiCalculator } from '../components/roi-calculator';
 import { InteractiveSystemSimulator } from '../components/interactive-system-simulator';
@@ -24,7 +23,6 @@ import { CasesSection } from '../components/cases-section';
 import { TestimonialsSection } from '../components/testimonials-section';
 import { WhyVancod } from '../components/why-vancod';
 import { TransparencySection } from '../components/transparency-section';
-import { SITE_CONFIG } from '../lib/config';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState(0);
@@ -34,7 +32,8 @@ export default function Home() {
       id: 'adega',
       name: 'Balcão Pro Adegas',
       subdomain: 'adegas.vancod.com.br',
-      badge: 'Operação Offline-First & PDV Rápido',
+      segment: 'Adegas & Distribuidoras',
+      badge: 'PDV Local & Controle de Fiado',
       img: '/assets/adega-br.png',
       path: '/adegas'
     },
@@ -42,6 +41,7 @@ export default function Home() {
       id: 'restaurantes',
       name: 'Vancod Restaurantes',
       subdomain: 'restaurantes.vancod.com.br',
+      segment: 'Bares & Restaurantes',
       badge: 'KDS Cozinha & Comanda de Mesas',
       img: '/assets/restaurantes-br.png',
       path: '/restaurantes'
@@ -50,7 +50,8 @@ export default function Home() {
       id: 'olhare',
       name: 'Olhare Fotos & Eventos',
       subdomain: 'olhare.vancod.com.br',
-      badge: 'Transmissão ao Vivo na TV via QR Code',
+      segment: 'Eventos & Festas',
+      badge: 'Mural ao Vivo na TV via QR Code',
       img: '/assets/olhare-br.png',
       path: '/olhare'
     }
@@ -79,7 +80,6 @@ export default function Home() {
     }
   ];
 
-  // Schema.org sem preços fictícios ou claims não comprovadas
   const schema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -97,82 +97,82 @@ export default function Home() {
         schema={schema}
       />
       
-      <AnimatedGrid />
-
       {/* 1. HERO SECTION */}
-      <section className="relative min-h-[80vh] flex items-center pt-28 pb-16 overflow-hidden z-10">
+      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden z-10">
+        <AmbientBackground />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="text-center max-w-4xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-14">
             
-            {/* Top Pill */}
+            {/* Eyebrow */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/80 text-slate-800 text-xs font-semibold mb-6 border border-slate-300/60"
+              transition={{ duration: 0.4 }}
+              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-semibold mb-6 shadow-2xs"
             >
-              <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-              Sistemas desenvolvidos para a rotina real da sua empresa
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+              Software especializado para operações reais
             </motion.div>
 
-            {/* Main Title */}
+            {/* Main Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 leading-[1.1]"
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-[1.12]"
             >
-              Softwares que simplificam e <br className="hidden sm:block" />
-              <span className="text-blue-600">
-                organizam a sua operação.
-              </span>
+              Software feito para a <br className="hidden sm:block" />
+              operação do seu negócio.
             </motion.h1>
             
             {/* Subtitle */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-xl text-slate-600 mb-10 max-w-2xl mx-auto font-normal leading-relaxed"
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-base sm:text-lg text-slate-600 mb-9 max-w-2xl mx-auto leading-relaxed"
             >
-              Soluções especializadas para <strong>adegas</strong>, <strong>restaurantes</strong> e <strong>eventos</strong>. Menos cliques, menos erros de atendimento e continuidade da operação local mesmo quando a conexão de internet estiver instável.
+              PDV para adegas, gestão para restaurantes e experiências digitais para eventos — desenvolvidos para simplificar tarefas, reduzir retrabalho e dar mais controle à operação.
             </motion.p>
             
             {/* CTA Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-3.5"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-col sm:flex-row items-center justify-center gap-3"
             >
               <Link
                 to="/contato"
-                className="w-full sm:w-auto px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2 hover:shadow-md"
+                className="w-full sm:w-auto px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2 hover:shadow-md"
               >
                 <span>Agendar demonstração</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
                 href="#simulador"
-                className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 rounded-full font-semibold text-sm shadow-xs transition-all flex items-center justify-center"
+                className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 rounded-xl font-semibold text-sm shadow-2xs transition-all flex items-center justify-center"
               >
-                <span>Ver demonstração interativa</span>
+                <span>Ver como funciona</span>
               </a>
             </motion.div>
 
           </div>
 
-          {/* Interface Mockup Display */}
-          <div className="mt-14 relative mx-auto max-w-5xl">
+          {/* SaaS Product Showcase Mockup */}
+          <div className="relative mx-auto max-w-5xl">
+            
+            {/* Segment Selector Tabs */}
             <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
               {showcaseTabs.map((tab, idx) => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(idx)}
-                  className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${
+                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === idx
-                      ? 'bg-blue-600 text-white shadow-sm'
-                      : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
+                      ? 'bg-slate-900 text-white shadow-xs'
+                      : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
                   }`}
                 >
                   {tab.name}
@@ -180,29 +180,32 @@ export default function Home() {
               ))}
             </div>
 
-            <div className="aspect-[16/9] md:aspect-[21/10] rounded-2xl bg-white border border-slate-200 shadow-xl overflow-hidden">
-              <div className="h-10 bg-slate-100 border-b border-slate-200 flex items-center px-4 justify-between">
+            {/* Mockup Frame */}
+            <div className="aspect-[16/9] md:aspect-[21/10] rounded-2xl bg-white border border-slate-200/90 shadow-lg shadow-slate-200/60 overflow-hidden">
+              <div className="h-10 bg-slate-100/90 border-b border-slate-200 flex items-center px-4 justify-between">
                  <div className="flex gap-1.5">
                    <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
                    <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
                    <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
                  </div>
-                 <span className="text-xs font-mono text-slate-500">
+                 <div className="text-[11px] font-mono text-slate-500 bg-white/70 px-3 py-1 rounded-md border border-slate-200">
                    https://{showcaseTabs[activeTab].subdomain}
-                 </span>
+                 </div>
                  <Link 
                    to={showcaseTabs[activeTab].path} 
                    className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1"
                  >
-                   Ver produto <ArrowRight className="w-3 h-3" />
+                   <span>Ver produto</span>
+                   <ChevronRight className="w-3.5 h-3.5" />
                  </Link>
               </div>
               
-              <div className="relative w-full h-[calc(100%-2.5rem)] bg-slate-100">
+              <div className="relative w-full h-[calc(100%-2.5rem)] bg-slate-50">
                 <img 
                   src={showcaseTabs[activeTab].img} 
-                  alt={showcaseTabs[activeTab].name}
+                  alt={`Interface do sistema ${showcaseTabs[activeTab].name}`}
                   className="w-full h-full object-cover object-top"
+                  loading="eager"
                 />
               </div>
             </div>
@@ -212,16 +215,16 @@ export default function Home() {
       </section>
 
       {/* 2. PRODUTOS DO ECOSSISTEMA */}
-      <section className="py-24 bg-slate-50 border-t border-slate-200">
+      <section className="py-24 bg-white border-t border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Soluções Dedicadas</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Catálogo de Soluções</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
               Cada produto desenvolvido para um contexto específico.
             </h2>
-            <p className="text-base md:text-lg text-slate-600">
-              Conheça as ferramentas desenhadas para atender com precisão o seu modelo de trabalho.
+            <p className="text-sm md:text-base text-slate-600">
+              Ferramentas focadas nas necessidades práticas de cada segmento.
             </p>
           </div>
 
@@ -231,49 +234,49 @@ export default function Home() {
                 title: 'Balcão Pro Adegas',
                 tag: 'Adegas & Distribuidoras',
                 desc: 'PDV com operação offline-first, dedução automática de insumos em combos e gestão prática de fiado com extrato no WhatsApp.',
-                icon: <Zap className="w-6 h-6 text-cyan-600" />,
+                icon: <Zap className="w-5 h-5 text-blue-600" />,
                 path: '/adegas',
                 bullets: [
                   'Caixa com funcionamento local sem depender de internet',
-                  'Desmembramento de combos (bebida + insumos)',
-                  'Controle de clientes no fiado e limites',
-                  'Compatível com impressoras térmicas e leitores'
+                  'Desmembramento automático de combos de bebidas',
+                  'Controle organizado de clientes no fiado e limites',
+                  'Compatível com impressoras térmicas e leitores USB'
                 ]
               },
               {
                 title: 'Vancod Restaurantes',
                 tag: 'Bares & Restaurantes',
                 desc: 'Comanda de mesas no celular, telas KDS para organização de pedidos na cozinha e sincronização com canais de delivery.',
-                icon: <ChefHat className="w-6 h-6 text-pink-600" />,
+                icon: <ChefHat className="w-5 h-5 text-blue-600" />,
                 path: '/restaurantes',
                 bullets: [
-                  'Telas digitais KDS por praça de preparo',
-                  'Lançamento ágil de mesas e comandas',
-                  'Divisão automática de contas no salão',
-                  'Módulo para pizzarias com meio-a-meio'
+                  'Telas digitais KDS organizadas por praça de preparo',
+                  'Lançamento ágil de mesas e comandas eletrônicas',
+                  'Divisão automática de contas no fechamento',
+                  'Módulo para pizzarias com suporte a frações'
                 ]
               },
               {
                 title: 'Olhare Fotos & Eventos',
                 tag: 'Festas & Cerimoniais',
                 desc: 'Mural interativo que transmite fotos e recados dos convidados na TV do evento via QR Code sem baixar aplicativos.',
-                icon: <QrCode className="w-6 h-6 text-purple-600" />,
+                icon: <QrCode className="w-5 h-5 text-blue-600" />,
                 path: '/olhare',
                 bullets: [
-                  'Acesso instantâneo pelo navegador do celular',
-                  'Painel de moderação para aprovação de fotos',
+                  'Acesso instantâneo pelo navegador do smartphone',
+                  'Painel de moderação para aprovação prévia de fotos',
                   'Transmissão contínua em Smart TVs ou telões',
-                  'Download completo da galeria pós-evento'
+                  'Download completo da galeria ao término do evento'
                 ]
               },
             ].map((p, i) => (
-              <div key={i} className="bg-white p-8 rounded-2xl border border-slate-200 flex flex-col justify-between shadow-xs hover:shadow-md transition-shadow">
+              <div key={i} className="bg-slate-50/70 p-7 md:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-slate-300 transition-colors">
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                    <div className="p-2.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
                       {p.icon}
                     </div>
-                    <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">
+                    <span className="text-[11px] font-semibold text-slate-600 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
                       {p.tag}
                     </span>
                   </div>
@@ -293,9 +296,9 @@ export default function Home() {
 
                 <Link
                   to={p.path}
-                  className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600 hover:text-blue-700"
+                  className="pt-4 border-t border-slate-200/70 flex items-center justify-between text-xs font-bold text-blue-600 hover:text-blue-700"
                 >
-                  <span>Ver detalhes da solução</span>
+                  <span>Conhecer produto</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -315,12 +318,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Processo Transparente</span>
-            <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
-              Tecnologia que resolve problemas reais da operação.
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Processo de Adoção</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
+              Como funciona na prática.
             </h2>
-            <p className="text-base md:text-lg text-slate-600">
-              Sem burocracia excessiva ou sistemas genéricos que não encaixam no seu dia a dia.
+            <p className="text-sm md:text-base text-slate-600">
+              Passos claros para implantar a solução no seu negócio sem complicação.
             </p>
           </div>
 
@@ -346,14 +349,14 @@ export default function Home() {
               },
             ].map((card, i) => (
               <div key={i} className="p-8 rounded-2xl bg-slate-50 border border-slate-200 relative">
-                <span className="text-4xl font-extrabold text-slate-200 absolute top-6 right-6 font-mono">
+                <span className="text-3xl font-extrabold text-slate-200 absolute top-6 right-6 font-mono">
                   {card.step}
                 </span>
-                <div className="p-3 bg-white rounded-xl border border-slate-200 w-fit mb-6 shadow-2xs">
+                <div className="p-2.5 bg-white rounded-xl border border-slate-200 w-fit mb-5 shadow-2xs">
                   {card.icon}
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">{card.title}</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">{card.desc}</p>
+                <h3 className="text-base font-bold text-slate-900 mb-2">{card.title}</h3>
+                <p className="text-xs md:text-sm text-slate-600 leading-relaxed">{card.desc}</p>
               </div>
             ))}
           </div>
@@ -370,7 +373,7 @@ export default function Home() {
       {/* 7. SIMULADOR DE RETORNO / ROI */}
       <RoiCalculator />
 
-      {/* 8. PROVA SOCIAL: CLIENTES & CASES & DEPOIMENTOS (ESTRUTURA MODULAR HONESTA) */}
+      {/* 8. PROVA SOCIAL: CLIENTES & CASES & DEPOIMENTOS */}
       <ClientsSection />
       <CasesSection />
       <TestimonialsSection />
@@ -382,7 +385,7 @@ export default function Home() {
       <section className="py-24 bg-slate-900 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-3">
               Perguntas Frequentes
             </h2>
             <p className="text-sm md:text-base text-slate-400">
@@ -396,23 +399,23 @@ export default function Home() {
       {/* 11. CTA FINAL */}
       <section className="py-24 bg-blue-600 text-white text-center relative overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">
             Pronto para organizar a operação do seu negócio?
           </h2>
-          <p className="text-base md:text-lg text-blue-100 mb-8 max-w-xl mx-auto font-normal">
+          <p className="text-base text-blue-100 mb-8 max-w-xl mx-auto font-normal">
             Agende uma demonstração prática e veja como os sistemas Vancod se adaptam à sua rotina.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               to="/contato"
-              className="w-full sm:w-auto px-8 py-3.5 bg-white text-blue-900 hover:bg-blue-50 rounded-full font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-3.5 bg-white text-blue-900 hover:bg-blue-50 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
             >
               <span>Agendar demonstração</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               to="/suporte"
-              className="w-full sm:w-auto px-6 py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-full font-semibold text-sm transition-all flex items-center justify-center"
+              className="w-full sm:w-auto px-6 py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl font-semibold text-sm transition-all flex items-center justify-center"
             >
               <span>Central de suporte</span>
             </Link>

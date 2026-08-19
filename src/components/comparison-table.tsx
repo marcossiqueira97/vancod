@@ -115,10 +115,10 @@ export function ComparisonTable() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Comparativo Prático</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
             Como a Vancod se compara aos sistemas tradicionais.
           </h2>
-          <p className="text-base md:text-lg text-slate-600">
+          <p className="text-sm md:text-base text-slate-600">
             Selecione seu segmento abaixo para conferir as diferenças práticas de operação:
           </p>
         </div>
@@ -131,7 +131,7 @@ export function ComparisonTable() {
               onClick={() => setActiveSegment(s.id)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs md:text-sm font-semibold transition-all ${
                 activeSegment === s.id
-                  ? 'bg-blue-600 text-white shadow-xs'
+                  ? 'bg-slate-900 text-white shadow-2xs'
                   : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
               }`}
             >
@@ -143,7 +143,7 @@ export function ComparisonTable() {
 
         {/* Comparison Table */}
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse min-w-[650px] bg-white rounded-xl border border-slate-200 shadow-xs overflow-hidden">
+          <table className="w-full text-left border-collapse min-w-[650px] bg-white rounded-2xl border border-slate-200 shadow-2xs overflow-hidden">
             <thead>
               <tr className="border-b border-slate-200 text-xs font-bold">
                 <th className="py-4 px-5 text-slate-700 w-1/3 bg-slate-100/80">Recurso Operacional</th>

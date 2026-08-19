@@ -1,7 +1,8 @@
 import { motion } from 'motion/react';
-import { ArrowRight, Target, Zap, Layout, Headphones, Shield, CheckCircle2, Building, Mail, MapPin, Server, Cpu, RefreshCw } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Building, Mail, MapPin, Server, Cpu, RefreshCw, Shield, Headphones, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/seo';
+import { AmbientBackground } from '../components/ambient-background';
 import { SITE_CONFIG } from '../lib/config';
 
 export default function Sobre() {
@@ -22,15 +23,18 @@ export default function Sobre() {
       />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-16 lg:pt-44 lg:pb-24 relative overflow-hidden">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
+        <AmbientBackground />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/80 text-slate-800 text-xs font-semibold mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-semibold mb-6 shadow-2xs">
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
             Institucional
           </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight max-w-4xl mx-auto">
             Desenvolvemos softwares que atendem à realidade do seu negócio.
           </h1>
-          <p className="text-base md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
+          <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
             A Vancod é uma empresa brasileira de tecnologia focada em criar soluções de software especializadas, práticas e confiáveis para pequenos e médios negócios.
           </p>
         </div>
@@ -41,7 +45,7 @@ export default function Sobre() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+            <div className="p-6 rounded-2xl bg-slate-50/70 border border-slate-200">
               <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Quem Somos</span>
               <h3 className="text-base font-bold text-slate-900 mb-2">Empresa Brasileira de Tecnologia</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
@@ -49,7 +53,7 @@ export default function Sobre() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+            <div className="p-6 rounded-2xl bg-slate-50/70 border border-slate-200">
               <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">O Que Fazemos</span>
               <h3 className="text-base font-bold text-slate-900 mb-2">Softwares Especializados</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
@@ -57,7 +61,7 @@ export default function Sobre() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+            <div className="p-6 rounded-2xl bg-slate-50/70 border border-slate-200">
               <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Para Quem</span>
               <h3 className="text-base font-bold text-slate-900 mb-2">Pequenos e Médios Negócios</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
@@ -65,7 +69,7 @@ export default function Sobre() {
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200">
+            <div className="p-6 rounded-2xl bg-slate-50/70 border border-slate-200">
               <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Como Pensamos</span>
               <h3 className="text-base font-bold text-slate-900 mb-2">Simplicidade & Evolução</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
@@ -86,7 +90,7 @@ export default function Sobre() {
               <p>
                 Na <strong>Vancod</strong>, escolhemos desenvolver produtos dedicados:
               </p>
-              <ul className="space-y-2 text-xs text-slate-700">
+              <ul className="space-y-2.5 text-xs text-slate-700">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 text-blue-600 mt-0.5 flex-shrink-0" />
                   <span><strong>Balcão Pro:</strong> Focado no varejo de bebidas, com dedução de combos e fiado com extrato no WhatsApp.</span>
@@ -192,7 +196,7 @@ export default function Sobre() {
               }
             ].map((item, i) => (
               <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs">
-                <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200 w-fit mb-4">
+                <div className="p-2 bg-slate-50 rounded-xl border border-slate-200 w-fit mb-4">
                   {item.icon}
                 </div>
                 <h3 className="text-base font-bold text-slate-900 mb-1.5">{item.title}</h3>
@@ -207,7 +211,7 @@ export default function Sobre() {
       {/* CTA Final */}
       <section className="py-20 text-center bg-white">
         <div className="max-w-3xl mx-auto px-4">
-          <h2 className="text-2xl md:text-4xl font-extrabold mb-4 tracking-tight text-slate-900">
+          <h2 className="text-2xl md:text-3xl font-extrabold mb-4 tracking-tight text-slate-900">
             Deseja conhecer as soluções na prática?
           </h2>
           <p className="text-sm md:text-base text-slate-600 mb-8 max-w-xl mx-auto leading-relaxed">
@@ -216,7 +220,7 @@ export default function Sobre() {
           <div className="flex justify-center">
             <Link
               to="/contato"
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-sm shadow-sm transition-all"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm shadow-xs transition-all"
             >
               <span>Agendar demonstração</span>
               <ArrowRight className="w-4 h-4" />

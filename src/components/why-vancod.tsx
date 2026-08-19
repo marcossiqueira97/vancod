@@ -31,10 +31,10 @@ export function WhyVancod() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Diferenciais Concretos</span>
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
             Por que escolher a Vancod?
           </h2>
-          <p className="text-base md:text-lg text-slate-600">
+          <p className="text-sm md:text-base text-slate-600">
             Quatro compromissos que orientam nosso desenvolvimento e nosso relacionamento com clientes.
           </p>
         </div>
@@ -42,9 +42,9 @@ export function WhyVancod() {
         {/* 4 Pillars Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {pillars.map((p, i) => (
-            <div key={i} className="p-6 rounded-2xl bg-slate-50 border border-slate-200 shadow-2xs flex flex-col justify-between">
+            <div key={i} className="p-6 rounded-2xl bg-slate-50/70 border border-slate-200 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-colors">
               <div>
-                <div className="p-2.5 bg-white rounded-xl border border-slate-200 w-fit mb-4">
+                <div className="p-2.5 bg-white rounded-xl border border-slate-200 w-fit mb-4 shadow-2xs">
                   {p.icon}
                 </div>
                 <h3 className="text-base font-bold text-slate-900 mb-2">{p.title}</h3>
