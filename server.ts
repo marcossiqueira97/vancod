@@ -12,7 +12,7 @@ import { SITE_CONFIG } from "./src/lib/config";
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT) || 3000;
 
   // Basic security headers
   // CSP fica ativo apenas em produção: no dev, o Vite usa scripts/estilos inline e HMR
