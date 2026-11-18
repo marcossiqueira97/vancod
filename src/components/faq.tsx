@@ -35,7 +35,9 @@ export function FAQ({ items }: FAQProps) {
           >
             <button
               onClick={() => toggleFAQ(index)}
-              className="w-full flex items-center justify-between p-6 md:p-8 text-left focus:outline-none"
+              aria-expanded={isOpen}
+              aria-controls={`faq-resposta-${index}`}
+              className="w-full flex items-center justify-between p-6 md:p-8 text-left rounded-[1.5rem] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-blue-500"
             >
               <span className="text-lg md:text-xl font-extrabold text-slate-900 pr-4 tracking-tight">{item.question}</span>
               <div className={cn(
@@ -53,6 +55,7 @@ export function FAQ({ items }: FAQProps) {
             <AnimatePresence initial={false}>
               {isOpen && (
                 <motion.div
+                  id={`faq-resposta-${index}`}
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}

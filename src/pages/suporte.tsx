@@ -15,7 +15,7 @@ export default function Suporte() {
   const hasWhatsApp = Boolean(SITE_CONFIG.contact.whatsappNumber);
 
   return (
-    <div className="bg-slate-50 text-slate-900 min-h-screen pt-32 pb-24 relative overflow-hidden">
+    <div className="top-band [--band:400px] bg-slate-50 text-slate-900 min-h-screen pt-32 pb-24 relative overflow-hidden">
       <SEO 
         title="Central de Suporte & Atendimento Técnico" 
         description="Atendimento direto e suporte técnico para clientes das soluções Balcão Pro, Vancod Restaurantes e Olhare."
@@ -25,13 +25,13 @@ export default function Suporte() {
 
       {/* Header */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 mb-14">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/80 text-slate-800 text-xs font-semibold mb-4">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-blue-200 text-xs font-semibold mb-4">
           Canais de Atendimento
         </div>
-        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+        <h1 className="font-display text-3xl md:text-5xl font-bold tracking-[-0.03em] text-white mb-4">
           Central de Suporte Técnico
         </h1>
-        <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto">
+        <p className="text-base md:text-lg text-slate-300 max-w-2xl mx-auto">
           Estamos à disposição para auxiliar na configuração de equipamentos, dúvidas de operação e acompanhamento da sua equipe.
         </p>
       </section>
@@ -95,7 +95,7 @@ export default function Suporte() {
          <div className="mt-12 bg-slate-100/80 border border-slate-200 rounded-2xl p-6 text-xs text-slate-600 leading-relaxed">
            <h4 className="font-bold text-slate-900 mb-2 text-sm">Horários e Formatos de Atendimento</h4>
            <p className="mb-2">
-             Nosso suporte atende de segunda a sábado em horário comercial com plantão para atendimentos emergenciais de caixas e PDVs.
+             Nosso suporte atende de segunda a sábado em horário comercial.
            </p>
            <p>
              Para dúvidas sobre termos de uso ou políticas de tratamento de dados, consulte nossa página de <Link to="/termos" className="text-blue-600 underline font-semibold">Termos de Serviço</Link> e <Link to="/privacidade" className="text-blue-600 underline font-semibold">Política de Privacidade</Link>.

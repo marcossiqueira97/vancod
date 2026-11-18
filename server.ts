@@ -6,6 +6,9 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import nodemailer from "nodemailer";
 import "dotenv/config";
+import { recordVisit, systemFor, visitorId } from "./server/analytics";
+import { renderAdmin, requireAdmin } from "./server/admin";
+import { SITE_CONFIG } from "./src/lib/config";
 
 async function startServer() {
   const app = express();
@@ -116,6 +119,72 @@ async function startServer() {
       });
     }
   });
+
+  // Rastreamento de visitas: grava rota, sistema e domínio de origem. IP nunca é salvo, só um hash diário.
+  const trackLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    max: 60,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: { error: "Muitas requisições de rastreamento." },
+  });
+
+  app.post("/api/track", trackLimiter, async (req, res) => {
+    const { path: pagePath, referrer } = (req.body ?? {}) as { path?: unknown; referrer?: unknown };
+    if (typeof pagePath !== "string" || !pagePath.startsWith("/") || pagePath.length > 200) {
+      return res.status(400).json({ error: "Caminho inválido." });
+    }
+
+    let ref = "direto";
+    if (typeof referrer === "string" && referrer.length <= 500) {
+      try {
+        ref = new URL(referrer).host || ref;
+      } catch {
+        ref = "direto"; // referrer malformado conta como acesso direto
+      }
+    }
+
+    const host = req.hostname.slice(0, 100);
+    try {
+      await recordVisit({
+        t: new Date().toISOString(),
+        host,
+        path: pagePath,
+        system: systemFor(host, pagePath),
+        ref,
+        v: visitorId(req.ip ?? "", req.get("user-agent") ?? ""),
+      });
+    } catch (err) {
+      // Falha de rastreamento não pode quebrar a página do visitante; fica registrada no log.
+      console.error("[analytics] Falha ao gravar visita:", err);
+    }
+    res.status(204).end();
+  });
+
+  // Painel: conta só as tentativas com senha errada, para não travar quem acerta.
+  const adminLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 20,
+    skipSuccessfulRequests: true,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: "Muitas tentativas de acesso ao painel. Tente novamente em 15 minutos.",
+  });
+
+  app.get("/admin", adminLimiter, requireAdmin, async (_req, res) => {
+    try {
+      res.type("html").send(await renderAdmin());
+    } catch (err) {
+      console.error("[admin] Falha ao montar o painel:", err);
+      res.status(500).type("text").send("Não foi possível carregar as visitas agora.");
+    }
+  });
+
+  // Preserva os links antigos das p?ginas de produtos.
+  for (const product of SITE_CONFIG.products) {
+    const paths = product.id === "adega" ? ["/adega", product.path] : product.id === "olhare" ? ["/eventos", product.path] : [product.path];
+    app.get(paths, (_req, res) => res.redirect(301, `https://${product.subdomain}`));
+  }
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {

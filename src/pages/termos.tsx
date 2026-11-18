@@ -10,7 +10,7 @@ export default function Termos() {
   };
 
   return (
-    <div className="bg-slate-50 text-slate-900 min-h-screen pt-32 pb-24">
+    <div className="top-band [--band:330px] bg-slate-50 text-slate-900 min-h-screen pt-32 pb-24">
       <SEO 
         title="Termos de Uso" 
         description="Termos e condições para contratação e uso dos softwares da Vancod Tecnologia."
@@ -23,11 +23,11 @@ export default function Termos() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 text-slate-800 text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/15 text-blue-200 text-xs font-semibold mb-4">
             Documento Legal
           </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">Termos de Uso</h1>
-          <p className="text-slate-500 mb-10 text-sm border-b border-slate-200 pb-6">
+          <h1 className="font-display text-3xl md:text-5xl font-bold tracking-[-0.03em] text-white mb-4">Termos de Uso</h1>
+          <p className="text-slate-300 mb-14 text-sm pb-6">
             Última atualização: {new Date().toLocaleDateString('pt-BR')}
           </p>
           

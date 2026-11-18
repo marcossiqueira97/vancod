@@ -6,6 +6,7 @@ import '@fontsource/inter/500.css';
 import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import '@fontsource/inter/800.css';
+import '@fontsource-variable/bricolage-grotesque';
 import App from './App.tsx';
 import './index.css';
 

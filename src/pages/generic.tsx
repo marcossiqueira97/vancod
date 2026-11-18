@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'motion/react';
+import { SITE_CONFIG } from '../lib/config';
 
 export default function GenericPage({ title }: { title: string }) {
   return (
@@ -15,9 +16,20 @@ export default function GenericPage({ title }: { title: string }) {
           <span className="font-extrabold text-2xl">V</span>
         </div>
         <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-4">{title}</h1>
-        <p className="text-sm text-slate-600 mb-8 leading-relaxed">
-          Esta página está em processo de atualização ou não foi localizada.
+        <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+          Esta página não existe.
         </p>
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {SITE_CONFIG.products.map((p) => (
+            <a
+              key={p.id}
+              href={`https://${p.subdomain}`}
+              className="px-3.5 py-2 rounded-xl border border-slate-300 text-xs font-semibold text-slate-800 hover:border-blue-600 hover:text-blue-600 transition-colors"
+            >
+              {p.name}
+            </a>
+          ))}
+        </div>
         <Link 
           to="/" 
           className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white hover:bg-blue-700 rounded-full text-xs font-bold transition-all shadow-sm"

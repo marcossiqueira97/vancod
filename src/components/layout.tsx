@@ -1,6 +1,6 @@
 import { ReactNode, useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight, ChevronDown, Zap, ChefHat, QrCode, Mail, MapPin } from 'lucide-react';
+import { Menu, X, ArrowRight, ChevronDown, Zap, ChefHat, QrCode, MapPin, MessageCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { FloatingWhatsApp } from './floating-whatsapp';
@@ -9,19 +9,19 @@ import { SITE_CONFIG, getWhatsAppUrl } from '../lib/config';
 const products = [
   { 
     name: 'Balcão Pro Adegas', 
-    path: '/adegas', 
+    path: 'https://adegas.vancod.com.br', 
     desc: 'PDV com operação offline-first, controle de fiado e desmembramento de combos.', 
     icon: <Zap className="w-4 h-4 text-blue-600" /> 
   },
   { 
     name: 'Vancod Restaurantes', 
-    path: '/restaurantes', 
+    path: 'https://restaurantes.vancod.com.br', 
     desc: 'KDS para cozinha, comanda digital de mesas e integração de pedidos.', 
     icon: <ChefHat className="w-4 h-4 text-blue-600" /> 
   },
   { 
     name: 'Olhare Fotos & Eventos', 
-    path: '/olhare', 
+    path: 'https://olhare.vancod.com.br', 
     desc: 'Mural de fotos e recados em tempo real na TV via QR Code sem instalação.', 
     icon: <QrCode className="w-4 h-4 text-blue-600" /> 
   },
@@ -49,9 +49,9 @@ export function Navbar() {
       <div
         className={cn(
           'transition-all duration-300 border-b',
-          scrolled 
-            ? 'bg-white/95 backdrop-blur-xl border-slate-200/90 shadow-2xs' 
-            : 'bg-white/85 backdrop-blur-md border-slate-200/50'
+          scrolled
+            ? 'bg-[#001a44]/95 backdrop-blur-xl border-white/10 shadow-lg'
+            : 'bg-[#001a44]/80 backdrop-blur-md border-white/5'
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,28 +59,26 @@ export function Navbar() {
             
             {/* Logo */}
             <div className="flex items-center gap-8">
-              <Link to="/" className="flex items-center gap-2.5 group">
-                <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-extrabold text-base shadow-2xs">
-                  V
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-extrabold text-lg tracking-tight text-slate-900 leading-tight">Vancod</span>
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Tecnologia</span>
-                </div>
+              <Link to="/" className="flex items-center">
+                <img src="/assets/vancod-marca-dark.png" alt="" className="h-9 w-auto" />
+                <span className="ml-1.5 leading-none">
+                  <span className="block font-display text-2xl font-bold tracking-tight text-white">vancod</span>
+                  <span className="block text-[9px] font-semibold tracking-[0.3em] text-sky-400">TECNOLOGIA</span>
+                </span>
               </Link>
 
               {/* Navigation Links */}
               <nav className="hidden md:flex items-center gap-6">
                 <div className="relative group">
-                  <button className="flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-blue-600 transition-colors py-2">
+                  <button className="flex items-center gap-1 text-xs font-semibold text-slate-200 hover:text-white transition-colors py-2">
                     Soluções <ChevronDown className="w-3.5 h-3.5 group-hover:rotate-180 transition-transform duration-200 text-slate-400" />
                   </button>
                   <div className="absolute top-full left-0 w-[420px] bg-white border border-slate-200 shadow-lg rounded-2xl p-2.5 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 ring-1 ring-slate-900/5">
                     <div className="space-y-1">
                       {products.map((p) => (
-                        <Link 
+                        <a 
                           key={p.path} 
-                          to={p.path} 
+                          href={p.path} 
                           className="flex items-start gap-3 p-3 hover:bg-slate-50 rounded-xl transition-all group/item"
                         >
                           <div className="p-2 rounded-lg bg-slate-100 mt-0.5 group-hover/item:bg-white group-hover/item:shadow-2xs transition-all">
@@ -90,20 +88,32 @@ export function Navbar() {
                             <div className="font-bold text-slate-900 group-hover/item:text-blue-600 transition-colors text-xs">{p.name}</div>
                             <div className="text-[11px] text-slate-500 mt-0.5 leading-relaxed font-normal">{p.desc}</div>
                           </div>
-                        </Link>
+                        </a>
                       ))}
                     </div>
                   </div>
                 </div>
 
-                <Link to="/sobre" className="text-xs font-semibold text-slate-700 hover:text-blue-600 transition-colors">A Empresa</Link>
-                <Link to="/suporte" className="text-xs font-semibold text-slate-700 hover:text-blue-600 transition-colors">Suporte</Link>
-                <Link to="/contato" className="text-xs font-semibold text-slate-700 hover:text-blue-600 transition-colors">Contato</Link>
+                <Link to="/#como-trabalhamos" className="text-xs font-semibold text-slate-200 hover:text-white transition-colors">Como trabalhamos</Link>
+                <Link to="/sobre" className="text-xs font-semibold text-slate-200 hover:text-white transition-colors">A Empresa</Link>
+                <Link to="/suporte" className="text-xs font-semibold text-slate-200 hover:text-white transition-colors">Suporte</Link>
+                <Link to="/contato" className="text-xs font-semibold text-slate-200 hover:text-white transition-colors">Contato</Link>
               </nav>
             </div>
 
             {/* CTA */}
-            <div className="hidden md:flex items-center gap-4">
+            <div className="hidden md:flex items-center gap-3">
+              {SITE_CONFIG.contact.whatsappNumber && (
+                <a
+                  href={getWhatsAppUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-white/30 text-white font-semibold text-xs hover:bg-white/10 transition-colors"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+                  Falar no WhatsApp
+                </a>
+              )}
               <Link 
                 to="/contato" 
                 className="inline-flex items-center gap-2 px-4.5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs shadow-2xs transition-all hover:shadow-xs"
@@ -115,7 +125,7 @@ export function Navbar() {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center">
-              <button onClick={() => setIsOpen(!isOpen)} className="text-slate-900 p-2" aria-label="Menu principal">
+              <button onClick={() => setIsOpen(!isOpen)} className="text-white p-2" aria-label="Menu principal">
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
@@ -136,17 +146,18 @@ export function Navbar() {
               <div className="py-2">
                 <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 px-3">Soluções Especializadas</div>
                 {products.map((p) => (
-                  <Link 
+                  <a 
                     key={p.path} 
-                    to={p.path} 
+                    href={p.path} 
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50"
                   >
                     <span className="p-1.5 rounded-lg bg-slate-100">{p.icon}</span>
                     {p.name}
-                  </Link>
+                  </a>
                 ))}
               </div>
               <div className="h-px bg-slate-100 my-2" />
+              <Link to="/#como-trabalhamos" className="block px-3 py-2 rounded-xl text-xs font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50">Como trabalhamos</Link>
               <Link to="/sobre" className="block px-3 py-2 rounded-xl text-xs font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50">A Empresa</Link>
               <Link to="/suporte" className="block px-3 py-2 rounded-xl text-xs font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50">Suporte Técnico</Link>
               <Link to="/contato" className="block px-3 py-2 rounded-xl text-xs font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50">Fale Conosco</Link>
@@ -173,14 +184,8 @@ export function Footer() {
           
           {/* Coluna 1: Empresa & Bio */}
           <div className="col-span-2 lg:col-span-2 space-y-4">
-            <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-extrabold text-base">
-                V
-              </div>
-              <div className="flex flex-col">
-                <span className="font-extrabold text-lg tracking-tight text-white leading-tight">Vancod</span>
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Tecnologia</span>
-              </div>
+            <Link to="/" className="flex items-center">
+              <img src="/assets/vancod-logo-128.webp" alt="Vancod Tecnologia" className="h-16 w-16 rounded-full object-cover" />
             </Link>
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
               Desenvolvimento de softwares especializados para rotinas de adegas, restaurantes e eventos com foco em agilidade e confiabilidade operacional.
@@ -193,11 +198,11 @@ export function Footer() {
           
           {/* Coluna 2: Soluções */}
           <div className="lg:col-span-1">
-            <h4 className="font-bold text-white mb-4 text-xs uppercase tracking-wider">Soluções</h4>
+            <h2 className="font-bold text-white mb-4 text-sm">Soluções</h2>
             <ul className="space-y-2.5">
               {products.map(p => (
                 <li key={p.path}>
-                  <Link to={p.path} className="text-xs text-slate-400 hover:text-white transition-colors">{p.name}</Link>
+                  <a href={p.path} className="text-xs text-slate-400 hover:text-white transition-colors">{p.name}</a>
                 </li>
               ))}
             </ul>
@@ -205,7 +210,7 @@ export function Footer() {
 
           {/* Coluna 3: Suporte & Atendimento */}
           <div className="lg:col-span-1">
-            <h4 className="font-bold text-white mb-4 text-xs uppercase tracking-wider">Suporte</h4>
+            <h2 className="font-bold text-white mb-4 text-sm">Suporte</h2>
             <ul className="space-y-2.5">
               <li><Link to="/suporte" className="text-xs text-slate-400 hover:text-white transition-colors">Central de Suporte</Link></li>
               <li><Link to="/contato" className="text-xs text-slate-400 hover:text-white transition-colors">Fale Conosco</Link></li>
@@ -219,7 +224,7 @@ export function Footer() {
 
           {/* Coluna 4: Institucional & Legal */}
           <div className="lg:col-span-1">
-            <h4 className="font-bold text-white mb-4 text-xs uppercase tracking-wider">Institucional</h4>
+            <h2 className="font-bold text-white mb-4 text-sm">Institucional</h2>
             <ul className="space-y-2.5">
               <li><Link to="/sobre" className="text-xs text-slate-400 hover:text-white transition-colors">Sobre a Vancod</Link></li>
               <li><Link to="/termos" className="text-xs text-slate-400 hover:text-white transition-colors">Termos de Uso</Link></li>
@@ -229,7 +234,7 @@ export function Footer() {
 
         </div>
         
-        <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+        <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
           <p>© {currentYear} Vancod Tecnologia. Todos os direitos reservados.</p>
           <div className="flex items-center gap-2">
             <span>Soluções de software desenvolvidas para operações reais.</span>

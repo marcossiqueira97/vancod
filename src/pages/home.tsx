@@ -1,425 +1,328 @@
 import { motion } from 'motion/react';
-import { 
-  ArrowRight, 
-  Zap, 
-  ChefHat, 
-  QrCode, 
-  CheckCircle2, 
-  Users2,
-  Settings2,
-  Check,
-  ChevronRight
-} from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { FAQ } from '../components/faq';
 import { SEO } from '../components/seo';
-import { useState } from 'react';
-import { AmbientBackground } from '../components/ambient-background';
-import { ComparisonTable } from '../components/comparison-table';
-import { RoiCalculator } from '../components/roi-calculator';
-import { InteractiveSystemSimulator } from '../components/interactive-system-simulator';
-import { ClientsSection } from '../components/clients-section';
-import { CasesSection } from '../components/cases-section';
-import { TestimonialsSection } from '../components/testimonials-section';
 import { WhyVancod } from '../components/why-vancod';
 import { TransparencySection } from '../components/transparency-section';
 
+// Dados estáticos ficam fora do componente: não são recriados a cada render.
+const steps = [
+  'Entendemos a sua operação',
+  'Configuramos a solução',
+  'Treinamos a sua equipe',
+  'Acompanhamos a operação'
+];
+
+// Só o que o Balcão Pro faz de fato (PRODUCT.md, "Capabilities").
+const balcaoFacts = [
+  'Continua vendendo quando a internet cai',
+  'Combos com baixa automática dos insumos',
+  'Fiado com limite por cliente',
+  'Imprime em Bematech, Elgin, Epson e Daruma'
+];
+
+const trustItems = [
+  { icon: '/assets/icone-implantacao.png', label: 'Implantação acompanhada' },
+  { icon: '/assets/icone-suporte.png', label: 'Suporte real e rápido' },
+  { icon: '/assets/icone-sob-medida.png', label: 'Soluções sob medida' },
+  { icon: '/assets/icone-seguranca.png', label: 'Operação estável e segura' }
+];
+
+const productCards = [
+  {
+    name: 'Balcão Pro Adegas',
+    desc: 'Controle de vendas, PDV, estoque e fiado para adegas.',
+    img: '/assets/foto-adega.jpg',
+    to: 'https://adegas.vancod.com.br',
+    accent: 'from-blue-500 to-sky-400'
+  },
+  {
+    name: 'Vancod Restaurantes',
+    desc: 'PDV, comandas, cozinha e gestão completa para restaurantes.',
+    img: '/assets/foto-restaurante.jpg',
+    to: 'https://restaurantes.vancod.com.br',
+    accent: 'from-violet-500 to-fuchsia-400'
+  },
+  {
+    name: 'Olhare Fotos & Eventos',
+    desc: 'Organização, vendas e entrega de fotos para eventos.',
+    img: '/assets/foto-eventos.jpg',
+    to: 'https://olhare.vancod.com.br',
+    accent: 'from-amber-500 to-orange-400'
+  }
+];
+
+const faqs = [
+  {
+    question: "A Vancod desenvolve software sob medida?",
+    answer: "Sim. Além das soluções prontas para segmentos como adegas, restaurantes e eventos, desenvolvemos sistemas sob medida para processos específicos da sua empresa. Começamos entendendo a operação antes de definir o escopo."
+  },
+  {
+    question: "Como funciona a implantação e o suporte?",
+    answer: "Nossa equipe acompanha a instalação e a configuração inicial dos produtos e dos dados. O suporte técnico é feito direto pela equipe, por e-mail, para tirar dúvidas e manter a rotina fluida."
+  },
+  {
+    question: "Existe cobrança de comissão percentual sobre as vendas?",
+    answer: "Não. Trabalhamos com assinaturas de software com valores transparentes e previsíveis. Não cobramos comissões sobre o faturamento do seu estabelecimento."
+  },
+  {
+    question: "Posso conversar com a equipe antes de contratar?",
+    answer: "Sim. Você pode agendar uma conversa para apresentar a sua operação e entender se o nosso formato faz sentido para o seu negócio, sem compromisso."
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Vancod Tecnologia",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web",
+  "description": "Empresa de tecnologia que desenvolve software sob medida e soluções para empresas de adegas, restaurantes, eventos e outros segmentos."
+};
+
 export default function Home() {
-  const [activeTab, setActiveTab] = useState(0);
-
-  const showcaseTabs = [
-    {
-      id: 'adega',
-      name: 'Balcão Pro Adegas',
-      subdomain: 'adegas.vancod.com.br',
-      segment: 'Adegas & Distribuidoras',
-      badge: 'PDV Local & Controle de Fiado',
-      img: '/assets/adega-br.png',
-      path: '/adegas'
-    },
-    {
-      id: 'restaurantes',
-      name: 'Vancod Restaurantes',
-      subdomain: 'restaurantes.vancod.com.br',
-      segment: 'Bares & Restaurantes',
-      badge: 'KDS Cozinha & Comanda de Mesas',
-      img: '/assets/restaurantes-br.png',
-      path: '/restaurantes'
-    },
-    {
-      id: 'olhare',
-      name: 'Olhare Fotos & Eventos',
-      subdomain: 'olhare.vancod.com.br',
-      segment: 'Eventos & Festas',
-      badge: 'Mural ao Vivo na TV via QR Code',
-      img: '/assets/olhare-br.png',
-      path: '/olhare'
-    }
-  ];
-
-  const faqs = [
-    {
-      question: "Como funciona a implantação e o suporte dos sistemas Vancod?",
-      answer: "Nossa equipe acompanha você na instalação e na configuração inicial dos produtos e dados. O suporte técnico é prestado de forma direta e humanizada via e-mail e WhatsApp para tirar dúvidas e manter sua rotina fluida."
-    },
-    {
-      question: "O sistema de caixa continua funcionando se a internet cair?",
-      answer: "Sim. O Balcão Pro Adegas e o módulo de PDV do Vancod Restaurantes contam com processamento local. Isso permite continuar registrando vendas e imprimindo comprovantes mesmo quando a conexão de internet oscilar ou cair. Os dados são sincronizados automaticamente assim que a conexão é restabelecida."
-    },
-    {
-      question: "Existe cobrança de comissão percentual sobre as vendas?",
-      answer: "Não. A Vancod trabalha com assinaturas de software com valores transparentes e previsíveis. Não cobramos comissões sobre o faturamento do seu estabelecimento."
-    },
-    {
-      question: "Quais equipamentos são compatíveis com os sistemas?",
-      answer: "Nossos sistemas rodam em computadores convencionais com Windows, além de navegadores modernos em tablets e celulares. São compatíveis com impressoras térmicas padrão (USB/Rede) e leitores de código de barras USB comuns."
-    },
-    {
-      question: "Posso agendar uma demonstração antes de contratar?",
-      answer: "Sim. Realizamos demonstrações online e práticas para você ver o sistema funcionando no modelo exato do seu negócio e tirar todas as suas dúvidas com nossa equipe."
-    }
-  ];
-
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Vancod Tecnologia",
-    "applicationCategory": "BusinessApplication",
-    "operatingSystem": "Web, Windows, Android, iOS",
-    "description": "Soluções de software desenvolvidas para atender as necessidades práticas de adegas, distribuidores, restaurantes e eventos com agilidade e confiabilidade."
-  };
-
   return (
-    <div className="bg-slate-50 text-slate-900 overflow-hidden relative">
-      <SEO 
-        title="Software Especializado para Adegas, Restaurantes e Eventos" 
-        description="Soluções de software desenvolvidas para atender as necessidades práticas de adegas, distribuidores, restaurantes e eventos com agilidade e confiabilidade."
+    <div className="bg-white text-slate-900 overflow-hidden font-sans">
+      <SEO
+        title="Sistemas para adegas, restaurantes e eventos"
+        description="Balcão Pro para adegas, Vancod Restaurantes para salão e cozinha, Olhare para eventos. Software sob medida com implantação acompanhada."
         schema={schema}
       />
-      
-      {/* 1. HERO SECTION */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden z-10">
-        <AmbientBackground />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-          <div className="text-center max-w-3xl mx-auto mb-14">
-            
-            {/* Eyebrow */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-semibold mb-6 shadow-2xs"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
-              Software especializado para operações reais
-            </motion.div>
+      {/* 1. HERO */}
+      <section className="relative overflow-hidden bg-[#001a44] text-white">
+        {/* A arte já traz o fundo azul à esquerda; ela encosta na direita e o texto fica por cima. */}
+        <img
+          src="/assets/hero-bg.jpg"
+          alt="Adega, restaurante e show: os segmentos atendidos pela Vancod"
+          className="absolute inset-y-0 right-0 hidden h-full w-[58%] object-cover object-right lg:block [mask-image:linear-gradient(to_right,transparent,black_18%)]"
+        />
 
-            {/* Main Headline */}
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-[1.12]"
-            >
-              Software feito para a <br className="hidden sm:block" />
-              operação do seu negócio.
-            </motion.h1>
-            
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base sm:text-lg text-slate-600 mb-9 max-w-2xl mx-auto leading-relaxed"
-            >
-              PDV para adegas, gestão para restaurantes e experiências digitais para eventos — desenvolvidos para simplificar tarefas, reduzir retrabalho e dar mais controle à operação.
-            </motion.p>
-            
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-3"
-            >
-              <Link
-                to="/contato"
-                className="w-full sm:w-auto px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm shadow-xs transition-all flex items-center justify-center gap-2 hover:shadow-md"
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 md:pt-32 md:pb-24">
+          <div className="max-w-xl">
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="font-display text-4xl sm:text-5xl xl:text-6xl font-bold tracking-[-0.03em] leading-[1.03] text-white"
               >
-                <span>Agendar demonstração</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="#simulador"
-                className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 rounded-xl font-semibold text-sm shadow-2xs transition-all flex items-center justify-center"
+                Sistemas prontos e sob medida para{' '}
+                <span className="text-blue-400">adegas, restaurantes e eventos.</span>
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="mt-6 max-w-xl text-base sm:text-lg text-slate-300 leading-relaxed"
               >
-                <span>Ver como funciona</span>
-              </a>
-            </motion.div>
+                Desenvolvemos e implantamos sistemas para controle, gestão e operação do seu negócio, com suporte próximo e foco em resultado.
+              </motion.p>
 
-          </div>
-
-          {/* SaaS Product Showcase Mockup */}
-          <div className="relative mx-auto max-w-5xl">
-            
-            {/* Segment Selector Tabs */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mb-4">
-              {showcaseTabs.map((tab, idx) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(idx)}
-                  className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === idx
-                      ? 'bg-slate-900 text-white shadow-xs'
-                      : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
-                  }`}
-                >
-                  {tab.name}
-                </button>
-              ))}
-            </div>
-
-            {/* Mockup Frame */}
-            <div className="aspect-[16/9] md:aspect-[21/10] rounded-2xl bg-white border border-slate-200/90 shadow-lg shadow-slate-200/60 overflow-hidden">
-              <div className="h-10 bg-slate-100/90 border-b border-slate-200 flex items-center px-4 justify-between">
-                 <div className="flex gap-1.5">
-                   <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-                   <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-                   <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
-                 </div>
-                 <div className="text-[11px] font-mono text-slate-500 bg-white/70 px-3 py-1 rounded-md border border-slate-200">
-                   https://{showcaseTabs[activeTab].subdomain}
-                 </div>
-                 <Link 
-                   to={showcaseTabs[activeTab].path} 
-                   className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1"
-                 >
-                   <span>Ver produto</span>
-                   <ChevronRight className="w-3.5 h-3.5" />
-                 </Link>
-              </div>
-              
-              <div className="relative w-full h-[calc(100%-2.5rem)] bg-slate-50">
-                <img 
-                  src={showcaseTabs[activeTab].img} 
-                  alt={`Interface do sistema ${showcaseTabs[activeTab].name}`}
-                  className="w-full h-full object-cover object-top"
-                  loading="eager"
-                />
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* 2. PRODUTOS DO ECOSSISTEMA */}
-      <section className="py-24 bg-white border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Catálogo de Soluções</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
-              Cada produto desenvolvido para um contexto específico.
-            </h2>
-            <p className="text-sm md:text-base text-slate-600">
-              Ferramentas focadas nas necessidades práticas de cada segmento.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Balcão Pro Adegas',
-                tag: 'Adegas & Distribuidoras',
-                desc: 'PDV com operação offline-first, dedução automática de insumos em combos e gestão prática de fiado com extrato no WhatsApp.',
-                icon: <Zap className="w-5 h-5 text-blue-600" />,
-                path: '/adegas',
-                bullets: [
-                  'Caixa com funcionamento local sem depender de internet',
-                  'Desmembramento automático de combos de bebidas',
-                  'Controle organizado de clientes no fiado e limites',
-                  'Compatível com impressoras térmicas e leitores USB'
-                ]
-              },
-              {
-                title: 'Vancod Restaurantes',
-                tag: 'Bares & Restaurantes',
-                desc: 'Comanda de mesas no celular, telas KDS para organização de pedidos na cozinha e sincronização com canais de delivery.',
-                icon: <ChefHat className="w-5 h-5 text-blue-600" />,
-                path: '/restaurantes',
-                bullets: [
-                  'Telas digitais KDS organizadas por praça de preparo',
-                  'Lançamento ágil de mesas e comandas eletrônicas',
-                  'Divisão automática de contas no fechamento',
-                  'Módulo para pizzarias com suporte a frações'
-                ]
-              },
-              {
-                title: 'Olhare Fotos & Eventos',
-                tag: 'Festas & Cerimoniais',
-                desc: 'Mural interativo que transmite fotos e recados dos convidados na TV do evento via QR Code sem baixar aplicativos.',
-                icon: <QrCode className="w-5 h-5 text-blue-600" />,
-                path: '/olhare',
-                bullets: [
-                  'Acesso instantâneo pelo navegador do smartphone',
-                  'Painel de moderação para aprovação prévia de fotos',
-                  'Transmissão contínua em Smart TVs ou telões',
-                  'Download completo da galeria ao término do evento'
-                ]
-              },
-            ].map((p, i) => (
-              <div key={i} className="bg-slate-50/70 p-7 md:p-8 rounded-2xl border border-slate-200 flex flex-col justify-between hover:border-slate-300 transition-colors">
-                <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="p-2.5 bg-white rounded-xl border border-slate-200 shadow-2xs">
-                      {p.icon}
-                    </div>
-                    <span className="text-[11px] font-semibold text-slate-600 bg-white px-2.5 py-1 rounded-lg border border-slate-200">
-                      {p.tag}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{p.title}</h3>
-                  <p className="text-xs text-slate-600 leading-relaxed mb-6">{p.desc}</p>
-                  
-                  <ul className="space-y-2.5 mb-8">
-                    {p.bullets.map((b, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-700">
-                        <Check className="w-3.5 h-3.5 text-blue-600 mt-0.5 flex-shrink-0" />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="mt-9 flex flex-col sm:flex-row items-start gap-3"
+              >
                 <Link
-                  to={p.path}
-                  className="pt-4 border-t border-slate-200/70 flex items-center justify-between text-xs font-bold text-blue-600 hover:text-blue-700"
+                  to="/contato"
+                  className="w-full sm:w-auto px-7 py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-400"
                 >
-                  <span>Conhecer produto</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <span>Agendar demonstração</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
-              </div>
-            ))}
-          </div>
+                <a
+                  href="#solucoes"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-white/25 text-white font-semibold text-sm hover:bg-white/5 transition-colors flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                >
+                  Conheça nossas soluções
+                </a>
+              </motion.div>
 
+              <p className="mt-5 text-sm text-slate-300">
+                Assinatura mensal, sem comissão sobre o seu faturamento.
+              </p>
+
+              <ul className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/10 pt-6">
+                {trustItems.map((t) => (
+                  <li key={t.label} className="flex items-center gap-2 text-xs font-medium text-slate-300">
+                    <img src={t.icon} alt="" className="h-9 w-9 shrink-0" />
+                    <span>{t.label}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* No celular a arte não cabe ao lado do texto: entra um recorte abaixo. */}
+              <img
+                src="/assets/hero-bg.jpg"
+                alt=""
+                className="mt-10 h-48 w-full rounded-2xl object-cover object-[78%_center] lg:hidden"
+              />
+            </div>
+
+          </div>
         </div>
       </section>
 
-      {/* 3. PRODUTO EM AÇÃO / SIMULADOR */}
-      <div id="simulador">
-        <InteractiveSystemSimulator />
-      </div>
-
-      {/* 4. COMO FUNCIONA NA PRÁTICA */}
-      <section className="py-24 bg-white border-y border-slate-200">
+      {/* 2. PRODUTOS */}
+      <section id="solucoes" className="py-16 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Processo de Adoção</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
-              Como funciona na prática.
-            </h2>
-            <p className="text-sm md:text-base text-slate-600">
-              Passos claros para implantar a solução no seu negócio sem complicação.
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
+            <div>
+              <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-slate-950">
+                Produtos para o seu segmento
+              </h2>
+            </div>
+            <p className="max-w-sm text-sm text-slate-600">
+              Soluções práticas, estáveis e adaptadas à rotina da sua operação.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                step: '01',
-                title: 'Entendemos sua operação',
-                desc: 'Identificamos os pontos críticos do seu fluxo de caixa, atendimento, cozinha ou evento para indicar a configuração ideal.',
-                icon: <Users2 className="w-5 h-5 text-blue-600" />
-              },
-              {
-                step: '02',
-                title: 'Configuramos a solução',
-                desc: 'Ajudamos você a cadastrar seus produtos, parâmetros de atendimento e equipamentos (impressoras, leitores e telas).',
-                icon: <Settings2 className="w-5 h-5 text-blue-600" />
-              },
-              {
-                step: '03',
-                title: 'Sua equipe começa a operar',
-                desc: 'Com uma interface simples e direta, sua equipe aprende em minutos e conta com nosso suporte sempre que precisar.',
-                icon: <CheckCircle2 className="w-5 h-5 text-blue-600" />
-              },
-            ].map((card, i) => (
-              <div key={i} className="p-8 rounded-2xl bg-slate-50 border border-slate-200 relative">
-                <span className="text-3xl font-extrabold text-slate-200 absolute top-6 right-6 font-mono">
-                  {card.step}
+          <div className="grid md:grid-cols-3 gap-5">
+            {productCards.map((c) => (
+              <a
+                key={c.to}
+                href={c.to}
+                className="group relative flex items-center gap-4 overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-sm transition-colors hover:border-slate-300 hover:shadow-md"
+              >
+                <span className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${c.accent}`} />
+                <img src={c.img} alt="" className="h-20 w-28 shrink-0 rounded-xl object-cover" loading="lazy" />
+                <span className="min-w-0">
+                  <span className="block text-sm font-bold text-slate-950">{c.name}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-slate-600">{c.desc}</span>
                 </span>
-                <div className="p-2.5 bg-white rounded-xl border border-slate-200 w-fit mb-5 shadow-2xs">
-                  {card.icon}
-                </div>
-                <h3 className="text-base font-bold text-slate-900 mb-2">{card.title}</h3>
-                <p className="text-xs md:text-sm text-slate-600 leading-relaxed">{card.desc}</p>
-              </div>
+                <ArrowRight className="ml-auto w-4 h-4 shrink-0 text-slate-400 transition-transform group-hover:translate-x-0.5 group-hover:text-blue-600" />
+              </a>
             ))}
           </div>
-
         </div>
       </section>
 
-      {/* 5. POR QUE ESCOLHER A VANCOD (4 PILARES) */}
+      {/* 3. COMO TRABALHAMOS: foto + 4 passos */}
+      <section id="como-trabalhamos" className="scroll-mt-20 relative overflow-hidden bg-slate-50 border-y border-slate-200">
+        <img
+          src="/assets/foto-equipe.jpg"
+          alt="Ilustração: consultor mostra o sistema no notebook para dois clientes"
+          className="absolute inset-y-0 left-0 hidden h-full w-[26%] object-cover xl:block"
+          loading="lazy"
+        />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 xl:pl-[24%] grid lg:grid-cols-[0.8fr_1.2fr] gap-10 items-center">
+          <div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-slate-950">
+              Do processo à operação, com você em cada etapa.
+            </h2>
+          </div>
+          <ol className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {steps.map((step, i) => (
+              <li key={step} className="flex flex-col gap-2 rounded-2xl bg-white p-5 shadow-sm ring-1 ring-slate-200">
+                <span className="font-display text-3xl font-bold leading-none text-blue-600">{i + 1}</span>
+                <span className="text-sm font-bold leading-snug text-slate-950">{step}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* 4. PROVA: a tela do Balcão Pro */}
+      <section className="hero-dark py-16 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center">
+          <div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-white">
+              O caixa da adega não para quando a internet cai.
+            </h2>
+            <ul className="mt-6 space-y-3">
+              {balcaoFacts.map((f) => (
+                <li key={f} className="flex items-start gap-2.5 text-sm text-slate-200">
+                  <Check className="w-4 h-4 mt-0.5 shrink-0 text-sky-400" aria-hidden />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a
+              href="https://adegas.vancod.com.br"
+              className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-sky-300 hover:text-white transition-colors rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-sky-300"
+            >
+              Ver o Balcão Pro
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+          <img
+            src="/assets/adega-pdv-recorte.jpg"
+            alt="Tela de venda do Balcão Pro com o aviso de funcionamento offline e a lista de itens"
+            className="w-full rounded-2xl border border-sky-400/40 shadow-[0_20px_60px_-20px_rgba(56,189,248,0.5)]"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      {/* 4. DIFERENCIAIS */}
       <WhyVancod />
 
-      {/* 6. COMPARATIVO OPERACIONAL */}
-      <ComparisonTable />
+      {/* 5. PRIMEIROS PARCEIROS */}
+      <section className="py-20 bg-white border-t border-slate-200">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-slate-950 mb-4">
+            Ainda são poucos clientes. Cada implantação é feita por quem escreve o código.
+          </h2>
+          <p className="text-base text-slate-600 mb-8 leading-relaxed">
+            A Vancod está começando, e preferimos dizer isso a inventar logos. Quem entra agora participa da implantação junto com a equipe: o fluxo é ajustado ao seu balcão, à sua cozinha ou ao seu evento.
+          </p>
+          <Link
+            to="/contato"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-sm transition-colors"
+          >
+            <span>Agendar demonstração</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
 
-      {/* 7. SIMULADOR DE RETORNO / ROI */}
-      <RoiCalculator />
-
-      {/* 8. PROVA SOCIAL: CLIENTES & CASES & DEPOIMENTOS */}
-      <ClientsSection />
-      <CasesSection />
-      <TestimonialsSection />
-
-      {/* 9. CONFIANÇA & TRANSPARÊNCIA INSTITUCIONAL */}
+      {/* 6. CONFIANÇA & TRANSPARÊNCIA */}
       <TransparencySection />
 
-      {/* 10. FAQ */}
-      <section className="py-24 bg-slate-900 text-white">
+      {/* 7. FAQ */}
+      <section className="py-24 md:py-32 bg-slate-950 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-white mb-3">
-              Perguntas Frequentes
+          <div className="max-w-2xl mx-auto text-center mb-14">
+            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-[-0.02em] text-white">
+              Perguntas frequentes
             </h2>
-            <p className="text-sm md:text-base text-slate-400">
-              Esclarecimentos sobre implantação, infraestrutura e funcionamento das ferramentas.
+            <p className="mt-4 text-base text-slate-400">
+              Dúvidas sobre a empresa, a implantação e o suporte.
             </p>
           </div>
           <FAQ items={faqs} />
         </div>
       </section>
 
-      {/* 11. CTA FINAL */}
-      <section className="py-24 bg-blue-600 text-white text-center relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 tracking-tight">
-            Pronto para organizar a operação do seu negócio?
+      {/* 8. CTA FINAL */}
+      <section className="py-24 md:py-32 bg-slate-950 text-white border-t border-slate-800">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="font-display text-4xl md:text-6xl font-bold tracking-[-0.03em] leading-[1.02] mb-6 text-white">
+            Quer conversar sobre a operação da sua empresa?
           </h2>
-          <p className="text-base text-blue-100 mb-8 max-w-xl mx-auto font-normal">
-            Agende uma demonstração prática e veja como os sistemas Vancod se adaptam à sua rotina.
+          <p className="text-base md:text-lg text-slate-400 mb-10 max-w-xl mx-auto">
+            Conte o que a sua equipe enfrenta hoje e veja se podemos ajudar.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
               to="/contato"
-              className="w-full sm:w-auto px-8 py-3.5 bg-white text-blue-900 hover:bg-blue-50 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-8 py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-sm transition-colors flex items-center justify-center gap-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               <span>Agendar demonstração</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               to="/suporte"
-              className="w-full sm:w-auto px-6 py-3.5 bg-blue-700 hover:bg-blue-800 text-white rounded-xl font-semibold text-sm transition-all flex items-center justify-center"
+              className="w-full sm:w-auto px-7 py-3.5 text-slate-200 hover:text-white font-semibold text-sm transition-colors flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white rounded-xl"
             >
-              <span>Central de suporte</span>
+              Central de suporte
             </Link>
           </div>
+          <p className="mt-6 text-sm text-slate-400">Conversa sem compromisso, antes de qualquer contratação.</p>
         </div>
       </section>
 

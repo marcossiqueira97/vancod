@@ -3,23 +3,23 @@ import { Layers, Server, Headphones, ShieldCheck } from 'lucide-react';
 export function WhyVancod() {
   const pillars = [
     {
-      title: 'Produto Especializado',
-      desc: 'Soluções desenvolvidas para operações específicas, em vez de tentar resolver todos os segmentos com um sistema genérico e inchado.',
+      title: 'Um sistema para cada segmento',
+      desc: 'Adega, restaurante e evento têm sistemas próprios, em vez de um sistema genérico que tenta servir a todos.',
       icon: <Layers className="w-5 h-5 text-blue-600" />
     },
     {
-      title: 'Tecnologia Aplicada à Operação',
-      desc: 'Arquitetura e interfaces pensadas para reduzir dependência desnecessária de processos manuais e garantir funcionamento local no caixa.',
+      title: 'Vende sem internet',
+      desc: 'No Balcão Pro o caixa continua registrando vendas se a internet cair, e sincroniza quando ela volta.',
       icon: <Server className="w-5 h-5 text-blue-600" />
     },
     {
-      title: 'Suporte Próximo',
-      desc: 'Contato direto com especialistas para implantação guiada, configuração de equipamentos, dúvidas e acompanhamento.',
+      title: 'Quem implanta é quem programa',
+      desc: 'Configuração, treinamento e suporte ficam com a mesma equipe que escreve o sistema.',
       icon: <Headphones className="w-5 h-5 text-blue-600" />
     },
     {
-      title: 'Transparência Comercial',
-      desc: 'Informações claras sobre o produto, modelos de contratação sem comissão sobre faturamento e políticas de privacidade transparentes.',
+      title: 'Sem comissão',
+      desc: 'Assinatura mensal. Nada é cobrado sobre o que você vende.',
       icon: <ShieldCheck className="w-5 h-5 text-blue-600" />
     }
   ];
@@ -30,13 +30,9 @@ export function WhyVancod() {
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Diferenciais Concretos</span>
-          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 mb-3">
-            Por que escolher a Vancod?
+          <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-slate-900 mb-3">
+            Quatro coisas que você pode cobrar da gente.
           </h2>
-          <p className="text-sm md:text-base text-slate-600">
-            Quatro compromissos que orientam nosso desenvolvimento e nosso relacionamento com clientes.
-          </p>
         </div>
 
         {/* 4 Pillars Grid */}

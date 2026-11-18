@@ -5,6 +5,7 @@
 @theme {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', 'Inter', sans-serif;
 }
 
 @layer base {
@@ -48,5 +49,20 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Topo escuro das páginas, no mesmo azul do hero da Home. */
+@layer components {
+  .hero-dark {
+    background: radial-gradient(60% 80% at 80% 0%, rgb(37 99 235 / 0.35), transparent 70%), #001a44;
+    color: #fff;
+  }
+
+  /* Faixa escura só nos primeiros --band px; o resto da página continua claro. */
+  .top-band {
+    background:
+      radial-gradient(60% 80% at 80% 0%, rgb(37 99 235 / 0.35), transparent 70%) top / 100% var(--band) no-repeat,
+      linear-gradient(#001a44, #001a44) top / 100% var(--band) no-repeat;
   }
 }

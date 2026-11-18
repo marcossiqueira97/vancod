@@ -2,7 +2,6 @@ import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Building, Mail, MapPin, Server, Cpu, RefreshCw, Shield, Headphones, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { SEO } from '../components/seo';
-import { AmbientBackground } from '../components/ambient-background';
 import { SITE_CONFIG } from '../lib/config';
 
 export default function Sobre() {
@@ -16,25 +15,24 @@ export default function Sobre() {
   return (
     <div className="bg-slate-50 text-slate-900 overflow-hidden min-h-screen">
       <SEO 
-        title="Sobre a Vancod Tecnologia • Nossa História e Propósito" 
+        title="Sobre a Vancod Tecnologia" 
         description="A Vancod é uma empresa brasileira de tecnologia focada em desenvolver soluções de software especializadas para pequenos e médios negócios."
         schema={schema}
         canonicalUrl="https://vancod.com.br/sobre"
       />
       
       {/* Hero Section */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
-        <AmbientBackground />
+      <section className="hero-dark pt-32 pb-16 md:pt-40 md:pb-24 relative overflow-hidden">
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-semibold mb-6 shadow-2xs">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/15 text-blue-200 text-xs font-semibold mb-6">
             <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
             Institucional
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 mb-6 leading-tight max-w-4xl mx-auto">
-            Desenvolvemos softwares que atendem à realidade do seu negócio.
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-[-0.03em] text-white mb-6 leading-[1.05] max-w-4xl mx-auto">
+            Uma empresa pequena fazendo software para empresas pequenas.
           </h1>
-          <p className="text-base md:text-lg text-slate-600 max-w-2xl mx-auto leading-relaxed font-normal">
+          <p className="text-base md:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed font-normal">
             A Vancod é uma empresa brasileira de tecnologia focada em criar soluções de software especializadas, práticas e confiáveis para pequenos e médios negócios.
           </p>
         </div>
@@ -49,7 +47,7 @@ export default function Sobre() {
               <span className="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Quem Somos</span>
               <h3 className="text-base font-bold text-slate-900 mb-2">Empresa Brasileira de Tecnologia</h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Fundada para desenvolver ferramentas acessíveis e robustas com engenharia própria e proximidade com o usuário.
+                Ferramentas com preço de assinatura e engenharia própria, feitas perto de quem usa.
               </p>
             </div>
 
@@ -85,7 +83,7 @@ export default function Sobre() {
                 Por que criamos produtos dedicados por segmento?
               </h2>
               <p>
-                Durante anos acompanhamos empresários lidando com sistemas genéricos: ferramentas inchadas de funcionalidades desnecessárias, lentas de operar no balcão e caras para manter.
+                Acompanhamos empresários lidando com sistemas genéricos: ferramentas inchadas de funcionalidades desnecessárias, lentas de operar no balcão e caras para manter.
               </p>
               <p>
                 Na <strong>Vancod</strong>, escolhemos desenvolver produtos dedicados:
@@ -132,13 +130,6 @@ export default function Sobre() {
                   <span className="font-semibold text-slate-100 flex items-center gap-1">
                     <Mail className="w-3.5 h-3.5 text-blue-400" />
                     {SITE_CONFIG.contact.email}
-                  </span>
-                </div>
-
-                <div>
-                  <span className="text-slate-400 block text-[11px]">Cadastro Fiscal</span>
-                  <span className="font-mono text-slate-300">
-                    {SITE_CONFIG.company.cnpj || 'CNPJ: Sob consulta comercial'}
                   </span>
                 </div>
               </div>

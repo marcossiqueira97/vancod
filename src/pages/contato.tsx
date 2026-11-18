@@ -54,7 +54,7 @@ export default function Contato() {
   };
 
   return (
-    <div className="bg-slate-50 text-slate-900 min-h-screen pt-32 pb-24 relative overflow-hidden">
+    <div className="top-band [--band:400px] bg-slate-50 text-slate-900 min-h-screen pt-32 pb-24 relative overflow-hidden">
       <SEO 
         title="Contato & Agendamento de Demonstração" 
         description="Fale com a equipe da Vancod Tecnologia. Agende uma demonstração prática dos sistemas Balcão Pro, Vancod Restaurantes ou Olhare."
@@ -66,13 +66,13 @@ export default function Contato() {
         
         {/* Header Title */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-200/80 text-slate-800 text-xs font-semibold mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/15 text-blue-200 text-xs font-semibold mb-4">
             Atendimento Comercial & Demonstração
           </div>
-          <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-4">
+          <h1 className="font-display text-3xl md:text-5xl font-bold tracking-[-0.03em] text-white mb-4">
             Agende uma demonstração prática.
           </h1>
-          <p className="text-base md:text-lg text-slate-600">
+          <p className="text-base md:text-lg text-slate-300">
             Nossa equipe analisa a necessidade da sua empresa e entra em contato para apresentar a solução adequada.
           </p>
         </div>
@@ -101,14 +101,14 @@ export default function Contato() {
 
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
               <span className="font-mono font-bold text-blue-600 text-base block mb-2">3. Avaliação</span>
-              <strong className="text-slate-900 block mb-1">Avaliamos a solução adequada</strong>
+              <strong className="text-slate-900 block mb-1">Definimos o que você precisa</strong>
               <p className="text-slate-500 leading-relaxed">Explicamos recursos necessários, compatibilidade com seus equipamentos e implantação.</p>
             </div>
 
             <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
               <span className="font-mono font-bold text-blue-600 text-base block mb-2">4. Decisão</span>
-              <strong className="text-slate-900 block mb-1">Você decide com clareza</strong>
-              <p className="text-slate-500 leading-relaxed">Sem pressão comercial, com contratos transparentes e sem comissão sobre suas vendas.</p>
+              <strong className="text-slate-900 block mb-1">Você decide sem pressão</strong>
+              <p className="text-slate-500 leading-relaxed">Contrato transparente, sem comissão sobre as suas vendas.</p>
             </div>
           </div>
         </div>
@@ -222,14 +222,14 @@ export default function Contato() {
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-slate-700">E-mail corporativo *</label>
+                  <label className="text-xs font-semibold text-slate-700">E-mail *</label>
                   <input
                     required
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full bg-slate-50 border border-slate-300 rounded-lg px-3.5 py-2.5 text-slate-900 focus:outline-none focus:border-blue-500 focus:bg-white text-xs"
-                    placeholder="nome@empresa.com"
+                    placeholder="voce@email.com"
                   />
                 </div>
               </div>

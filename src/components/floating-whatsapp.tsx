@@ -46,7 +46,7 @@ export function FloatingWhatsApp() {
             <div className="p-5 bg-slate-50 space-y-4">
               <div className="bg-white p-3.5 rounded-xl border border-slate-200 text-xs text-slate-600 leading-relaxed">
                 <p className="font-semibold text-slate-900 mb-1">Como podemos ajudar sua operação?</p>
-                <p>Escolha o segmento de interesse para conversar com nossa equipe:</p>
+                <p>Por segmento:</p>
               </div>
 
               <div className="space-y-2">
