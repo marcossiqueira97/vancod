@@ -1,4 +1,4 @@
-import { Layers, Server, Headphones, ShieldCheck } from 'lucide-react';
+import { Layers, Headphones } from 'lucide-react';
 
 export function WhyVancod() {
   const pillars = [
@@ -8,19 +8,9 @@ export function WhyVancod() {
       icon: <Layers className="w-5 h-5 text-blue-600" />
     },
     {
-      title: 'Vende sem internet',
-      desc: 'No Balcão Pro o caixa continua registrando vendas se a internet cair, e sincroniza quando ela volta.',
-      icon: <Server className="w-5 h-5 text-blue-600" />
-    },
-    {
       title: 'Quem implanta é quem programa',
       desc: 'Configuração, treinamento e suporte ficam com a mesma equipe que escreve o sistema.',
       icon: <Headphones className="w-5 h-5 text-blue-600" />
-    },
-    {
-      title: 'Sem comissão',
-      desc: 'Assinatura mensal. Nada é cobrado sobre o que você vende.',
-      icon: <ShieldCheck className="w-5 h-5 text-blue-600" />
     }
   ];
 
@@ -31,12 +21,12 @@ export function WhyVancod() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="font-display text-3xl md:text-4xl font-bold tracking-[-0.02em] text-slate-900 mb-3">
-            Quatro coisas que você pode cobrar da gente.
+            Duas promessas que dá para cobrar da gente.
           </h2>
         </div>
 
-        {/* 4 Pillars Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Pillars Grid */}
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {pillars.map((p, i) => (
             <div key={i} className="p-6 rounded-2xl bg-slate-50/70 border border-slate-200 shadow-2xs flex flex-col justify-between hover:border-slate-300 transition-colors">
               <div>

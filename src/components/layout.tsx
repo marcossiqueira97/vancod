@@ -63,7 +63,7 @@ export function Navbar() {
                 <img src="/assets/vancod-marca-dark.png" alt="" className="h-9 w-auto" />
                 <span className="ml-1.5 leading-none">
                   <span className="block font-display text-2xl font-bold tracking-tight text-white">vancod</span>
-                  <span className="block text-[9px] font-semibold tracking-[0.3em] text-sky-400">TECNOLOGIA</span>
+                  <span className="block text-[9px] font-semibold tracking-[0.3em] text-sky-300">TECNOLOGIA</span>
                 </span>
               </Link>
 
@@ -79,6 +79,8 @@ export function Navbar() {
                         <a 
                           key={p.path} 
                           href={p.path} 
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex items-start gap-3 p-3 hover:bg-slate-50 rounded-xl transition-all group/item"
                         >
                           <div className="p-2 rounded-lg bg-slate-100 mt-0.5 group-hover/item:bg-white group-hover/item:shadow-2xs transition-all">
@@ -125,7 +127,13 @@ export function Navbar() {
 
             {/* Mobile Menu Button */}
             <div className="md:hidden flex items-center">
-              <button onClick={() => setIsOpen(!isOpen)} className="text-white p-2" aria-label="Menu principal">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-white p-2"
+                aria-label="Menu principal"
+                aria-expanded={isOpen}
+                aria-controls="menu-mobile"
+              >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
@@ -137,6 +145,7 @@ export function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="menu-mobile"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -149,6 +158,8 @@ export function Navbar() {
                   <a 
                     key={p.path} 
                     href={p.path} 
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold text-slate-800 hover:text-blue-600 hover:bg-slate-50"
                   >
                     <span className="p-1.5 rounded-lg bg-slate-100">{p.icon}</span>
@@ -202,7 +213,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               {products.map(p => (
                 <li key={p.path}>
-                  <a href={p.path} className="text-xs text-slate-400 hover:text-white transition-colors">{p.name}</a>
+                  <a href={p.path} target="_blank" rel="noopener noreferrer" className="text-xs text-slate-400 hover:text-white transition-colors">{p.name}</a>
                 </li>
               ))}
             </ul>
