@@ -52,8 +52,7 @@ export const SITE_CONFIG = {
   contact: {
     email: 'contato@vancod.com.br',
     suporteEmail: 'suporte@vancod.com.br',
-    // Inserir número oficial quando definido (ex: '5511999999999')
-    whatsappNumber: '',
+    whatsappNumber: '5512996940335',
   },
 
   // Estruturas prontas para receber dados reais quando autorizados
